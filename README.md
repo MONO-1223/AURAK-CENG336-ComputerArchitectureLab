@@ -1,1 +1,1 @@
-# AURAK-CENG336-Computer-Architecture-Lab
+# Computer Architecture Lab
