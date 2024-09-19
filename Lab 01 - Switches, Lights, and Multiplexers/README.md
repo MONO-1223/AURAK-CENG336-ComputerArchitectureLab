@@ -15,6 +15,18 @@ The aim of this experiment is to explore how to interface basic input and output
 
 We extend our sincere appreciation to Eng. Umar Adeel for his insightful feedback which has significantly contributed to the successful completion of this experiment.
 
+```mermaid
+gantt
+    title Work Distribution Gantt Chart
+    dateFormat YYYY-MM-DD
+    section Nour Mostafa
+        Documenting experiment results : a1,2024-09-11, 1d
+        Authoring Report          :after a1, 2d
+    section Mohamed Abouissa
+        Quartus Implementation :2024-09-11, 1d
+        Documenting simulation results : 2024-09-11, 1d
+
+```
 
 ## Table of Contents
 
