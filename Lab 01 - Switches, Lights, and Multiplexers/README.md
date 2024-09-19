@@ -32,12 +32,12 @@ gantt
 
 1. [Introduction](#introduction)<br>
 3. [Part 1: Daily Driver OS (Arch Linux)](#part-1-daily-driver-os-arch-linux)<br>
-&nbsp;3.1. [Processes and Threads](#processes-and-threads)<br>
-&nbsp;3.2. [Process Scheduling](#process-scheduling)<br>
-&nbsp;3.3. [Synchronization](#synchronization)<br>
-&nbsp;3.4. [Deadlock](#deadlock)<br>
-&nbsp;3.5. [Memory Management](#memory-management)<br>
-&nbsp;3.6. [File Management](#file-management)<br>
+&nbsp;3.1. [VHDL Code](#processes-and-threads)<br>
+&nbsp;3.2. [Implementation Results](#process-scheduling)<br>
+&nbsp;3.3. [Testbench Code](#synchronization)<br>
+&nbsp;3.4. [Simulation Results](#deadlock)<br>
+&nbsp;3.5. [Discussion](#memory-management)<br>
+&nbsp;3.6. [F](#file-management)<br>
 4. [Part 2: Cloud Computing OS](#part-2-cloud-computing-os)<br>
 &nbsp;4.1. [Trends in Operating Systems](#trends-in-operating-systems)<br>
 &nbsp;4.2. [What Constitutes a Cloud Computing OS?](#what-constitutes-a-cloud-computing-os)<br>
