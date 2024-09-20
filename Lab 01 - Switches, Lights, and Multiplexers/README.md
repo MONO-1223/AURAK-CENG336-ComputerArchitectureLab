@@ -1,33 +1,10 @@
 # <p align="center">Experiment 1</p>
 ## <p align="center">Switches, Lights, and Multiplexers</p>
 
-![](Photos/AURAK-Banner.png)
+![](Photos/Logo.jpg)
 
 The aim of this experiment is to explore how to interface basic input and output devices with an FPGA chip and implement a functional circuit utilizing these components. The switches on the DE-series boards will serve as inputs to the circuit while light-emitting diodes (LEDs) and 7-segment displays will be employed as output devices.
 
-
-
-
-## Work Distribution & Acknowledgements
-| | Name            | ID        | Task |
-|-|-------------------|-----------|------|
-|1| [Nour Mostafa](mailto:nour.mohamed@aurak.ac.ae)    | 2021004938 | 1. Conducted research on synchronization. <br> 2. Conducted research on deadlock. <br> 3. Prepared outstanding presentation slides. |
-|2| [Mohamed Abouissa](mailto:mohamed.abouissa@aurak.ac.ae)  | 2021005188| 1. Documenting experiment and simulation results. <br> 2. Conducted research on memory management. <br> 3. Conducted research on file management. |
-
-We extend our sincere appreciation to Eng. Umar Adeel for his insightful feedback which has significantly contributed to the successful completion of this experiment.
-
-```mermaid
-gantt
-    title Work Distribution Gantt Chart
-    dateFormat YYYY-MM-DD
-    section Nour Mostafa
-        Documenting experiment results : a1,2024-09-11, 1d
-        Authoring Report          :after a1, 2d
-    section Mohamed Abouissa
-        Quartus Implementation :2024-09-11, 1d
-        Documenting simulation results : 2024-09-11, 1d
-
-```
 
 ## Table of Contents
 
@@ -61,7 +38,8 @@ gantt
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.1. Simulation Results<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2.2. Discussion<br>
 6. [Conclusion](#conclusion)<br>
-7. [Resources](#resources)<br>
+7. [Work Division](#conclusion)<br>
+8. [Resources](#resources)<br>
 
 ### Part 1
 The DE2-115 provides eighteen switches and lights. The switches can be used to provide inputs, and the lights can be used as output devices. 
@@ -77,3 +55,35 @@ VHDL code
 ### Part 3
 
 ### Part 4
+
+### Work Division
+```mermaid
+gantt
+    title Gantt Chart
+    tickInterval 1day
+    todayMarker off
+    axisFormat %a-%Y-%m-%d
+    section Preparation         
+        Nour Mostafa : crit, 2024-09-10, 2h
+        Mohamed Abouissa : 2024-09-10, 2h
+    section Quartus         
+        Nour Mostafa : crit, href "mailto:nour.mohamed@aurak.ac.ae", 2024-09-11, 2d
+        Mohamed Abouissa : href "mailto:mohamed.abouissa@aurak.ac.ae", 2024-09-11, 2d
+    section ModelSim       
+        Nour Mostafa : crit,2024-09-11, 2d
+        Mohamed Abouissa : 2024-09-11, 3d
+    section Results       
+        Nour Mostafa : crit,2024-09-11, 2d
+        Mohamed Abouissa : 2024-09-11, 3d
+    section Practice 1         
+        Nour Mostafa : crit,2024-09-12, 4h
+        Mohamed Abouissa : 2024-09-12, 4h
+    section Practice 2         
+        Nour Mostafa : crit, 2024-09-19, 2h
+        Mohamed Abouissa : 2024-09-19, 2h
+    section Report
+        Nour Mostafa : crit,2024-09-18, 3d
+        Mohamed Abouissa : 2024-09-19, 1d
+```
+
+We extend our sincere appreciation to Eng. Umar Adeel for his insightful feedback which has significantly contributed to the successful completion of this experiment.
