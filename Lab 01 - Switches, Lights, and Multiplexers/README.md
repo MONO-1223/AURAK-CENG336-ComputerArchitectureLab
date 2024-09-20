@@ -1,9 +1,18 @@
 # <p align="center">Experiment 1</p>
 ## <p align="center">Switches, Lights, and Multiplexers</p>
 
-![](Photos/Logo.jpg)
+<p align="center">
+  <img src="Photos/AURAK.png">
+</p>
 
-The aim of this experiment is to explore how to interface basic input and output devices with an FPGA chip and implement a functional circuit utilizing these components. The switches on the DE-series boards will serve as inputs to the circuit while light-emitting diodes (LEDs) and 7-segment displays will be employed as output devices.
+<p align="center">
+    <a href="https://aurak.ac.ae/academics/programs-departments/department-of-computer-science-and-engineering">
+    <img src="https://custom-icon-badges.demolab.com/badge/-Department%20of%20Computer%20Science%20and%20Engineering-991828?style=for-the-badge&logoColor=white" style="vertical-align:top; margin:4px"></a>
+    <a href="">
+    <img src="https://custom-icon-badges.demolab.com/badge/Fall%202024-991828?style=for-the-badge&logoColor=white" style="vertical-align:top; margin:4px"></a>
+</p>
+
+*The aim of this experiment is to explore how to interface basic input and output devices with an FPGA chip and implement a functional circuit utilizing these components. The switches on the DE-series boards will serve as inputs to the circuit while light-emitting diodes (LEDs) and 7-segment displays will be employed as output devices.*
 
 
 ## Table of Contents
