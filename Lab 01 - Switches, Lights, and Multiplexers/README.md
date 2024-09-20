@@ -104,7 +104,6 @@ begin
 
   stimulus: process
   begin
-  
     -- Initialisation code can be added here, such as setting initial values for signals
 
 		SW <= "101010101010101010"; -- Set the SW signal to a specific pattern of switches (101010101010101010)     
@@ -123,6 +122,11 @@ end;
 <p align="center">
   <img src="Photos/6.png" title="ModelSim Result" />
 </p>
+
+The simulation results align perfectly with the implementation results observed on the board, confirming that the design behaves as intended. When a switch (SW) is set to 1, the corresponding LED (LEDR) bit also lights up as 1, and similarly, when the switch is set to 0, the corresponding LED bit reflects this with a 0 output. This direct correlation between the switch states and LED outputs demonstrates the expected functionality of the circuit. In the waveform window, we can clearly observe the effect of the 100 ns wait time during which nothing occurs, creating the visual equivalent of a break between two test scenarios. After this pause we test new values in the switches vector and the corresponding results in the LEDs vector after each stimulus is applied.
+
+It’s important to note that although we are viewing a waveform window, the data displayed does not represent traditional waveforms. Instead, we see discrete values of 0s and 1s. The absence of oscillation or variation in these values means that we cannot describe this output as a wave; there is no upward or downward movement to indicate continuous change. Rather, each state remains stable until the next input is applied, further illustrating the digital nature of the signals.
+
 
 ## Part 2
 
