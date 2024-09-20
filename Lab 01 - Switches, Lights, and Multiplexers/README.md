@@ -1,5 +1,4 @@
-# <p align="center">Experiment 1</p>
-## <p align="center">Switches, Lights, and Multiplexers</p>
+# <p align="center">Switches, Lights, and Multiplexers</p>
 
 *The aim of this experiment is to explore how to interface basic input and output devices with an FPGA chip and implement a functional circuit utilizing these components. The switches on the DE-series boards will serve as inputs to the circuit while light-emitting diodes (LEDs) and 7-segment displays will be employed as output devices.*
 
@@ -40,25 +39,17 @@
 8. [Resources](#resources)<br>
 
 ## Introduction
-VHDL, which stands for VHSIC (Very High-Speed Integrated Circuit) Hardware Description Language, is a powerful and standardized language used for describing the behavior and structure of electronic systems, particularly digital circuits. Developed in the 1980s for the U.S. Department of Defense, VHDL allows designers to model complex hardware architectures at various levels of abstraction, from high-level algorithmic descriptions to detailed gate-level representations. The language supports concurrent execution of processes, enabling the simulation of hardware behavior in a time-efficient manner. VHDL is widely used in the design of Field Programmable Gate Arrays (FPGAs) and Application-Specific Integrated Circuits (ASICs) due to its ability to facilitate verification, synthesis, and optimization of digital designs. Its syntax is similar to that of the Ada programming language, making it both expressive and versatile, allowing designers to define entities, architectures, data types, and behaviors through constructs such as entities, architectures, packages, and configurations. Moreover, VHDL supports strong typing, modular design, and hierarchical modeling, which helps manage complexity in large systems. The language is governed by the IEEE standard (IEEE 1076), ensuring interoperability across various tools and platforms. VHDL also plays a significant role in the design flow, from behavioral simulation and functional verification to synthesis for actual hardware implementation, making it an essential tool for engineers and designers in the field of digital electronics. In VHDL, the following concepts are fundamental to understanding how digital circuits are designed and described:
+VHDL, which stands for VHSIC (Very High-Speed Integrated Circuit) Hardware Description Language, is a powerful and standardized language used for describing the behavior and structure of electronic systems, particularly digital circuits. Developed in the 1980s for the U.S. Department of Defense, VHDL allows designers to model complex hardware architectures at various levels of abstraction, from high-level algorithmic descriptions to detailed gate-level representations. The language supports concurrent execution of processes, enabling the simulation of hardware behavior in a time-efficient manner. VHDL is widely used in the design of Field Programmable Gate Arrays (FPGAs) and Application-Specific Integrated Circuits (ASICs) due to its ability to facilitate verification, synthesis, and optimization of digital designs. Its syntax is similar to that of the Ada programming language, making it both expressive and versatile, allowing designers to define entities, architectures, data types, and behaviors through constructs such as entities, architectures, packages, and configurations. Moreover, VHDL supports strong typing, modular design, and hierarchical modeling, which helps manage complexity in large systems. The language is governed by the IEEE standard (IEEE 1076), ensuring interoperability across various tools and platforms. VHDL also plays a significant role in the design flow, from behavioral simulation and functional verification to synthesis for actual hardware implementation, making it an essential tool for engineers and designers in the field of digital electronics.
 
-1. A library in VHDL is a collection of predefined packages that provide access to various data types, functions, and procedures. The IEEE library, for instance, contains standard logic types and operations, which are essential for digital circuit design.
+In VHDL, several fundamental concepts are crucial for understanding the design and description of digital circuits. A library is a collection of predefined packages that grant access to various data types, functions, and procedures, with the IEEE library being a notable example that contains standard logic types and operations essential for digital circuit design. An entity defines the interface of a VHDL module, specifying the inputs and outputs of a digital circuit without detailing its internal operation; essentially, it serves as a blueprint for the component, outlining what it is, the signals it accepts as inputs, and the outputs it produces. You can have as many entities as you wish in a single VHDL file, with each entity representing a distinct component or module of the design. A port defines the connection points (inputs and outputs) for an entity, each having a name, a direction (IN, OUT, or INOUT), and a data type, enabling communication between the entity and other components or systems. An architecture describes the internal implementation and behavior of the entity, detailing how inputs are processed and outputs are generated; there can be multiple architectures for a single entity, allowing for different implementations of the same functionality. This means that each entity can be associated with one or more architectures, but a single architecture is linked to only one entity, facilitating various implementations or behaviors. Additionally, signals represent connections between different components and internal variables, enabling them to hold values and facilitate communication between processes. Together, these components form the backbone of VHDL design, empowering designers to create complex digital systems in a structured and modular manner.
 
-2. An entity defines the interface of a VHDL module. It describes the inputs and outputs of a digital circuit without detailing how the circuit operates. Essentially, it serves as a blueprint that specifies what the component is, what signals it will accept as inputs, and what signals it will produce as outputs. You can have as many entities as you want in a single VHDL file. Each entity represents a distinct component or module of your design.
-
-3. A port defines the connection points (inputs and outputs) for an entity. Each port has a name, a direction (IN, OUT, or INOUT), and a data type. Ports allow the entity to communicate with other components or systems.
-
-4. An architecture describes the internal implementation and behavior of the entity. It defines how the inputs are processed and how the outputs are generated. There can be multiple architectures for a single entity, allowing different implementations of the same functionality. Each entity can have one or more architectures (but a single architecture is linked to only one entity). This allows you to provide different implementations or behaviors for the same entity. For example, you might define a behavioral architecture and a structural architecture for the same entity.
-
-5. Signals are used to represent connections between different components and internal variables. They can hold values and communicate between processes.
-
-Together, these components form the backbone of VHDL design, allowing designers to create complex digital systems in a structured and modular way.
 
 ## Part 1: Switches & LEDs
 The DE2-115 provides eighteen switches and lights. The switches can be used to provide inputs, and the lights can be used as output devices. In this part, we create a simple VHDL entity that uses the switches and shows their states on the LEDs. 
 
 This same procedure will be used to implement tasks. First, we will create a new Quartus project for the circuit, ensuring to select the target chip that corresponds to our DE2-115 board. Next, we will create a VHDL entity for the code and incorporate it into our project. Following that, we will include the necessary pin assignments for the DE-series board, as discussed previously, and compile the project. Finally, we will download the compiled circuit into the FPGA chip using the Quartus Programmer tool and test the functionality of the circuit.
 
+### VHDL Code Implementation on the FPGA Board
 ``` VHDL
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -83,9 +74,10 @@ END Structure;
 
 In the first photo, none of the switches are activated, resulting in no LEDs being illuminated. In the second photo, switch 0 (SW0) is turned on, which causes LED0 to light up. The third photo shows switch 5 activated, illuminating LED5. Similarly, in the fourth photo, switch 8 is turned on, activating LED8. We can also observe that activating a switch does not affect the state of any other LEDs that were previously lit with their corresponding switches. A LED will remain on as long as its switch is activated.
 
-``` VHDL
--- This VHDL code is a testbench for a digital circuit described in another VHDL file named part1. The testbench simulates input signals to the circuit and monitors the output signals.
+<br/>
 
+### VHDL Testbench Code Simulation in ModelSim
+``` VHDL
 library IEEE;
 use IEEE.Std_logic_1164.all; -- Use the standard logic package for defining and working with signals
 use IEEE.Numeric_Std.all; -- Use the numeric standard library for arithmetic operations on vectors
@@ -129,7 +121,7 @@ begin
 end;
 ```
 <p align="center">
-  <img src="Photos/6.jpg" title="ModelSim Result" />
+  <img src="Photos/6.png" title="ModelSim Result" />
 </p>
 
 ## Part 2
