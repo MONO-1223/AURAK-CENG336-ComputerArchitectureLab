@@ -167,7 +167,7 @@ END Structure;
   <img src="Photos/9.jpg" style="width: 49%; height: 300px;" title="X = 1111, Y = 1111, Sel = 0, M = 1111 = X" /> <img src="Photos/10.jpg" style="width: 49%; height: 300px;" title="X = 1111, Y = 1111, Sel = 1, M = 1111 = Y"/>
 </p>
 
-In the first photo, we test a case when X = "0001", Y = "0011", Sel = "0", and the result in M displayed on the LEDRs = "0001" which makes sense as we stated in our goal that when the Sel = "0" the output in M must mirror the input X. In the second photo, we test the same case except with the Sel = "1", and the result in M = "0011" which mirrors the input Y this time. In the third photo, we test another case when X = "1111", Y = "1111", Sel = "0", and the result in M = "1111" mirroring X, not Y because the Sel = "0". Also, we have activated Switch 13 just to prove that it will affect nothing in the configuration or results because it is not defined in our current VHDL design. In the last test, we test the same case except with the Sel = "1" which results in M = "1111" mirroring the input Y.
+In the first photo, we test a case when X = "0001", Y = "0011", Sel = "0", and the result in M displayed on the LEDRs = "0001" which makes sense as we stated in our goal that when the Sel = "0" the output in M must mirror the input X. In the second photo, we test the same case except with the Sel = "1", and the result in M = "0011" which mirrors the input Y this time. Also, note that the LED corresponding to the Sel switch lights up when Sel is activated as per our instructions in VHDL. In the third photo, we test another case when X = "1111", Y = "1111", Sel = "0", and the result in M = "1111" mirroring X, not Y because the Sel = "0". Also, we have activated Switch 13 just to prove that it will affect nothing in the configuration or results because it is not defined in our current VHDL design. In the last test, we test the same case except with the Sel = "1" which results in M = "1111" mirroring the input Y.
 
 <br/>
 
@@ -230,6 +230,8 @@ end;
 <p align="center">
   <img src="Photos/11.png" title="ModelSim Result" />
 </p>
+
+We can observe that the simulation result agrees with the FPGA implementation results. When X = "0000", Y = "1111", Sel = "1", the output M = "1111" mirroring Y then we have 4 bits which are deactivated and then the Sel bit is 1 because Sel = "1". In the second case, we test the same setup except that Sel = "0" this time which causes the output in M = "0000" mirroring X.
 
 ## Part 3
 
