@@ -129,10 +129,51 @@ It’s important to note that although we are viewing a waveform window, the dat
 
 
 ## Part 2
+In this section, we implement a four-bit wide 2-to-1 multiplexer that takes two 4-bit inputs, X and Y, and produces a four-bit output M. The functionality of the multiplexer is governed by a select line s: when s=0, the output M mirrors the input X; conversely, when s=1, the output reflects the input Y.
+
+A multiplexer, often abbreviated as "mux," is a digital switch that selects one of several input signals and forwards the selected input to a single output line. It operates based on control signals, known as select lines, which determine which input is routed to the output. The primary function of a multiplexer is to manage multiple data sources and simplify the complexity of wiring in a circuit.
+
+### VHDL Code Implementation on the FPGA Board
+``` VHDL
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+-- Simple module that connects the SW switches to the LEDR lights
+ENTITY part2 IS 
+   PORT ( SW   : IN  STD_LOGIC_VECTOR(8 DOWNTO 0);    -- 9 slide switches for input (8 for data and 1 for selection)
+          LEDR : OUT STD_LOGIC_VECTOR(8 DOWNTO 0));   -- 9 red LEDs for output (8 for data display and 1 for selection indicator)
+END part2;
+
+ARCHITECTURE Structure OF part2 IS
+   SIGNAL Sel : STD_LOGIC; -- defining that the selector is only 1 bit
+   SIGNAL X, Y, M : STD_LOGIC_VECTOR(3 DOWNTO 0); -- defining that the x input, y input, and m output  are all 4 bits each
+
+BEGIN
+   X <= SW(3 DOWNTO 0); -- 4 bits (switches) for input X
+   Y <= SW(7 DOWNTO 4); -- 4 bits (switches) for input Y
+   Sel <= SW(8); -- 1 bit (switch) for the selector
+   M(0) <= (NOT(Sel) AND X(0)) OR (Sel AND Y(0)); -- the equation to calculate the value inside the 1st bit of the M output
+   M(1) <= (NOT(Sel) AND X(1)) OR (Sel AND Y(1)); -- the equation to calculate the value inside the 2nd bit of the M output
+   M(2) <= (NOT(Sel) AND X(2)) OR (Sel AND Y(2)); -- the equation to calculate the value inside the 3rd bit of the M output
+   M(3) <= (NOT(Sel) AND X(3)) OR (Sel AND Y(3)); -- the equation to calculate the value inside the 4th bit of the M output
+   LEDR(8) <= Sel; -- LEDR8 will light up based on the state of the selector switch whether it is slid on or off
+   LEDR(7 DOWNTO 4) <= "0000"; -- The second 4 LEDRs will remain off
+   LEDR(3 DOWNTO 0) <= M; -- The first 4 LEDRs will show the output which is stored in the 4 bits of M
+END Structure;
+```
+
+### VHDL Testbench Code Simulation in ModelSim
 
 ## Part 3
 
+### VHDL Code Implementation on the FPGA Board
+### VHDL Testbench Code Simulation in ModelSim
+
 ## Part 4
+
+### VHDL Code Implementation on the FPGA Board
+### VHDL Testbench Code Simulation in ModelSim
+
 
 ## Work Division
 ```mermaid
