@@ -162,7 +162,74 @@ BEGIN
 END Structure;
 ```
 
+<p align="center">
+  <img src="Photos/7.jpg" style="width: 49%; height: 300px;" title="X = 0001, Y = 0011, Sel = 0, M = 0001 = X" /> <img src="Photos/8.jpg" style="width: 49%; height: 300px;" title="X = 0001, Y = 0011, Sel = 1, M = 0011 = Y"/>  
+  <img src="Photos/9.jpg" style="width: 49%; height: 300px;" title="X = 1111, Y = 1111, Sel = 0, M = 1111 = X" /> <img src="Photos/10.jpg" style="width: 49%; height: 300px;" title="X = 1111, Y = 1111, Sel = 1, M = 1111 = Y"/>
+</p>
+
+In the first photo, we test a case when X = "0001", Y = "0011", Sel = "0", and the result in M displayed on the LEDRs = "0001" which makes sense as we stated in our goal that when the Sel = "0" the output in M must mirror the input X. In the second photo, we test the same case except with the Sel = "1", and the result in M = "0011" which mirrors the input Y this time. In the third photo, we test another case when X = "1111", Y = "1111", Sel = "0", and the result in M = "1111" mirroring X, not Y because the Sel = "0". Also, we have activated Switch 13 just to prove that it will affect nothing in the configuration or results because it is not defined in our current VHDL design. In the last test, we test the same case except with the Sel = "1" which results in M = "1111" mirroring the input Y.
+
+<br/>
+
 ### VHDL Testbench Code Simulation in ModelSim
+``` VHDL
+library IEEE;
+use IEEE.Std_logic_1164.all;
+use IEEE.Numeric_Std.all;
+
+entity part2_tb is
+end;
+
+architecture bench of part2_tb is
+
+  component part2 
+     PORT ( SW   : IN  STD_LOGIC_VECTOR(8 DOWNTO 0);
+            LEDR : OUT STD_LOGIC_VECTOR(8 DOWNTO 0));
+  end component;
+
+  signal SW: STD_LOGIC_VECTOR(8 DOWNTO 0);
+  signal LEDR: STD_LOGIC_VECTOR(8 DOWNTO 0);
+
+begin
+
+  uut: part2 port map ( SW   => SW,
+                        LEDR => LEDR );
+
+  stimulus: process
+  begin
+  
+    -- Put initialisation code here
+
+	 	-- Setting values for 4bit X
+		SW(0) <= '0';
+		SW(1) <= '0';
+		SW(2) <= '0';
+		SW(3) <= '0';
+		
+		-- Setting values for 4bit Y
+		SW(4) <= '1';
+		SW(5) <= '1';
+		SW(6) <= '1';
+		SW(7) <= '1';
+		
+		-- Selection line 
+		SW(8) <= '1';
+		wait for 100ns;
+		SW(8) <= '0';
+		wait for 100ns;
+
+    -- Note that this is only one case, we can have 81 combinations.
+    -- Although this one test case is sufficient in showing that the Sel bit is the determining factor in whether the M output mirrors input X or Y.
+
+    wait;
+  end process;
+
+end;
+```
+
+<p align="center">
+  <img src="Photos/11.png" title="ModelSim Result" />
+</p>
 
 ## Part 3
 
