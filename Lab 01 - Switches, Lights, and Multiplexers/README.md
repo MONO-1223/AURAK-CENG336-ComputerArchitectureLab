@@ -18,7 +18,7 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)<br>
-2. [Part 1: ](#part-1-daily-driver-os-arch-linux)<br>
+2. [Part 1: Switches & LEDs](#part-1-switches-&-leds)<br>
 &nbsp;2.1. VHDL Code<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.1. Implementation Results<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.2. Discussion<br>
@@ -50,13 +50,27 @@
 7. [Work Division](#conclusion)<br>
 8. [Resources](#resources)<br>
 
-### Part 1
-The DE2-115 provides eighteen switches and lights. The switches can be used to provide inputs, and the lights can be used as output devices. 
+### Part 1: Switches & LEDs
+The DE2-115 provides eighteen switches and lights. The switches can be used to provide inputs, and the lights can be used as output devices. In this part, we create a simple VHDL entity that uses the switches and shows their states on the LEDs. 
 
-VHDL entity that uses ten switches and shows their
-states on the LEDs. Since there are multiple switches and lights it is convenient to represent them as vectors in the
-VHDL code
+This same procedure will be used to implement tasks. First, we will create a new Quartus project for the circuit, ensuring to select the target chip that corresponds to our DE2-115 board. Next, we will create a VHDL entity for the code and incorporate it into our project. Following that, we will include the necessary pin assignments for the DE-series board, as discussed previously, and compile the project. Finally, we will download the compiled circuit into the FPGA chip using the Quartus Programmer tool and test the functionality of the circuit.
 
+``` VHDL
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+-- Simple module that connects the SW switches to the LEDR lights
+ENTITY part1 IS 
+   PORT ( SW   : IN   STD_LOGIC_VECTOR(17 DOWNTO 0);
+          LEDR : OUT  STD_LOGIC_VECTOR(17 DOWNTO 0));  -- red LEDs
+END part1;
+
+ARCHITECTURE Structure OF part1 IS
+BEGIN
+   LEDR <= SW;
+END Structure;
+
+```
 
 
 ### Part 2
