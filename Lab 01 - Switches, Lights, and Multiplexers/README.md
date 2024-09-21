@@ -691,11 +691,11 @@ gantt
     todayMarker off
     axisFormat %a-%Y-%m-%d
     section Preparation         
-        Nour Mostafa : crit, 2024-09-10, 2h
-        Mohamed Abouissa : 2024-09-10, 2h
+        Nour Mostafa : crit, 2024-09-10, 02h
+        Mohamed Abouissa : 2024-09-10, 02h
     section Quartus         
-        Nour Mostafa : crit, href "mailto:nour.mohamed@aurak.ac.ae", 2024-09-11, 2d
-        Mohamed Abouissa : href "mailto:mohamed.abouissa@aurak.ac.ae", 2024-09-11, 2d
+        Nour Mostafa : crit, 2024-09-11, 2d
+        Mohamed Abouissa : 2024-09-11, 2d
     section ModelSim       
         Nour Mostafa : crit,2024-09-11, 2d
         Mohamed Abouissa : 2024-09-11, 3d
@@ -703,13 +703,13 @@ gantt
         Nour Mostafa : crit,2024-09-11, 2d
         Mohamed Abouissa : 2024-09-11, 3d
     section Practice 1         
-        Nour Mostafa : crit,2024-09-12, 4h
-        Mohamed Abouissa : 2024-09-12, 4h
+        Nour Mostafa : crit,2024-09-12, 04h
+        Mohamed Abouissa : 2024-09-12, 04h
     section Practice 2         
-        Nour Mostafa : crit, 2024-09-19, 2h
-        Mohamed Abouissa : 2024-09-19, 2h
+        Nour Mostafa : crit, 2024-09-19, 02h
+        Mohamed Abouissa : 2024-09-19, 02h
     section Report
-        Nour Mostafa : crit,2024-09-18, 3d
+        Nour Mostafa : crit,2024-09-18, 2d
         Mohamed Abouissa : 2024-09-19, 1d
 ```
 
