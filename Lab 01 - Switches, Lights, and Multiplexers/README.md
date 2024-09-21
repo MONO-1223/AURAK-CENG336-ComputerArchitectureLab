@@ -682,6 +682,7 @@ Looking forward, future experiments could expand on this foundation by incorpora
 |9| VHDL Testbench Creation Using Perl. (n.d.). Retrieved September 21, 2024, from https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl/  
 |10| Compare PRO, STANDARD, and LITE Editions. (n.d.). https://www.intel.com/content/dam/www/central-libraries/us/en/documents/quartus-prime-compare-editions-guide.pdf  
 |11| Compare Editions Pro Standard Lite (Free) (n.d.). Retrieved September 21, 2024, from https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2023-11/quartus-prime-comparison-infographic.pdf <br>
+<br>
 
 ```mermaid
 gantt
