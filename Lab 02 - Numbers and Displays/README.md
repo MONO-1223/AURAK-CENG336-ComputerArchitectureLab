@@ -374,7 +374,7 @@ END Structure;    -- Its just like a function that calculate something for you
 ```
 <p align="center">
   <img src="Photos/11.jpg" style="width: 49%; height: 300px;" title="0000 1010 = 0A" /> <img src="Photos/13.jpg" style="width: 49%; height: 300px;" title="0000 1100 = 0C"/>  
-  <img src="Photos/30.jpg" style="width: 49%; height: 300px;" title="1110 0000 = E0" /> <img src="Photos/19.jpg" style="width: 49%; height: 300px;" title="1111 0000 = F0"/>
+  <img src="Photos/30.jpg" style="width: 49%; height: 300px;" title="1110 0000 = E0" /> <img src="Photos/31.jpg" style="width: 49%; height: 300px;" title="1111 0000 = F0"/>
 </p>
 
 We can observe that when we set our 8-bit binary value from 0 to F, the corresponding numbers are displayed on the 7-segment display. The four rightmost switches control the first 7-segment display, while the remaining four switches control the second 7-segment display. For instance, if we input the binary value '1111 0000', the output displayed on the 7-segment displays should be 'F0'. This can be observed in the figure above.
