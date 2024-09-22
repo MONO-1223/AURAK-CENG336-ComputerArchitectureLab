@@ -106,6 +106,7 @@ END Structure;
 
 -- (defining my Entity)
 
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
@@ -134,8 +135,6 @@ BEGIN
 END Structure;    -- Its just like a function that calculate something for you
                   -- insted of write it in you main code so you can just call it
                             
-
-
 ```
 
 <p align="center">
