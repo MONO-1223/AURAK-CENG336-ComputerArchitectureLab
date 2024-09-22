@@ -296,47 +296,6 @@ END Structure;
 ```
 
 ``` VHDL
--- (definding my Entity)
-
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-
-ENTITY bcd7seg IS                             -- Here im definding my Entity (bcd7seg) Which i will use it on the main code later
-
-   PORT ( B : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);    -- It have input B which have 4 bits
-          H : OUT STD_LOGIC_VECTOR(0 TO 6));       -- It have output H which have 7 bit (So i can use it as the 7-Segment Display)
-			 
-END bcd7seg;
-
-ARCHITECTURE Structure OF bcd7seg IS           -- Here im just assign my output depending on my output
-BEGIN
-	
-	H <=  "0000001" when B <= "0000" else
-			"1001111" when B <= "0001" else
-			"0010010" when B <= "0010" else
-			"0000110" when B <= "0011" else
-			"1001100" when B <= "0100" else
-			"0100100" when B <= "0101" else
-			"0100000" when B <= "0110" else
-			"0001111" when B <= "0111" else
-			"0000000" when B <= "1000" else
-			"0000100" when B <= "1001" else
-			"0001000" when B <= "1010" else
-			"0000000" when B <= "1011" else
-			"0110001" when B <= "1100" else
-			"0000001" when B <= "1101" else
-			"0110000" when B <= "1110" else
-			"0111000" when B <= "1111" else
-			"0000000";
-	
-	
-END Structure;    -- Its just like a function that calculate something for you
-                  -- insted of write it in you main code so you can just call it
-                            
-
-```
-
-``` VHDL
 -- (My main)
 
 LIBRARY ieee;                  -- This is the top level design (because im calling other entity)
@@ -374,6 +333,44 @@ BEGIN
 -- line becaues we need to follow the same order as we write my entity, so if i satrt with input, here also start with input etc.
 	
 END Structure;
+
+-- (definding my Entity)
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY bcd7seg IS                             -- Here im definding my Entity (bcd7seg) Which i will use it on the main code later
+
+   PORT ( B : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);    -- It have input B which have 4 bits
+          H : OUT STD_LOGIC_VECTOR(0 TO 6));       -- It have output H which have 7 bit (So i can use it as the 7-Segment Display)
+			 
+END bcd7seg;
+
+ARCHITECTURE Structure OF bcd7seg IS           -- Here im just assign my output depending on my output
+BEGIN
+	
+	H <=  "0000001" when B <= "0000" else
+			"1001111" when B <= "0001" else
+			"0010010" when B <= "0010" else
+			"0000110" when B <= "0011" else
+			"1001100" when B <= "0100" else
+			"0100100" when B <= "0101" else
+			"0100000" when B <= "0110" else
+			"0001111" when B <= "0111" else
+			"0000000" when B <= "1000" else
+			"0000100" when B <= "1001" else
+			"0001000" when B <= "1010" else
+			"0000000" when B <= "1011" else
+			"0110001" when B <= "1100" else
+			"0000001" when B <= "1101" else
+			"0110000" when B <= "1110" else
+			"0111000" when B <= "1111" else
+			"0000000";
+	
+	
+END Structure;    -- Its just like a function that calculate something for you
+                  -- insted of write it in you main code so you can just call it
+
 ```
 <p align="center">
   <img src="Photos/11.jpg" style="width: 49%; height: 300px;" title="0000 1010 = 0A" /> <img src="Photos/13.jpg" style="width: 49%; height: 300px;" title="0000 1100 = 0C"/>  
