@@ -359,8 +359,7 @@ The goal of this task is to display specific characters on a 7-segment display b
 
 Unlike 14-segment displays (as in the STM32L476VG's LCD), which can show a wider range of characters and more detailed information, a 7-segment display is primarily designed to display numerical digits (0-9) and a limited selection of alphabetic characters, such as 'A', 'b', 'C', 'd', 'E', 'F', 'g', 'H', 'L', 'P', 't', and 'u.' It cannot display arbitrary symbols or graphics, and while it can represent some letters, its character set is significantly restricted compared to full alphanumeric or graphical displays. Additionally, it typically presents information in a single color—most commonly red, green, or blue—limiting its ability to showcase different colors or shades.
 
-
-A decoder is a digital circuit that converts encoded inputs into distinct outputs, effectively translating binary or other encoded signals into recognizable data. Typically, a decoder has n input lines and 2^n output lines, with each output corresponding to a unique combination of the input values.
+A decoder is a digital circuit that converts encoded inputs into distinct outputs, effectively translating binary or other encoded signals into recognizable data. Typically, a decoder has n input lines and $2^n$ output lines, with each output corresponding to a unique combination of the input values.
 
 <details>
   <summary>Only One 7-Segment Display Working</summary>
