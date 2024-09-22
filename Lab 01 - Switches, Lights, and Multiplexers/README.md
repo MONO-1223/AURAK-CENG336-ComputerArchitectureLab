@@ -672,16 +672,17 @@ Looking forward, future experiments could expand on this foundation by incorpora
 
 ## Resources
 |1| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.  
-|2| Digital Logic & Programming (Director). (2023, March 29). Installing Quartus, ModelSim & MAX10 Drivers (March 2023) [Video recording]. https://www.youtube.com/watch?v=eOWBF4kNM8w  
-|3| Frooxius (Director). (2011, July 23). Altera DE2-115 FPGA - Unpacking and Demonstration [Video recording]. https://www.youtube.com/watch?v=Dn4UAL5MLMg  
-|4| Gantt diagrams | Mermaid. (n.d.). Retrieved September 20, 2024, from https://mermaid.js.org/syntax/gantt.html  
-|5| montoya332 (Director). (2011, August 3). Control Panel Tutorial [Video recording]. https://www.youtube.com/watch?v=F1e0XG83sLU  
+|2| Digital Logic & Programming (Director). (2023, March 29). Installing Quartus, ModelSim & MAX10 Drivers (March 2023) [Video recording]. <br> https://www.youtube.com/watch?v=eOWBF4kNM8w  
+|3| Frooxius (Director). (2011, July 23). Altera DE2-115 FPGA - Unpacking and Demonstration [Video recording]. <br> https://www.youtube.com/watch?v=Dn4UAL5MLMg  
+|4| Gantt diagrams | Mermaid. (n.d.). Retrieved September 20, 2024, from <br> https://mermaid.js.org/syntax/gantt.html  
+|5| montoya332 (Director). (2011, August 3). Control Panel Tutorial [Video recording]. <br> https://www.youtube.com/watch?v=F1e0XG83sLU  
 |6| Quartus® Prime Introduction Using VHDL Designs. (2019).  
-|7| Rania Hussein (Director). (2018, June 18). Tutorial (1/4): Creating a project from scratch in Quartus Prime [Video recording]. https://www.youtube.com/watch?v=iLbmSTG7bpA  
-|8| Technologies, T. (n.d.). Terasic—All FPGA Boards—Cyclone IV - Altera DE2-115 Development and Education Board. Retrieved September 16, 2024, from https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=502  
-|9| VHDL Testbench Creation Using Perl. (n.d.). Retrieved September 21, 2024, from https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl/  
-|10| Compare PRO, STANDARD, and LITE Editions. (n.d.). https://www.intel.com/content/dam/www/central-libraries/us/en/documents/quartus-prime-compare-editions-guide.pdf  
-|11| Compare Editions Pro Standard Lite (Free) (n.d.). Retrieved September 21, 2024, from https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2023-11/quartus-prime-comparison-infographic.pdf <br>
+|7| Rania Hussein (Director). (2018, June 18). Tutorial (1/4): Creating a project from scratch in Quartus Prime [Video recording]. <br> https://www.youtube.com/watch?v=iLbmSTG7bpA  
+|8| Technologies, T. (n.d.). Terasic—All FPGA Boards—Cyclone IV - Altera DE2-115 Development and Education Board. Retrieved September 16, 2024, from <br> https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=502  
+|9| VHDL Testbench Creation Using Perl. (n.d.). Retrieved September 21, 2024, from <br> https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl/  
+|10| Compare PRO, STANDARD, and LITE Editions. (n.d.). <br> https://www.intel.com/content/dam/www/central-libraries/us/en/documents/quartus-prime-compare-editions-guide.pdf  
+|11| Compare Editions Pro Standard Lite (Free) (n.d.). Retrieved September 21, 2024, from <br> https://www.intel.com/content/dam/www/central-libraries/us/en/documents/2023-11/quartus-prime-comparison-infographic.pdf  
+|12| Terasic. (2017). DE2-115 User Manual. <br> https://www.terasic.com.tw/attachment/archive/502/DE2_115_User_manual.pdf <br>
 <br>
 
 ```mermaid
