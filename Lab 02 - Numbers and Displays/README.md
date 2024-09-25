@@ -81,13 +81,13 @@ ENTITY part1 IS               -- Defind My Main entity
 			  
 END part1;
 
-ARCHITECTURE Structure OF part1 IS     -- Here if im using an outside entity i need to declare my inputs and outputs
-				       -- under (COMPONENT) you can think about it as C++ function signature
+ARCHITECTURE Structure OF part1 IS     -- Here if I'm using an outside entity I need to declare my inputs and outputs
+				       -- under (COMPONENT). You can think about it as C++ function signature
 
    COMPONENT bcd7seg
 	
-      PORT ( B : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);    -- Same as above
-             H : OUT STD_LOGIC_VECTOR(0 TO 6));
+      PORT ( B : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);  -- This is the 4 bit input to be taken from the switches
+             H : OUT STD_LOGIC_VECTOR(0 TO 6)); -- This is the 7 bit output displayed on the 7SD
 				 
    END COMPONENT;
 	
@@ -96,32 +96,23 @@ BEGIN
 
    LEDR <= SW;                             -- Just assign the LEDR to match the input (SW)
    
-   digit0: bcd7seg PORT MAP (SW(3 DOWNTO 0), HEX0); -- digit0 it just a varible name, here we calling the entity (bcd7seg) and 
-   digit1: bcd7seg PORT MAP (SW(7 DOWNTO 4), HEX1); -- map it, the maping is like the first thing which is the SW it will go to my
-
--- entity as B because in the entity my B is the input so we pass the first four bit to entity
--- Then my Entity take the input and do the steps then save the
--- output on H then the H is maped with the HEX0 the why we need to becareful when we write this
--- line becaues we need to follow the same order as we write my entity, so if i satrt with input, here also start with input etc.
+   digit0: bcd7seg PORT MAP (SW(3 DOWNTO 0), HEX0); -- digit0 is a varible name, here we calling the entity bcd7seg (whose architecture is defined below). We are passing the leftmost 4 bits of the switch as B (the input) and HEX0 as H (the output) which are the arguments required by the bcd7seg to operate.
+   digit1: bcd7seg PORT MAP (SW(7 DOWNTO 4), HEX1);
 	
 END Structure;
 
--- (defining my Entity)
+-- Entity definition for the BCD to 7-segment display converter
 
+ENTITY bcd7seg IS                             -- definding Entity (bcd7seg) which was used above
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-
-ENTITY bcd7seg IS                             -- Here im definding my Entity (bcd7seg) Which i will use it on the main code later
-
-   PORT ( B : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);    -- It have input B which have 4 bits
-          H : OUT STD_LOGIC_VECTOR(0 TO 6));       -- It have output H which have 7 bit (So i can use it as the 7-Segment Display)
+   PORT ( B : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);    -- input B (binary) which have 4 bits
+          H : OUT STD_LOGIC_VECTOR(0 TO 6));       -- output H (hex) which have 7 bit (So i can use it as the 7-Segment Display)
 			 
 END bcd7seg;
 
 ARCHITECTURE Structure OF bcd7seg IS           -- Here im just assign my output depending on my output
 BEGIN
-	
+	-- -- Output logic for the 7-segment display based on the BCD input
 	H <=  "0000001" when B <= "0000" else
 			"1001111" when B <= "0001" else
 			"0010010" when B <= "0010" else
@@ -135,7 +126,7 @@ BEGIN
 	
 	
 END Structure;    -- Its just like a function that calculate something for you
-                  -- insted of write it in you main code so you can just call it
+                  -- insted of writing it in you main code, you can just call it from here
                             
 ```
 <p align="center">
