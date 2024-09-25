@@ -626,19 +626,19 @@ begin
     -- This process generates test stimuli for the SW input signal. It assigns different binary values to SW at 100 ns intervals, 
 	 -- allowing us to test how the part3 entity responds to each input. 
 
-		SW<= "000000101";
+		SW<= "000000101"; -- A=0000 B=0101 Cin=0 (0 + 5 + 0)
 		wait for 100ns;
 		
-		SW<= "000100010";
+		SW<= "000100010"; -- A=0010 B=0010 Cin=0 (2 + 2 + 0)
 		wait for 100ns;
 		
-		SW<= "001000100";
+		SW<= "001000100"; -- A=0100 B=0100 Cin=0 (4 + 4 + 0)
 		wait for 100ns;
 		
-		SW<= "010000011";
+		SW<= "010000011"; -- A=1000 B=0011 Cin=0 (8 + 3 + 0)
 		wait for 100ns;
 		
-		SW<= "010101111";
+		SW<= "010101111"; -- A=1010 B=1111 Cin=0 (10 + 15 + 0)
 		wait for 100ns;
 
     wait;
