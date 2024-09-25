@@ -584,9 +584,10 @@ BEGIN
 END Structure;
 ```
 
- <img src="Photos/40.jpg" style="width: 49%; height: 300px;" title="A=0000 B=0101 Cin=0 (0 + 5 + 0)"/> <img src="Photos/41.jpg" style="width: 49%; height: 300px;" title="A=0010 B=0010 Cin=0 (2 + 2 + 0)" /> 
- <img src="Photos/43.jpg" style="width: 49%; height: 300px;" title="A=1000 B=0011 Cin=0 (8 + 3 + 0)"/>  <img src="Photos/44.jpg" style="width: 49%; height: 300px;" title="A=1010 B=1111 Cin=0 (10 + 15 + 0)" />
+ <img src="Photos/40.jpg" style="width: 49%; height: 300px;" title="A=0000 B=0101 Cin=0 (0 + 5 + 0 = 5)"/> <img src="Photos/41.jpg" style="width: 49%; height: 300px;" title="A=0010 B=0010 Cin=0 (2 + 2 + 0 = 4)" /> 
+ <img src="Photos/43.jpg" style="width: 49%; height: 300px;" title="A=1000 B=0011 Cin=0 (8 + 3 + 0 = 11)"/>  <img src="Photos/44.jpg" style="width: 49%; height: 300px;" title="A=1010 B=1111 Cin=0 (10 + 15 + 0 = 25)" />
 
+As shown in the results above, the setup is behaving as expected. For example, when `A = 0000 = 0`, `B = 0101 = 5`, and `Cin = 0` their sum was 5 as displayed on the rightmost bits of the LEDRs with 0101.
 
 </details>
 
@@ -651,6 +652,8 @@ end;
   <img src="Photos/45.png" title="ModelSim Result" />
 </p>
 
+In the testbench, we simulated the same test cases we tried on the FPGA board to examine whether the outcomes would match and they did. For instance, in the second input to SW, we test 2 + 2 + 0 as 000100010 and the result on the LEDR was 000000100 which is the binary for 4!
+
 </details>
 
 
@@ -661,6 +664,9 @@ In conclusion, this lab session successfully demonstrated the design and impleme
 |1| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.  
 |2| Terasic. (2017). DE2-115 User Manual. <br> https://www.terasic.com.tw/attachment/archive/502/DE2_115_User_manual.pdf <br>
 |3| VHDL Testbench Creation Using Perl. (n.d.). Retrieved September 21, 2024, from <br> https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl/   
+|4| ALL ABOUT ELECTRONICS. (2022, January 25). Ripple Carry Adder Explained | Working and Limitation of Ripple Carry Adder. <br> https://www.youtube.com/watch?v=b70ZQwci5sY  
+|5| Full Adder in Digital Logic. (2017, March 21). GeeksforGeeks. <br>  https://www.geeksforgeeks.org/full-adder-in-digital-logic/
+
 <br>
 
 ```mermaid
