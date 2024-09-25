@@ -138,24 +138,28 @@ END Structure;    -- Its just like a function that calculate something for you
                   -- insted of write it in you main code so you can just call it
                             
 ```
-
+<p align="center">
   <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
   <img src="Photos/2.jpg" style="width: 49%; height: 300px;" title="0000 0010 = 02"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
   <img src="Photos/4.jpg" style="width: 49%; height: 300px;" title="0000 0100 = 04"/> <img src="Photos/5.jpg" style="width: 49%; height: 300px;" title="0000 0101 = 05" />
 <img src="Photos/6.jpg" style="width: 49%; height: 300px;" title="0000 0110 = 06"/>  <img src="Photos/7.jpg" style="width: 49%; height: 300px;" title="0000 0111 = 07" />
 <img src="Photos/8.jpg" style="width: 49%; height: 300px;" title="0000 1000 = 08"/> <img src="Photos/10.jpg" style="width: 49%; height: 300px;" title="0000 1001 = 09" />
-
+</p>
  We can observe that when we set our 8-bit binary value from 0 to 9, the corresponding numbers are displayed on the 7-segment display. The four rightmost switches control the first 7-segment display, while the remaining four switches control the second 7-segment display. In the above cases, we focus on driving HEX0 only.
 
+
+<p align="center">
  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00" /> <img src="Photos/17.jpg" style="width: 49%; height: 300px;" title="0001 0000 = 10"/> 
  <img src="Photos/18.jpg" style="width: 49%; height: 300px;" title="0010 0000 = 20" /> <img src="Photos/19.jpg" style="width: 49%; height: 300px;" title="0011 0000 = 30"/>
   <img src="Photos/20.jpg" style="width: 49%; height: 300px;" title="0100 0000 = 40" /> <img src="Photos/21.jpg" style="width: 49%; height: 300px;" title="0101 0000 = 50"/>
   <img src="Photos/22.jpg" style="width: 49%; height: 300px;" title="0110 0000 = 60" /> <img src="Photos/23.jpg" style="width: 49%; height: 300px;" title="0111 0000 = 70"/>
   <img src="Photos/24.jpg" style="width: 49%; height: 300px;" title="1000 0000 = 80" /> <img src="Photos/25.jpg" style="width: 49%; height: 300px;" title="1001 0000 = 90" />
-
+</p>
  In these test cases, we focus on driving HEX1 for values from 0 to 9.
  
+ <p align="center">
   <img src="Photos/9.jpg" style="width: 49%; height: 300px;" title="0000 1111 = 08" />  <img src="Photos/32.jpg" style="width: 49%; height: 300px;" title="1000 1000 = 88" />
+</p>
 
   Finally, here we show one "don't care" case where all of the first 4 bits are activated, which would be "F" but it displays "8" instead because it is not defined in our scope. In the second case, we display different combinations for HEX0 and HEX1 driven both together. For instance, if we input the binary value '1000 1000', the output displayed on the 7-segment displays should be '88'. This can be observed in the figure above.
 
@@ -391,9 +395,11 @@ END Structure;    -- Its just like a function that calculate something for you
   <img src="Photos/11.jpg" style="width: 49%; height: 300px;" title="0000 1010 = 0A" /> <img src="Photos/12.jpg" style="width: 49%; height: 300px;" title="0000 1011 = 0B"/>  
   <img src="Photos/13.jpg" style="width: 49%; height: 300px;" title="0000 1100 = 0C" /> <img src="Photos/14.jpg" style="width: 49%; height: 300px;" title="0000 1101 = 0D"/>
   <img src="Photos/15.jpg" style="width: 49%; height: 300px;" title="0000 1110 = 0E" /> <img src="Photos/16.jpg" style="width: 49%; height: 300px;" title="0000 1111 = 0F"/>  
+</p>
 
   We can observe that when we set our 8-bit binary value from 0 to F, the corresponding numbers are displayed on the 7-segment display. In the above cases, we are focusing on driving HEX0 only.
-  
+
+  <p align="center">
   <img src="Photos/26.jpg" style="width: 49%; height: 300px;" title="1010 0000 = A0" /> <img src="Photos/27.jpg" style="width: 49%; height: 300px;" title="1011 0000 = B0"/>  
   <img src="Photos/28.jpg" style="width: 49%; height: 300px;" title="1100 0000 = C0" /> <img src="Photos/29.jpg" style="width: 49%; height: 300px;" title="1101 0000 = D0"/>
   <img src="Photos/30.jpg" style="width: 49%; height: 300px;" title="1110 0000 = E0" /> <img src="Photos/31.jpg" style="width: 49%; height: 300px;" title="1111 0000 = F0"/>
@@ -584,8 +590,10 @@ BEGIN
 END Structure;
 ```
 
+<p align="center">
  <img src="Photos/40.jpg" style="width: 49%; height: 300px;" title="A=0000 B=0101 Cin=0 (0 + 5 + 0 = 5)"/> <img src="Photos/41.jpg" style="width: 49%; height: 300px;" title="A=0010 B=0010 Cin=0 (2 + 2 + 0 = 4)" /> 
  <img src="Photos/43.jpg" style="width: 49%; height: 300px;" title="A=1000 B=0011 Cin=0 (8 + 3 + 0 = 11)"/>  <img src="Photos/44.jpg" style="width: 49%; height: 300px;" title="A=1010 B=1111 Cin=0 (10 + 15 + 0 = 25)" />
+</p>
 
 As shown in the results above, the setup is behaving as expected. For example, when `A = 0000 = 0`, `B = 0101 = 5`, and `Cin = 0` their sum was 5 as displayed on the rightmost bits of the LEDRs with 0101.
 
