@@ -260,7 +260,7 @@ In the results, we can clearly observe that for each binary input, we get the co
 LIBRARY ieee;                  
 USE ieee.std_logic_1164.all;
 
-ENTITY part1 IS               -- Defind My Main entity
+ENTITY part1 IS  
 
    PORT ( SW         : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);        
           LEDR       : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);       
