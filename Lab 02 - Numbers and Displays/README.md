@@ -653,3 +653,39 @@ end;
 
 </details>
 
+
+## Conclusion
+In conclusion, this lab session successfully demonstrated the design and implementation of fundamental combinational circuits using VHDL on an Intel FPGA DE-series board. By creating a binary-to-decimal converter for 7-segment displays and developing a ripple-carry adder through the instantiation of full adder modules, we effectively applied key VHDL concepts such as component instantiation, signal management, and hierarchical design. The project underscored the importance of understanding digital design principles and provided hands-on experience with translating logical operations into hardware descriptions. Overall, the lab enhanced our comprehension of VHDL and its application in constructing reliable digital systems, laying a solid foundation for future explorations in digital circuit design and implementation.
+
+## Resources
+|1| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.  
+|2| Terasic. (2017). DE2-115 User Manual. <br> https://www.terasic.com.tw/attachment/archive/502/DE2_115_User_manual.pdf <br>
+|3| VHDL Testbench Creation Using Perl. (n.d.). Retrieved September 21, 2024, from <br> https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl/   
+<br>
+
+```mermaid
+gantt
+    title Work Division Gantt Chart
+    tickInterval 1day
+    todayMarker off
+    axisFormat %a-%Y-%m-%d
+    section Preparation         
+        Nour Mostafa : active, 2024-09-17 00:00, 01h
+        Mohamed Abouissa : 2024-09-17 00:00, 01h
+    section Quartus         
+        Nour Mostafa : active, 2024-09-18 00:00, 1d
+        Mohamed Abouissa : 2024-09-18 00:00, 1d
+    section ModelSim       
+        Nour Mostafa : active,2024-09-18 00:00, 1d
+        Mohamed Abouissa : 2024-09-18 00:00, 1d
+    section Results       
+        Nour Mostafa : active,2024-09-18 00:00, 1d
+        Mohamed Abouissa : 2024-09-18 00:00, 1d
+    section Report
+        Nour Mostafa : active,2024-09-24 00:00, 1d
+        Mohamed Abouissa : 2024-09-22 00:00, 1d
+```
+
+We extend our sincere appreciation to Eng. Umar Adeel for his insightful feedback which has significantly contributed to the successful completion of this experiment.
+
+This publication adheres to all regulatory laws and guidelines established by the American University of Ras Al Khaimah (AURAK) regarding the dissemination of academic materials.
