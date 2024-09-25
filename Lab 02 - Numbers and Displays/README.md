@@ -26,49 +26,8 @@ Once this is set up for displaying numbers on HEX0 and HEX1, the second part of 
 <br>
 
 ``` VHDL
--- Easy Code (Not the main one)
-
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-
-ENTITY part1 IS
-   PORT ( SW : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);       -- My input (SW) have 4 bit as input
-          HEX0,HEX1 : OUT STD_LOGIC_VECTOR(0 TO 6));   -- My Output (HEX0 and HEX1) having 7 bit as output
-END part1;
-
-ARCHITECTURE Structure OF part1 IS
-BEGIN
-	
-	HEX0 <=  "0000001" when SW <= "0000" else                   -- Write every case for HEX0 depending on the input (SW)
-				"1001111" when SW <= "0001" else
-				"0010010" when SW <= "0010" else
-				"0000110" when SW <= "0011" else
-				"1001100" when SW <= "0100" else
-				"0100100" when SW <= "0101" else
-				"0100000" when SW <= "0110" else
-				"0001111" when SW <= "0111" else
-				"0000000" when SW <= "1000" else
-				"0000100" when SW <= "1001" else
-				"0000000";
-				
-	HEX1 <=  "0000001" when SW <= "0000" else                   -- Write every case for HEX1 depending on the input (SW)
-				"1001111" when SW <= "0001" else
-				"0010010" when SW <= "0010" else
-				"0000110" when SW <= "0011" else
-				"1001100" when SW <= "0100" else
-				"0100100" when SW <= "0101" else
-				"0100000" when SW <= "0110" else
-				"0001111" when SW <= "0111" else
-				"0000000" when SW <= "1000" else
-				"0000100" when SW <= "1001" else
-				"0000000";
-	
-	
-END Structure;
-```
-
-``` VHDL
--- (My main)
+-- The code studied/implemented in the lab
+-- Modular design
 
 LIBRARY ieee;                  -- This is the top level design (because im calling other entity)
 USE ieee.std_logic_1164.all;
@@ -126,9 +85,53 @@ BEGIN
 	
 	
 END Structure;    -- Its just like a function that calculate something for you
-                  -- insted of writing it in you main code, you can just call it from here
-                            
+                  -- insted of writing it in you main code, you can just call it from here                    
 ```
+
+
+``` VHDL
+-- Separate code that achieves the same result using a different approach
+-- Doing everything in one function without having to call any external functions
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY part1 IS
+   PORT ( SW : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);       -- My input (SW) have 4 bit as input
+          HEX0,HEX1 : OUT STD_LOGIC_VECTOR(0 TO 6));   -- My Output (HEX0 and HEX1) having 7 bit as output
+END part1;
+
+ARCHITECTURE Structure OF part1 IS
+BEGIN
+	
+	HEX0 <=  "0000001" when SW <= "0000" else                   -- Write every case for HEX0 depending on the input (SW)
+				"1001111" when SW <= "0001" else
+				"0010010" when SW <= "0010" else
+				"0000110" when SW <= "0011" else
+				"1001100" when SW <= "0100" else
+				"0100100" when SW <= "0101" else
+				"0100000" when SW <= "0110" else
+				"0001111" when SW <= "0111" else
+				"0000000" when SW <= "1000" else
+				"0000100" when SW <= "1001" else
+				"0000000";
+				
+	HEX1 <=  "0000001" when SW <= "0000" else                   -- Write every case for HEX1 depending on the input (SW)
+				"1001111" when SW <= "0001" else
+				"0010010" when SW <= "0010" else
+				"0000110" when SW <= "0011" else
+				"1001100" when SW <= "0100" else
+				"0100100" when SW <= "0101" else
+				"0100000" when SW <= "0110" else
+				"0001111" when SW <= "0111" else
+				"0000000" when SW <= "1000" else
+				"0000100" when SW <= "1001" else
+				"0000000";
+	
+	
+END Structure;
+```
+
 <p align="center">
   <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
   <img src="Photos/2.jpg" style="width: 49%; height: 300px;" title="0000 0010 = 02"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
