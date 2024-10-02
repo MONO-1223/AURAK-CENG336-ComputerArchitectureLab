@@ -124,4 +124,42 @@ When the `clock` goes low, the latch enters a holding state, meaning it retains 
   <summary>VHDL Simulation in Waveform Editor</summary>
 <br>
 
+<p align="center">
+  <img src="Photos/part1wave1.png" style="width: 33%; height: 300px;" title="'01' and '10' for 'SR' " /> <img src="Photos/part1wave2.png" style="width: 33%; height: 300px;" title="Clk follow S"/> <img src="Photos/part1wave3.png" style="width: 33%; height: 300px;" title="Clk follow R"/>   
+</p>
+
+In this implementation of the SR latch system using the waveform editor, we start by setting the inputs `S` and `R` to be opposites of each other, meaning when `S` is 1, `R` is 0, and vice versa. This approach prevents the inputs from being set to either (0, 0) or (1, 1), as doing so would cause the system, or the waveform editor software, to enter an infinite loop, resulting in an `error`. This issue arises due to the `"hold"` state when both `S` and `R` are 0 and the `"forbidden"` state when both `S` and `R` are 1, which leads to undefined behavior.
+
+In the second scenario, we configure the `clock (CLK)` to follow the `S` input, meaning the system remains in the high (1) state continuously. This is because if the `clock` is 0 and `S` is 0 while `R` is 1, the system ignores the inputs due to the `clock` being low, maintaining the previous state. In the final case, the clock is set to follow the `R` input. As a result, the system remains in the low (0) state indefinitely, because with the `clock` aligned with `R`, the system is effectively reset whenever `R` is 1.
+
+This setup ensures that the system behaves predictably, avoiding `errors` caused by `invalid input` combinations and the hold state.
+
 </details>
+
+<details>
+  <summary>VHDL LUT Diagram and Logic Gates Circuit</summary>
+<br>
+
+<p align="center">
+  <img src="Photos/part1lut.png" style="width: 49%; height: 300px;" title="LUT Diagram" /> <img src="Photos/part1gate.png" style="width: 49%; height: 300px;" title="Logic Gates Circuit"/> 
+</p>
+
+Above, we have the `LUT (Look-Up Table)` diagrams for the gated SR latch created in this lab. On the left side, we can see the inputs `S`, `R`, and the `clock (CLK)`, and on the far right, we have the output `Q`. In the middle, the internal signals, labeled as `R_g`, `S_g`, `Qa`, and `Qb`, are displayed, which were computed using the `LUT`.
+
+The second figure represents the same system but is shown in a logic gate design rather than using a `LUT`. Here, we can clearly see the logical gates that were used to compute the internal signals, providing a more detailed view of how the internal workings of the SR latch are implemented at the gate level. Both diagrams effectively illustrate the functioning of the SR latch, highlighting the transition from a LUT-based design to one using physical logic gates.
+
+</details>
+
+
+
+## Part 2: Design and Implementation of an D Latch
+
+In the second part, we will focus on creating a D latch, which is a fundamental memory element commonly used in digital circuits to store a single bit of information. Unlike the RS latch, the D latch operates with only two main inputs: `Data (D)` and `Clock (CLK)`, and produces two outputs: `Q` and its complement `Q'`. The key advantage of the D latch is its simplicity—it eliminates the possibility of invalid states by directly linking the Data input to the Set and Reset logic.
+
+The operation of the D latch is straightforward: when the `Clock (CLK)` is high (active), the output `Q` follows the input Data (D), meaning `Q` takes the value of `D`. When the clock is low (inactive), the latch holds its previous state, maintaining the last value that was stored when the `clock` was high. This design ensures that the latch only updates its state during the active phase of the `clock`, providing a more controlled and predictable behavior. Refer to [Figure 3](Photos/SRlatch.png) for a visual representation of the D latch.
+
+In this part, we will also examine how the D latch maintains the integrity of stored data by gating the Data input based on the clock signal. The D latch can be implemented using a modified RS latch configuration, where the Set and Reset inputs are derived directly from the Data signal. This modification ensures that the latch only updates when the clock is high, and retains its state when the clock is low.
+
+Refer to Figure 2 for a visual representation of the gated D latch. In this configuration, the latch takes D and clk as inputs, producing Qa as the output and Qb as its complement. The internal signals R_g and S_g are generated based on the clock signal and the data input, allowing the system to store data in sync with the clock. This gating mechanism ensures that the D latch updates the output Q only when the clock is high, providing reliable data storage in digital systems.
+
+
