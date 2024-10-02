@@ -264,4 +264,27 @@ END Structural;
 
 </details>
 
+<details>
+  <summary>VHDL Simulation in Waveform Editor</summary>
+<br>
+
+<p align="center">
+  <img src="Photos/part2wave.png" title="Waveform Editor" />
+</p>
+
+
+</details>
+
+<details>
+  <summary>VHDL LUT Diagram and Logic Gates Circuit</summary>
+<br>
+
+<p align="center">
+  <img src="Photos/part1lut.png" style="width: 49%; height: 300px;" title="LUT Diagram" /> <img src="Photos/part1gate.png" style="width: 49%; height: 300px;" title="Logic Gates Circuit"/> 
+</p>
+
+
+</details>
+
+
 
