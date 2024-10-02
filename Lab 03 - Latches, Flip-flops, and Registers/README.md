@@ -163,3 +163,105 @@ In this part, we will also examine how the D latch maintains the integrity of st
 Refer to [Figure 4](Photos/Part2Q.png) for a visual representation of the gated D latch. In this configuration, the latch takes `D` and `clk` as inputs, producing `Qa` as the output and `Qb` as its complement. The internal signals `R_g` and `S_g` are generated based on the clock signal and the data input, allowing the system to store data in sync with the clock. This gating mechanism ensures that the D latch updates the output `Q` only when the `clock` is high, providing reliable data storage in digital systems.
 
 
+<details>
+  <summary>VHDL Code Implementation on the FPGA Board (D Latch)</summary>
+<br>
+
+```VHDL
+-- This is Gate Level Design
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+-- A gated D latch described the hard way
+
+ENTITY D_latch IS
+
+   PORT ( Clk, D : IN  STD_LOGIC;    -- Set my inputs Clk and D
+          Q      : OUT STD_LOGIC);   -- Set my output Q
+
+END D_latch;
+
+ARCHITECTURE Structural OF D_latch IS
+
+   SIGNAL R, R_g, S_g, Qa, Qb : STD_LOGIC ;      -- Same idea as part 1 (SR Latch) 
+   ATTRIBUTE keep: boolean;
+   ATTRIBUTE keep of R, R_g, S_g, Qa, Qb : signal is true;
+
+BEGIN
+
+   R <= NOT D;               -- R will be the complement of D so we can use it as S
+   S_g <= NOT (D AND Clk);
+   R_g <= NOT (R AND Clk);
+   Qa <= NOT (S_g AND Qb);
+   Qb <= NOT (R_g AND Qa);
+
+   Q <= Qa;
+
+END Structural;
+
+```
+
+```VHDL
+
+-- This Is Top Level Design 
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+-- SW[0] is the latch's D input, SW[1] is the level-sensitive Clk, LEDR[0] is Q
+
+ENTITY top IS
+
+   PORT ( SW   : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);     -- Set my input as switch
+          LEDR : OUT STD_LOGIC_VECTOR(9 DOWNTO 0));    -- and the output will be on red LED
+END top;
+
+ARCHITECTURE Structural OF top IS
+
+   COMPONENT D_latch 
+      PORT ( Clk, D : IN  STD_LOGIC;     -- Defind the COMPONENT for the other entity that i will use
+             Q      : OUT STD_LOGIC);
+
+   END COMPONENT;
+
+BEGIN   
+   -- D_latch (input Clk, D, output Q)
+
+   U1: D_latch PORT MAP (SW(1), SW(0), LEDR(0));     -- Here we maping the iput and the output
+   LEDR(9 DOWNTO 1) <= "000000000";
+
+END Structural;
+
+-- Here is the gate level on it own entity same as the past code above
+
+LIBRARY ieee;                   
+USE ieee.std_logic_1164.all;
+
+-- A gated D latch described the hard way
+
+ENTITY D_latch IS
+   PORT ( Clk, D : IN  STD_LOGIC;
+          Q      : OUT STD_LOGIC);
+END D_latch;
+
+ARCHITECTURE Structural OF D_latch IS
+   SIGNAL R, R_g, S_g, Qa, Qb : STD_LOGIC ;
+   ATTRIBUTE keep: boolean;
+   ATTRIBUTE keep of R, R_g, S_g, Qa, Qb : signal is true;
+BEGIN   
+   R <= NOT D;
+   S_g <= NOT (D AND Clk);
+   R_g <= NOT (R AND Clk);
+   Qa <= NOT (S_g AND Qb);
+   Qb <= NOT (R_g AND Qa);
+
+   Q <= Qa;
+END Structural;
+
+```
+
+
+</details>
+
+
