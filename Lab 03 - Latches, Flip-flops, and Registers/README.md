@@ -1,10 +1,15 @@
 # <p align="center">Latches, Flip-flops, and Registers</p>
 
-abstract
+Do your magic :)
 
 ---
 
-introduction
+- what is the RS Latch
+- what is D latch (what the difrent between the RS and the D latch) What issue it solve
+- what is the D flib flop
+- defrence between the flib flop and the latch
+- the new simulastion (waveform editor)
+- the LUT digram and the gate digrams
 
 ## Part 1: Design and Implementation of an RS Latch
 
@@ -272,6 +277,7 @@ END Structural;
   <img src="Photos/part2wave.png" title="Waveform Editor" />
 </p>
 
+After carefully observing the waveform of the `D` latch, we can conclude that the behavior of the output `Q` is closely tied to the state of the clock signal and the data input `D`. Specifically, when the clock signal is high, the latch is in a transparent state, meaning that any changes in the input `D` are directly reflected in the output `Q`. In other words, as long as both the clock and the input `D` are high, the output `Q` will actively follow the input `D` without delay. This behavior ensures that during the clock's high period, the `D` latch continuously monitors and updates the output to mirror the input. However, when the clock signal goes low, the latch enters a hold state, maintaining the last value of `D` that was present during the high clock phase. This fundamental characteristic of the `D` latch makes it a valuable component for temporarily storing data in sequential circuits, ensuring synchronized data capture based on clock signals.
 
 </details>
 
@@ -280,7 +286,7 @@ END Structural;
 <br>
 
 <p align="center">
-  <img src="Photos/part1lut.png" style="width: 49%; height: 300px;" title="LUT Diagram" /> <img src="Photos/part1gate.png" style="width: 49%; height: 300px;" title="Logic Gates Circuit"/> 
+  <img src="Photos/part2lut.png" style="width: 49%; height: 300px;" title="LUT Diagram" /> <img src="Photos/part2gate.png" style="width: 49%; height: 300px;" title="Logic Gates Circuit"/> 
 </p>
 
 
