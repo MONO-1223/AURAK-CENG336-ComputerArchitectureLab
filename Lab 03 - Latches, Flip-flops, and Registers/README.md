@@ -289,6 +289,7 @@ After carefully observing the waveform of the `D` latch, we can conclude that th
   <img src="Photos/part2lut.png" style="width: 49%; height: 300px;" title="LUT Diagram" /> <img src="Photos/part2gate.png" style="width: 49%; height: 300px;" title="Logic Gates Circuit"/> 
 </p>
 
+In the diagram above, we can observe two representations of the D latch: on the left is the (LUT), and on the right is the gate-level design. At first glance, both resemble the structure of an RS latch. However, there is a key difference in the D latch—while the RS latch has two separate inputs `(S and R)`, the D latch simplifies this by having only one input, `D`. This input is then split into two signals: the original input `D` and its complement `D` (the inverse of `D`. This design ensures that the D latch eliminates the possibility of invalid states that can occur in the RS latch by tying the behavior of the set and reset inputs directly to the value of `D`. This streamlined approach makes the D latch more efficient and easier to use for storing and synchronizing data in digital circuits.
 
 </details>
 
