@@ -142,7 +142,7 @@ This setup ensures that the system behaves predictably, avoiding `errors` caused
 </details>
 
 <details>
-  <summary>VHDL LUT Diagram and Logic Gates Circuit</summary>
+  <summary>VHDL LUT-Level Design and Gates-Level Design</summary>
 <br>
 
 <p align="center">
@@ -282,7 +282,7 @@ After carefully observing the waveform of the `D` latch, we can conclude that th
 </details>
 
 <details>
-  <summary>VHDL LUT Diagram and Logic Gates Circuit</summary>
+  <summary>VHDL LUT-Level Design and Gates-Level Design</summary>
 <br>
 
 <p align="center">
@@ -362,6 +362,9 @@ END Behavior;
   <img src="Photos/part3lut.png" style="width: 49%; height: 300px;" title="LUT Diagram" /> <img src="Photos/part3gate.png" style="width: 49%; height: 300px;" title="Logic Gates Circuit"/> 
 </p>
 
+In the two diagrams provided, we can observe both the gate-level and LUT-level designs of a D latch and two D flip-flops. In the `gate-level design`, you see the D latch (`Qa$latch`) at the top, which holds data when the `Latch_Enable` signal is active. This latch is sensitive to the level of the clock signal (`Clk`). The two D flip-flops (`Qb~reg0` and `Qc~reg0`), on the other hand, are edge-triggered. One is positive edge-triggered (marked by a triangle on the clock input), and the other is negative edge-triggered (indicated by the bubble before the triangle). These flip-flops store the input (`D`) on the respective clock edge and transfer it to the outputs (`Qb` and `Qc`). The synchronous clear (`SCLR`) input for both flip-flops is deactivated (set to `1'h0`), meaning it does not affect the operation here.
+
+In the `LUT-level design`, the same components are represented through logic cells. The latch (`Qa$latch`) stores and outputs data based on the `Clk~input` signal, and the flip-flops (`Qb~reg0` and `Qc~reg0`) continue to store data on their respective clock edges (positive or negative), behaving similarly to the gate-level design. The outputs (`Qa`, `Qb`, and `Qc`) reflect the data stored within each component after the relevant clocking or latching event. Both designs serve the same function, but the gate-level diagram shows individual logic gates, while the LUT-level diagram focuses on programmable logic components.
 
 </details>
 
