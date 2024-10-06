@@ -149,9 +149,9 @@ This setup ensures that the system behaves predictably, avoiding `errors` caused
   <img src="Photos/part1lut.png" style="width: 49%; height: 300px;" title="LUT Diagram" /> <img src="Photos/part1gate.png" style="width: 49%; height: 300px;" title="Logic Gates Circuit"/> 
 </p>
 
-Above, we have the `LUT (Look-Up Table)` diagrams for the gated SR latch created in this lab. On the left side, we can see the inputs `S`, `R`, and the `clock (CLK)`, and on the far right, we have the output `Q`. In the middle, the internal signals, labeled as `R_g`, `S_g`, `Qa`, and `Qb`, are displayed, which were computed using the `LUT`.
+The diagrams above represent the `Look-Up Table (LUT)` for the gated SR latch created in this lab. On the left, we have the input signals: Set `(S)`, Reset `(R)`, and `Clock (CLK)`. The output `(Q)` is shown on the far right. In between, the internal signals, labeled as `R_g`, `S_g`, `Qa`, and `Qb`, are displayed. These internal signals were derived using the LUT, reflecting the latch's behavior based on the given inputs.
 
-The second figure represents the same system but is shown in a logic gate design rather than using a `LUT`. Here, we can clearly see the logical gates that were used to compute the internal signals, providing a more detailed view of how the internal workings of the SR latch are implemented at the gate level. Both diagrams effectively illustrate the functioning of the SR latch, highlighting the transition from a LUT-based design to one using physical logic gates.
+The second figure represents the same system but is shown in a logic gate design rather than using a `Look-Up Table (LUT)`. Here, we can clearly see the logical gates that were used to compute the internal signals, providing a more detailed view of how the internal workings of the SR latch are implemented at the gate level. Both diagrams effectively illustrate the functioning of the `SR latch`, highlighting the transition from a LUT-based design to one using physical logic gates.
 
 </details>
 
@@ -289,7 +289,7 @@ After carefully observing the waveform of the `D` latch, we can conclude that th
   <img src="Photos/part2lut.png" style="width: 49%; height: 300px;" title="LUT Diagram" /> <img src="Photos/part2gate.png" style="width: 49%; height: 300px;" title="Logic Gates Circuit"/> 
 </p>
 
-In the diagram above, we can observe two representations of the D latch: on the left is the (LUT), and on the right is the gate-level design. At first glance, both resemble the structure of an RS latch. However, there is a key difference in the D latch—while the RS latch has two separate inputs `(S and R)`, the D latch simplifies this by having only one input, `D`. This input is then split into two signals: the original input `D` and its complement `D` (the inverse of `D`. This design ensures that the D latch eliminates the possibility of invalid states that can occur in the RS latch by tying the behavior of the set and reset inputs directly to the value of `D`. This streamlined approach makes the D latch more efficient and easier to use for storing and synchronizing data in digital circuits.
+In the diagram above, we can observe two representations of the D latch: on the left is the `Look-Up Table (LUT)`, and on the right is the gate-level design. At first glance, both resemble the structure of an RS latch. However, there is a key difference in the D latch—while the RS latch has two separate inputs `(S and R)`, the D latch simplifies this by having only one input, `D`. This input is then split into two signals: the original input `D` and its complement `D` (the inverse of `D`. This design ensures that the D latch eliminates the possibility of invalid states that can occur in the RS latch by tying the behavior of the set and reset inputs directly to the value of `D`. This streamlined approach makes the D latch more efficient and easier to use for storing and synchronizing data in digital circuits.
 
 </details>
 
