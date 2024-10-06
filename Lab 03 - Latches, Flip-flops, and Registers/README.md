@@ -368,5 +368,40 @@ In the `LUT-level design`, the same components are represented through logic cel
 
 </details>
 
+## Conclusion
 
+Do your magic
+
+## Resources
+
+Do your magic
+
+<br>
+
+```mermaid
+gantt
+    title Work Division Gantt Chart
+    tickInterval 1day
+    todayMarker off
+    axisFormat %a-%Y-%m-%d
+    section Preparation         
+        Nour Mostafa : active, 2024-09-17 00:00, 01h
+        Mohamed Abouissa : 2024-09-17 00:00, 01h
+    section Quartus         
+        Nour Mostafa : active, 2024-09-18 00:00, 1d
+        Mohamed Abouissa : 2024-09-18 00:00, 1d
+    section ModelSim       
+        Nour Mostafa : active,2024-09-18 00:00, 1d
+        Mohamed Abouissa : 2024-09-18 00:00, 1d
+    section Results       
+        Nour Mostafa : active,2024-09-18 00:00, 1d
+        Mohamed Abouissa : 2024-09-18 00:00, 1d
+    section Report
+        Nour Mostafa : active,2024-09-24 00:00, 1d
+        Mohamed Abouissa : 2024-09-22 00:00, 1d
+```
+
+We extend our sincere appreciation to Eng. Umar Adeel for his insightful feedback which has significantly contributed to the successful completion of this experiment.
+
+This publication adheres to all regulatory laws and guidelines established by the American University of Ras Al Khaimah (AURAK) regarding the dissemination of academic materials.
 
