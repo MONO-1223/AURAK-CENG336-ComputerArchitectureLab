@@ -304,6 +304,65 @@ On the other hand, the negative edge-triggered flip-flop can be identified by a 
   <summary>VHDL Code Implementation on the FPGA Board (D Flip-Flop)</summary>
 <br>
 
+```VHDL
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY part4 IS 
+
+   PORT ( Clk, D     : IN  STD_LOGIC;
+          Qa, Qb, Qc : OUT STD_LOGIC);
+			 
+END part4;
+
+ARCHITECTURE Behavior OF part4 IS
+BEGIN
+   
+   PROCESS (D, Clk)
+   BEGIN
+      IF (Clk = '1') THEN
+         Qa <= D;
+      END IF;
+   END PROCESS;
+
+   PROCESS (Clk)
+   BEGIN
+      IF (Clk'EVENT AND Clk = '1') THEN
+         Qb <= D;
+      END IF;
+   END PROCESS;
+
+   PROCESS (Clk)
+   BEGIN
+      IF (Clk'EVENT AND Clk = '0') THEN
+         Qc <= D;
+      END IF;
+   END PROCESS;
+
+END Behavior;
+```
+
+</details>
+
+<details>
+  <summary>VHDL Simulation in Waveform Editor</summary>
+<br>
+
+<p align="center">
+  <img src="Photos/part3wave.png" title="Waveform Editor" />
+</p>
+
+</details>
+
+<details>
+  <summary>VHDL LUT Diagram and Logic Gates Circuit</summary>
+<br>
+
+<p align="center">
+  <img src="Photos/part3lut.png" style="width: 49%; height: 300px;" title="LUT Diagram" /> <img src="Photos/part3gate.png" style="width: 49%; height: 300px;" title="Logic Gates Circuit"/> 
+</p>
+
+
 </details>
 
 
