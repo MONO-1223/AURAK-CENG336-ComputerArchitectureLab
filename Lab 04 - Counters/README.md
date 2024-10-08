@@ -6,9 +6,9 @@ Do your magic :)
 
 - what is the synchronous counter.
 - what is the T-type flip-flops.
+- for part two try to explain what the meaning of using regesters
 
 ## Part 1: Design and Implementation of an 4-bit and 8-bit Synchronous Counter
-
 
 <details>
   <summary>VHDL Code Implementation on the FPGA Board (4-bit Synchronous Counter)</summary>
@@ -238,6 +238,10 @@ END Behavior;
 
 
 </details>
+
+## Part 2: do your magic
+
+do your magic
 
 
 ## Conclusion
