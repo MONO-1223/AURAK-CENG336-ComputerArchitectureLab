@@ -14,6 +14,12 @@ A __T-type flip-flop__ (T flip-flop) is a type of flip-flop, a basic building bl
 
 ## Part 1: Design and Implementation of an 4-bit and 8-bit Synchronous Counter
 
+In this lab, we will design a 4-bit and 8-bit counter using T flip-flops. Figure 1 illustrates the design for better understanding. The counter will have three primary inputs: `enable`, `reset (clear)`, and `clock`. 
+
+The `enable` input determines whether the counter is operational. If the `enable` signal is high, the counter will function, and if it is low, the counter will remain inactive. For this design, we assign the enable input to switch number 1 (the second switch from the right). The `reset (clear)` input is active-low, meaning the counter will reset to zero when the reset signal is low. This is represented by the small bubble at the input of each T flip-flop in Figure 1. When the reset input is high, the counter will continue its operation without resetting. We assign the reset input to switch number 0. The `clock` input is `positive-edge triggered` and is assigned to key zero. This means that the counter will increment on the rising edge of the `clock` signal, which occurs when key zero is pressed and released (from low to high and then back to low).
+
+To operate the counter, both the `enable` and `reset` inputs must be high. In this state, pressing the clock key will increment the counter. For the 4-bit counter, the output is displayed using a single 7-segment display `(HEX0)`. For the 8-bit counter, we use two 7-segment displays `(HEX0 and HEX1)`. The 4-bit counter is built using 4 T flip-flops, while the 8-bit counter uses 8 T flip-flops.
+
 <details>
   <summary>VHDL Code Implementation on the FPGA Board (4-bit Synchronous Counter)</summary>
 <br>
@@ -23,38 +29,38 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
 ENTITY part1_4bits IS 
-   PORT ( SW   : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
+   PORT ( SW   : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);     -- We assign my input and out put here
           KEY  : IN  STD_LOGIC_VECTOR(0 DOWNTO 0);
           HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6));
 END part1_4bits;
 
 ARCHITECTURE Behavior OF part1_4bits IS
-   COMPONENT ToggleFF 
+   COMPONENT ToggleFF                                 -- The component of the TFF entity that i will use it later
       PORT ( T, Clock, Resetn : IN  STD_LOGIC;
              Q                : OUT STD_LOGIC);
    END COMPONENT;
-   COMPONENT hex7seg
+   COMPONENT hex7seg                                  -- The component of the HEX entity that i will use it later
       PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
              display : OUT STD_LOGIC_VECTOR(0 TO 6));
-   END COMPONENT;
-   SIGNAL Clock, Resetn : STD_LOGIC;
+   END COMPONENT;                                     
+   SIGNAL Clock, Resetn : STD_LOGIC;                   -- Creat 4 signals that i will use it later
    SIGNAL Count, Enable : STD_LOGIC_VECTOR(3 DOWNTO 0);
 BEGIN
    
-   Clock <= KEY(0);
-   Resetn <= SW(0);
+   Clock <= KEY(0);   -- Assign the clock to KEY 0
+   Resetn <= SW(0);   -- Assign the resetn to SW 0
 
-   Enable(0) <= SW(1);
-   TFF0: ToggleFF PORT MAP (Enable(0), Clock, Resetn, Count(0));
-   Enable(1) <= Count(0) AND Enable(0);
+   Enable(0) <= SW(1); -- Assign the enable to SW 1
+   TFF0: ToggleFF PORT MAP (Enable(0), Clock, Resetn, Count(0));          -- Here we do mapping for the output Count(0) we take it and do AND with the Enable(0) so we get the second input for the second TFF
+   Enable(1) <= Count(0) AND Enable(0);                                   -- And we keep going
    TFF1: ToggleFF PORT MAP (Enable(1), Clock, Resetn, Count(1));
    Enable(2) <= Count(1) AND Enable(1);
    TFF2: ToggleFF PORT MAP (Enable(2), Clock, Resetn, Count(2));
    Enable(3) <= Count(2) AND Enable(2);
    TFF3: ToggleFF PORT MAP (Enable(3), Clock, Resetn, Count(3));
    
-   digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0);
-END Behavior;
+   digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0);                 -- Here after we get the output for each TFF we will map it with the HEX 0 with the same entity we used it before
+END Behavior; 
          
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -65,30 +71,30 @@ ENTITY ToggleFF IS
 END ToggleFF;
 
 ARCHITECTURE Behavior OF ToggleFF IS
-   SIGNAL T_out : STD_LOGIC;
+   SIGNAL T_out : STD_LOGIC;                         -- Creat a siganl
 BEGIN
-   PROCESS (Clock)
+   PROCESS (Clock)                                   -- This mean if any changes happen in the clock i will run this process
    BEGIN
-      IF (Clock'EVENT AND Clock = '1') THEN
-         IF (Resetn = '0') THEN
+      IF (Clock'EVENT AND Clock = '1') THEN          -- Simple nested if statment (if the clock change and it become one then enter the next if)
+         IF (Resetn = '0') THEN                      -- Also if the reset is 0 then T_out will be 0
             T_out <= '0';
-         ELSIF (T = '1') THEN
+         ELSIF (T = '1') THEN                        -- Else if T is 1 then toggel the input (CLOCK)
             T_out <= NOT T_out;
          END IF;
       END IF;
    END PROCESS;
-   Q <= T_out;
+   Q <= T_out;                                        -- My output will Assign it to Q the go up the when we are done
 END Behavior;
          
 LIBRARY ieee;
-USE ieee.std_logic_1164.all;
+USE ieee.std_logic_1164.all;                           -- We use this before
 
 ENTITY hex7seg IS
    PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
           display : OUT STD_LOGIC_VECTOR(0 TO 6));
 END hex7seg;
 
-ARCHITECTURE Behavior OF hex7seg IS
+ARCHITECTURE Behavior OF hex7seg IS               
 BEGIN
   
    PROCESS (hex)
