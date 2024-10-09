@@ -119,8 +119,8 @@ END Behavior;
 ```
 
 <p align="center">
-  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
-  <img src="Photos/2.jpg" style="width: 49%; height: 300px;" title="0000 0010 = 02"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
+  <img src="Photos/00-4bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 00"/> <img src="Photos/01-4bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 01" /> 
+  <img src="Photos/10-4bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 10"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 11" />
 </p>
 
 
@@ -130,7 +130,7 @@ END Behavior;
 <details>
   <summary>LUT-Level & Gates-Level Design</summary>
 	<p align="center">
-  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
+  <img src="Photos/part11-LUT.png" style="width: 49%; height: 300px;"/> <img src="Photos/part11-gate.png" style="width: 49%; height: 300px;" /> 
 </p>
 <br>
 	
@@ -255,8 +255,8 @@ END Behavior;
 ```
 
 <p align="center">
-  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
-  <img src="Photos/2.jpg" style="width: 49%; height: 300px;" title="0000 0010 = 02"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
+  <img src="Photos/00-8bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 00"/> <img src="Photos/01-8bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 01" /> 
+  <img src="Photos/10-8bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 10"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 11" />
 </p>
 
 </details>
@@ -264,7 +264,7 @@ END Behavior;
 <details>
   <summary>LUT-Level & Gates-Level Design</summary>
 	<p align="center">
-  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
+  <img src="Photos/part12-LUT.png" style="width: 49%; height: 300px;"/> <img src="Photos/part12-gate.png" style="width: 49%; height: 300px;" /> 
 </p>
 <br>
 
@@ -393,8 +393,7 @@ END Behavior;
 ```
 
 <p align="center">
-  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
-  <img src="Photos/2.jpg" style="width: 49%; height: 300px;" title="0000 0010 = 02"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
+  <img src="Photos/6.png" title="Testing all four cases for Enable, Reset" />
 </p>
 
 </details>
@@ -402,7 +401,7 @@ END Behavior;
 <details>
   <summary>LUT-Level & Gates-Level Design</summary>
 	<p align="center">
-  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
+  <img src="Photos/part2-LUT.png" style="width: 49%; height: 300px;"/> <img src="Photos/part2-gate.png" style="width: 49%; height: 300px;" /> 
 </p>
 <br>
 
