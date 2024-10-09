@@ -8,20 +8,11 @@ In digital system design, a __counter__ is a sequential circuit that counts the 
 
 A __synchronous counter__ is a type of counter where all flip-flops are triggered by the same clock signal simultaneously. Since every flip-flop in the counter gets the clock pulse at the same time, the output of the counter changes in a coordinated manner on each clock edge. This results in fast and predictable operation because all flip-flops change states together without delays between stages. Synchronous counters are more reliable at higher clock speeds due to the absence of cumulative propagation delays, and they are easier to design for timing analysis and control in complex systems. Since all the flip-flops are driven by the same clock signal, they provide better performance, accuracy, and control. Synchronous counters are widely used in systems that require precise timing, such as digital clocks, microprocessors, frequency dividers, and event counters in control systems, where fast, predictable, and reliable performance is essential. On the other hand, an __asynchronous counter__, also known as a __ripple counter__, operates differently. In this design, only the first flip-flop is triggered by the clock signal, and each subsequent flip-flop is triggered by the output of the previous one. This causes a delay to ripple through the flip-flops as each one depends on the state of the previous one, leading to a slower response time as the counter gets larger. The ripple effect results in a less coordinated operation, which can introduce timing issues, particularly at higher clock frequencies. Asynchronous counters, on the other hand, are simpler to design and use fewer logic gates, making them more efficient in terms of hardware for small, low-speed applications. These counters are often used in basic applications where timing precision and speed are not critical, such as simple timers, low-frequency divider circuits, and low-cost devices. They are a good fit for simple tasks that don’t demand tight synchronization.
 
-A __T-type flip-flop__ (T flip-flop) is a type of flip-flop, a basic building block in sequential digital circuits, used to store binary data. The "T" stands for "Toggle," which indicates its main function. A T flip-flop changes, or toggles, its output state (from 0 to 1 or from 1 to 0) every time it receives a triggering clock signal, provided its input is active (set to 1). If the T input is 0, the flip-flop retains its previous state. T flip-flops are often derived from JK flip-flops or D flip-flops, with modified behavior to simplify the design of counters and other sequential circuits. Key components include the toggle input that controls whether the flip-flop will change state. When T = 1, the flip-flop toggles; when T = 0, the output remains unchanged, the T flip-flop requires a clock signal to function (toggle action occurs on either the rising or falling edge of this signal, depending on the specific implementation), the output (Q) of the flip-flop, which represents its current state which can be either 0 or 1, and the complementary output (Q') which is simply the opposite of the Q output. If Q is 1, then Q' is 0, and vice versa. One of the most common applications of a T flip-flop is in binary counters. By connecting multiple T flip-flops in sequence, each flip-flop toggles at half the frequency of the previous one, effectively dividing the clock signal. In comparison with other flip-flops, a D flip-flop has a single data input, which determines its next state. If D = 1, the next state is 1; if D = 0, the next state is 0. The T flip-flop, on the other hand, toggles its output whenever T = 1, making it more suitable for counters. Furthermore, the T flip-flop is essentially a simplified version of the JK flip-flop with both the J and K inputs tied together. In a JK flip-flop, the J input acts like a "set" command, and the K input acts like a "reset" command, but when both J and K are high (1), the flip-flop toggles. The T flip-flop simply uses this toggle behavior directly.
+## Part 1: 4-bit and 8-bit Synchronous Counters Using T flip-flops
 
-A __register__ is a fundamental component in digital electronics used to store binary data temporarily. It typically consists of a collection of flip-flops or memory cells that can hold a specific number of bits (e.g., 8 bits, 16 bits, 32 bits, etc.). Registers are essential in various digital systems, including microprocessors, FPGAs (Field Programmable Gate Arrays), and digital signal processors. Registers can perform various operations, such as loading data, shifting bits, or counting. They are often used in arithmetic operations, data transfer, and control logic within digital circuits. Types of Registers include Synchronous Registers, which update their stored values based on a clock signal, causing all flip-flops in the register to change state simultaneously at a clock edge. Asynchronous Registers, on the other hand, change their output based on external signals and operate independently of the clock, allowing them to respond immediately to changes in control signals. Registers have several common uses in digital systems. They facilitate data transfer between various components, such as between the CPU and memory, ensuring smooth communication. Additionally, registers serve as temporary storage locations for data being processed or manipulated, providing a quick access point for operations. They can also be utilized to implement counters that increment or decrement based on clock pulses, aiding in tasks that require counting. Furthermore, in sequential circuits, registers are essential for state holding, as they maintain the current state of a system, enabling it to function based on past inputs. In VHDL, when we refer to accessing a register, we're typically talking about interacting with a physical storage element implemented in hardware, specifically within an FPGA (Field Programmable Gate Array) or other programmable logic devices. When you compile VHDL code targeting an FPGA, the registers defined in your VHDL design are mapped to actual physical hardware resources on the FPGA chip.
-Each register corresponds to an array of flip-flops or memory cells within the FPGA fabric. This fabric is made up of Configurable Logic Blocks (CLBs), which include lookup tables (LUTs), flip-flops, and multiplexers. Most FPGAs have a certain number of embedded flip-flops that can be used to create registers. When VHDL code is synthesized, the synthesis tool will allocate the appropriate number of flip-flops based on the signal definitions and the overall design. Some FPGAs also include block RAM (BRAM) modules that can serve as registers. These are larger storage elements that can hold multi-bit values and are useful for implementing larger data registers or memory. When VHDL code is simulated on a computer (using tools like ModelSim), the registers are represented in software. The simulation does not interact with the physical hardware; instead, it models how the registers would behave according to the defined VHDL logic. During simulation, the state of the registers is maintained in the simulator’s memory, allowing the designer to analyze the behavior of the circuit before deploying it to actual hardware. In VHDL, registers are often defined using signals or variables. VHDL can read from and write to registers using assignment statements. Registers are often accessed within process blocks. A process is sensitive to certain signals (like clock edges or resets) and executes when those signals change.
+A __T-type flip-flop__ (T flip-flop) is a type of flip-flop, a basic building block in sequential digital circuits, used to store binary data. The "T" stands for "Toggle," which indicates its main function. A T flip-flop changes, or toggles, its output state (from 0 to 1 or from 1 to 0) every time it receives a triggering clock signal, provided its input is active (set to 1). If the T input is 0, the flip-flop retains its previous state. T flip-flops are often derived from JK flip-flops or D flip-flops, with modified behavior to simplify the design of counters and other sequential circuits. Key components include the toggle input that controls whether the flip-flop will change state, a clock signal is required for the toggle to function (toggle action occurs on either the rising or falling edge of this signal, depending on the specific implementation), the output `Q` of the flip-flop, which represents its current state which can be either 0 or 1, and the complementary output `Q'` which is simply the opposite of the `Q` output. If `Q` is 1, then `Q'` is 0, and vice versa. One of the most common applications of a T flip-flop is in binary counters. By connecting multiple T flip-flops in sequence, each flip-flop toggles at half the frequency of the previous one, effectively dividing the clock signal. In comparison with other flip-flops, a D flip-flop has a single data input, which determines its next state. If `D = 1`, the next state is 1; if `D = 0`, the next state is 0. The T flip-flop, on the other hand, toggles its output whenever `T = 1`, making it more suitable for counters. Furthermore, the T flip-flop is essentially a simplified version of the JK flip-flop with both the J and K inputs tied together. In a JK flip-flop, the J input acts like a "set" command, and the K input acts like a "reset" command, but when both J and K are high (1), the flip-flop toggles. The T flip-flop simply uses this toggle behavior directly.
 
-
-
-## Part 1: Design and Implementation of an 4-bit and 8-bit Synchronous Counter
-
-In this lab, we will design a 4-bit and 8-bit counter using T flip-flops. Figure 1 illustrates the design for better understanding. The counter will have three primary inputs: `enable`, `reset (clear)`, and `clock`. 
-
-The `enable` input determines whether the counter is operational. If the `enable` signal is high, the counter will function, and if it is low, the counter will remain inactive. For this design, we assign the enable input to switch number 1 (the second switch from the right). The `reset (clear)` input is active-low, meaning the counter will reset to zero when the reset signal is low. This is represented by the small bubble at the input of each T flip-flop in Figure 1. When the reset input is high, the counter will continue its operation without resetting. We assign the reset input to switch number 0. The `clock` input is `positive-edge triggered` and is assigned to key zero. This means that the counter will increment on the rising edge of the `clock` signal, which occurs when key zero is pressed and released (from low to high and then back to low).
-
-To operate the counter, both the `enable` and `reset` inputs must be high. In this state, pressing the clock key will increment the counter. For the 4-bit counter, the output is displayed using a single 7-segment display `(HEX0)`. For the 8-bit counter, we use two 7-segment displays `(HEX0 and HEX1)`. The 4-bit counter is built using 4 T flip-flops, while the 8-bit counter uses 8 T flip-flops.
+For this part, we will design a 4-bit and 8-bit counter using T flip-flops. This [figure](Photos/4bitcounterfigure.png) illustrates the design for better understanding. The counter will have three primary inputs: `enable`, `reset (clear)`, and `clock`. The `enable` input determines whether the counter is operational. If the `enable` signal is high, the counter will function, and if it is low, the counter will remain inactive. For this design, we assign the enable input to switch number 1 (the second switch from the right). The `reset (clear)` input is active-low, meaning the counter will reset to zero when the reset signal is low. When the reset input is high, the counter will continue its operation without resetting. We assign the reset input to switch number 0 (rightmost). The `clock` input is `positive-edge triggered` and is assigned to key zero. This means that the counter will increment on the rising edge of the `clock` signal, which occurs when key zero is pressed and released (from low to high and then back to low). Therefore, to operate the counter, both the `enable` and `reset` inputs must be high. In this state, pressing the clock key will increment the counter. For the 4-bit counter, the output is displayed using a single 7-segment display `(HEX0)`. For the 8-bit counter, we use two 7-segment displays `(HEX0 and HEX1)`. The 4-bit counter is built using 4 T flip-flops, while the 8-bit counter uses 8 T flip-flops because it uses two 4-bit counters.
 
 <details>
   <summary>VHDL Code Implementation on the FPGA Board (4-bit Synchronous Counter)</summary>
@@ -252,9 +243,126 @@ END Behavior;
 
 </details>
 
-## Part 2: do your magic
+## Part 2: 16-bit Synchronous Counter Using a Register
 
-do your magic
+A __register__ is a fundamental component in digital electronics used to store binary data temporarily. It typically consists of a collection of flip-flops or memory cells that can hold a specific number of bits (e.g., 8 bits, 16 bits, 32 bits, etc.). Registers are essential in various digital systems, including microprocessors, FPGAs (Field Programmable Gate Arrays), and digital signal processors. Registers can perform various operations, such as loading data, shifting bits, or counting. They are often used in arithmetic operations, data transfer, and control logic within digital circuits. Types of Registers include Synchronous Registers, which update their stored values based on a clock signal, causing all flip-flops in the register to change state simultaneously at a clock edge. Asynchronous Registers, on the other hand, change their output based on external signals and operate independently of the clock, allowing them to respond immediately to changes in control signals. Registers have several common uses in digital systems. They facilitate data transfer between various components, such as between the CPU and memory, ensuring smooth communication. Additionally, registers serve as temporary storage locations for data being processed or manipulated, providing a quick access point for operations. They can also be utilized to implement counters that increment or decrement based on clock pulses, aiding in tasks that require counting. Furthermore, in sequential circuits, registers are essential for state holding, as they maintain the current state of a system, enabling it to function based on past inputs. 
+
+In VHDL, when we refer to accessing a register, we're typically talking about interacting with a physical storage element implemented in hardware, specifically within an FPGA (Field Programmable Gate Array) or other programmable logic devices. When you compile VHDL code targeting an FPGA, the registers defined in your VHDL design are mapped to actual physical hardware resources on the FPGA chip. Each register corresponds to an array of flip-flops or memory cells within the FPGA fabric. This fabric is made up of Configurable Logic Blocks (CLBs), which include lookup tables (LUTs), flip-flops, and multiplexers. Most FPGAs have a certain number of embedded flip-flops that can be used to create registers. When VHDL code is synthesized, the synthesis tool will allocate the appropriate number of flip-flops based on the signal definitions and the overall design. Some FPGAs also include block RAM (BRAM) modules that can serve as registers. These are larger storage elements that can hold multi-bit values and are useful for implementing larger data registers or memory. When VHDL code is simulated on a computer (using tools like ModelSim), the registers are represented in software. The simulation does not interact with the physical hardware; instead, it models how the registers would behave according to the defined VHDL logic. During simulation, the state of the registers is maintained in the simulator’s memory, allowing the designer to analyze the behavior of the circuit before deploying it to actual hardware. In VHDL, registers are often defined using signals or variables. VHDL can read from and write to registers using assignment statements. Registers are often accessed within process blocks. A process is sensitive to certain signals (like clock edges or resets) and executes when those signals change.
+
+In this part, the goal is to implement the same behavior as described in [Part 1](##part-1:-4-bit-and-8-bit-synchronous-counters-using-t-flip-flops) but using a register instead of a T flip-flop.
+
+<details>
+<summary>VHDL Code Implementation on the FPGA Board</summary>
+<br>
+
+``` VHDL
+LIBRARY ieee;
+USE ieee.std_logic_1164.all; -- Provides definitions for standard logic types
+USE ieee.std_logic_unsigned.all; -- Provides definitions for unsigned arithmetic operations
+
+-- inputs:
+-- KEY0: manual clock (when pressed, the counter increments)
+-- SW0: reset (active low)
+-- SW1: enable signal for the counter
+--
+-- outputs:
+--   HEX0 - HEX3: hex segment displays
+
+
+-- Define the entity for the counter design, referred to as part2
+-- This entity describes the inputs and outputs of the counter
+ENTITY part2 IS 
+   PORT ( SW  : IN STD_LOGIC_VECTOR(1 DOWNTO 0); -- 2-bit switch input vector
+          KEY : IN STD_LOGIC_VECTOR(0 DOWNTO 0); -- 1-bit key input vector for manual clock
+          HEX3, HEX2, HEX1, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6)); -- 7-segment display outputs
+END part2;
+
+ARCHITECTURE Behavior OF part2 IS
+   COMPONENT hex7seg -- architecture defines how the hex7seg module works internally
+      PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0); -- 4-bit input representing a hexadecimal digit
+             display : OUT STD_LOGIC_VECTOR(0 TO 6)); -- 7-bit output for driving the 7-segment display
+   END COMPONENT;
+	
+	-- Declaring internal signals
+   SIGNAL Clock, Resetn, Enable : STD_LOGIC; -- The control signals for the counter
+   SIGNAL Count : STD_LOGIC_VECTOR(15 DOWNTO 0); -- 16-bit counter value
+
+	
+	BEGIN
+	-- Assigning inputs to internal signals for easier reference
+   Clock <= KEY(0);
+   Resetn <= SW(0);
+   Enable <= SW(1);
+   
+   PROCESS (Clock) -- Process block triggered by the rising edge of the Clock
+   BEGIN
+      IF (Clock'EVENT AND Clock = '1') THEN -- Check for a rising edge on the Clock
+         IF (Resetn = '0') THEN -- Check if the Resetn signal is low (active)
+            Count <= (OTHERS => '0'); -- Reset the counter to 0
+         ELSIF (Enable = '1') THEN -- If enable signal is high
+            Count <= Count + 1; -- Increment the counter by 1 (This is the register expression)
+         END IF;
+      END IF;
+   END PROCESS;
+
+   -- Drive the 7-segment displays using the current count value
+	-- Here we are calling the hex7seg entity (function) and passing arguments to it
+   digit3: hex7seg PORT MAP (Count(15 DOWNTO 12), HEX3); -- Map the upper 4 bits of Count to HEX3
+   digit2: hex7seg PORT MAP (Count(11 DOWNTO 8), HEX2); -- Map the next 4 bits of Count to HEX2
+   digit1: hex7seg PORT MAP (Count(7 DOWNTO 4), HEX1); -- Map the next 4 bits of Count to HEX1
+   digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0); -- Map the lower 4 bits of Count to HEX0
+END Behavior;
+
+
+ENTITY hex7seg IS -- The entity declaration specifies the interface of the hex7seg module, including its 
+-- inputs and outputs. It describes what the module does but not how it does it. 
+-- Entity declaration is akin to defining a function.
+   PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0); -- 4-bit input for the hexadecimal digit
+          display : OUT STD_LOGIC_VECTOR(0 TO 6)); -- 7-bit output for controlling the 7-segment display
+END hex7seg;
+
+-- It may seem redundant to declare inputs and outputs in both the entity and architecture, but this 
+-- design practice is foundational in VHDL.
+
+ARCHITECTURE Behavior OF hex7seg IS
+BEGIN
+   --
+   --       0  
+   --      ---  
+   --     |   |
+   --    5|   |1
+   --     | 6 |
+   --      ---  
+   --     |   |
+   --    4|   |2
+   --     |   |
+   --      ---  
+   --       3  
+   --
+   PROCESS (hex) -- Process block to decode hexadecimal input to 7-segment display output
+   BEGIN
+      CASE hex IS -- Using a case statement 
+         WHEN "0000" => display <= "0000001"; --0
+         WHEN "0001" => display <= "1001111"; --1
+         WHEN "0010" => display <= "0010010"; --2
+         WHEN "0011" => display <= "0000110"; --3
+         WHEN "0100" => display <= "1001100"; --4
+         WHEN "0101" => display <= "0100100"; --5
+         WHEN "0110" => display <= "0100000"; --6
+         WHEN "0111" => display <= "0001111"; --7
+         WHEN "1000" => display <= "0000000"; --8
+         WHEN "1001" => display <= "0000100"; --9
+         WHEN "1010" => display <= "0001000"; --10 (A)
+         WHEN "1011" => display <= "1100000"; --11 (B)
+         WHEN "1100" => display <= "0110001"; --12 (C)
+         WHEN "1101" => display <= "1000010"; --13 (D)
+         WHEN "1110" => display <= "0110000"; --14 (E)
+         WHEN OTHERS => display <= "0111000"; --15 (F)
+      END CASE;
+   END PROCESS;
+END Behavior;
+```
+</details>
 
 
 ## Conclusion
