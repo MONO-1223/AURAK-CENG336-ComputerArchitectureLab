@@ -418,7 +418,17 @@ Whether having more bits in a counter is better depends entirely on the requirem
 
 ## Resources
 
-Do your magic
+|1| Adding a file to a repository. (n.d.). GitHub Docs. Retrieved October 9, 2024, from <br> https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository  
+|2| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.  
+|3| Counters in Digital Logic. (2015, November 2). GeeksforGeeks. <br> https://www.geeksforgeeks.org/counters-in-digital-logic/  
+|4| Electrodiction (Director). (2023a, August 5). REGISTERS || Digital Electronics [Video recording]. <br> https://www.youtube.com/watch?v=8UKdtiruQWE  
+|5| Electrodiction (Director). (2023b, August 7). REGISTERS PART2 || Digital Electronics [Video recording]. <br> https://www.youtube.com/watch?v=6AeXZz5YHiE  
+|6| Neso Academy (Director). (2015a, February 25). Introduction to T flip flop [Video recording]. <br> https://www.youtube.com/watch?v=wcfnEla_Y78  
+|7| Neso Academy (Director). (2015b, March 12). Introduction to Counters | Important [Video recording]. <br> https://www.youtube.com/watch?v=iaIu5SYmWVM  
+|8| Registers in Digital Electronics—Javatpoint. (n.d.). Www.Javatpoint.Com. Retrieved October 9, 2024, from <br> https://www.javatpoint.com/registers-in-digital-electronics  
+|9| T Flip Flop. (2023, June 13). GeeksforGeeks. <br> https://www.geeksforgeeks.org/t-flip-flop/  
+|10| VHDL Testbench Creation Using Perl. (n.d.). Retrieved September 21, 2024, from <br> https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl/  
+|11| What is Register in Digital Electronics ? (2023, August 13). GeeksforGeeks. <br> https://www.geeksforgeeks.org/what-is-register-digital-electronics/  
 
 <br>
 
