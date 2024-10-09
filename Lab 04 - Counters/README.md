@@ -119,8 +119,8 @@ END Behavior;
 ```
 
 <p align="center">
-  <img src="Photos/00-4bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 00"/> <img src="Photos/01-4bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 01" /> 
-  <img src="Photos/10-4bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 10"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 11" />
+  <img src="Photos/00-4bitcase.jpg" style="width: 45%; height: 300px;" title="Enable, Reset = 00"/> <img src="Photos/01-4bitcase.jpg" style="width: 45%; height: 300px;" title="Enable, Reset = 01" /> 
+  <img src="Photos/10-4bitcase.jpg" style="width: 45%; height: 300px;" title="Enable, Reset = 10"/>  <img src="Photos/11-4bitcase.gif" style="width: 100%; height: 300px;" title="Enable, Reset = 11" />
 </p>
 
 
@@ -255,8 +255,8 @@ END Behavior;
 ```
 
 <p align="center">
-  <img src="Photos/00-8bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 00"/> <img src="Photos/01-8bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 01" /> 
-  <img src="Photos/10-8bitcase.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 10"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="Enable, Reset = 11" />
+  <img src="Photos/00-8bitcase.jpg" style="width: 47%; height: 300px;" title="Enable, Reset = 00"/> <img src="Photos/01-8bitcase.jpg" style="width: 47%; height: 300px;" title="Enable, Reset = 01" /> 
+  <img src="Photos/10-8bitcase.jpg" style="width: 47%; height: 300px;" title="Enable, Reset = 10"/>  <img src="Photos/11-8bitcase.gif" style="width: 100%; height: 300px;" title="Enable, Reset = 11" />
 </p>
 
 </details>
@@ -393,7 +393,7 @@ END Behavior;
 ```
 
 <p align="center">
-  <img src="Photos/6.png" title="Testing all four cases for Enable, Reset" />
+  <img src="Photos/16bitcase.gif" style="width: 1000px" title="Testing all four cases for Enable, Reset" />
 </p>
 
 </details>
