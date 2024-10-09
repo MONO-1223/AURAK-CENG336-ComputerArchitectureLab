@@ -15,7 +15,10 @@ A __T-type flip-flop__ (T flip-flop) is a type of flip-flop, a basic building bl
 For this part, we will design a 4-bit and 8-bit counter using T flip-flops. This [figure](Photos/4bitcounterfigure.png) illustrates the design for better understanding. The counter will have three primary inputs: `enable`, `reset (clear)`, and `clock`. The `enable` input determines whether the counter is operational. If the `enable` signal is high, the counter will function, and if it is low, the counter will remain inactive. For this design, we assign the enable input to switch number 1 (the second switch from the right). The `reset (clear)` input is active-low, meaning the counter will reset to zero when the reset signal is low. When the reset input is high, the counter will continue its operation without resetting. We assign the reset input to switch number 0 (rightmost). The `clock` input is `positive-edge triggered` and is assigned to key zero. This means that the counter will increment on the rising edge of the `clock` signal, which occurs when key zero is pressed and released (from low to high and then back to low). Therefore, to operate the counter, both the `enable` and `reset` inputs must be high. In this state, pressing the clock key will increment the counter. For the 4-bit counter, the output is displayed using a single 7-segment display `(HEX0)`. For the 8-bit counter, we use two 7-segment displays `(HEX0 and HEX1)`. The 4-bit counter is built using 4 T flip-flops, while the 8-bit counter uses 8 T flip-flops because it uses two 4-bit counters.
 
 <details>
-  <summary>VHDL Code Implementation on the FPGA Board (4-bit Synchronous Counter)</summary>
+<summary>4-bit Counter</summary>
+
+<details>
+  <summary>VHDL Code Implementation on the FPGA Board</summary>
 <br>
 
 ```VHDL
@@ -113,12 +116,35 @@ BEGIN
       END CASE;
    END PROCESS;
 END Behavior;
-
 ```
+
+<p align="center">
+  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
+  <img src="Photos/2.jpg" style="width: 49%; height: 300px;" title="0000 0010 = 02"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
+</p>
+
+
 </details>
 
+
 <details>
-  <summary>VHDL Code Implementation on the FPGA Board (8-bit Synchronous Counter)</summary>
+  <summary>LUT-Level & Gates-Level Design</summary>
+	<p align="center">
+  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
+</p>
+<br>
+	
+</details>
+
+</details>
+
+
+
+<details>
+<summary>8-bit Counter</summary>
+
+<details>
+  <summary>VHDL Code Implementation on the FPGA Board</summary>
 <br>
 
 ```VHDL
@@ -227,19 +253,22 @@ BEGIN
    END PROCESS;
 END Behavior;
 ```
+
+<p align="center">
+  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
+  <img src="Photos/2.jpg" style="width: 49%; height: 300px;" title="0000 0010 = 02"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
+</p>
+
 </details>
 
 <details>
-  <summary>VHDL LUT-Level Design and Gates-Level Design (4-bit Synchronous Counter)</summary>
+  <summary>LUT-Level & Gates-Level Design</summary>
+	<p align="center">
+  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
+</p>
 <br>
-
 
 </details>
-
-<details>
-  <summary>VHDL LUT-Level Design and Gates-Level Design (8-bit Synchronous Counter)</summary>
-<br>
-
 
 </details>
 
@@ -362,8 +391,23 @@ BEGIN
    END PROCESS;
 END Behavior;
 ```
+
+<p align="center">
+  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
+  <img src="Photos/2.jpg" style="width: 49%; height: 300px;" title="0000 0010 = 02"/>  <img src="Photos/3.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
+</p>
+
 </details>
 
+<details>
+  <summary>LUT-Level & Gates-Level Design</summary>
+	<p align="center">
+  <img src="Photos/0.jpg" style="width: 49%; height: 300px;" title="0000 0000 = 00"/> <img src="Photos/1.jpg" style="width: 49%; height: 300px;" title="0000 0001 = 01" /> 
+</p>
+<br>
+
+
+</details>
 
 ## Conclusion
 
