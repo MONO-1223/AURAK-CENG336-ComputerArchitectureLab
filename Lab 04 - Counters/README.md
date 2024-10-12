@@ -26,21 +26,21 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
 ENTITY part1_4bits IS 
-   PORT ( SW   : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);     -- We assign my input and out put here
+   PORT ( SW   : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);     -- Assigning the input and output and their lengths
           KEY  : IN  STD_LOGIC_VECTOR(0 DOWNTO 0);
           HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6));
 END part1_4bits;
 
 ARCHITECTURE Behavior OF part1_4bits IS
-   COMPONENT ToggleFF                                 -- The component of the TFF entity that i will use it later
+   COMPONENT ToggleFF                                 -- The T-flip-flop component
       PORT ( T, Clock, Resetn : IN  STD_LOGIC;
              Q                : OUT STD_LOGIC);
    END COMPONENT;
-   COMPONENT hex7seg                                  -- The component of the HEX entity that i will use it later
+   COMPONENT hex7seg                                  -- The HEX component
       PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
              display : OUT STD_LOGIC_VECTOR(0 TO 6));
    END COMPONENT;                                     
-   SIGNAL Clock, Resetn : STD_LOGIC;                   -- Creat 4 signals that i will use it later
+   SIGNAL Clock, Resetn : STD_LOGIC;                   -- Creating 4 signals
    SIGNAL Count, Enable : STD_LOGIC_VECTOR(3 DOWNTO 0);
 BEGIN
    
@@ -56,21 +56,18 @@ BEGIN
    Enable(3) <= Count(2) AND Enable(2);
    TFF3: ToggleFF PORT MAP (Enable(3), Clock, Resetn, Count(3));
    
-   digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0);                 -- Here after we get the output for each TFF we will map it with the HEX 0 with the same entity we used it before
+   digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0);                 -- Here after we get the output for each TFF we will map the final result to the HEX 0
 END Behavior; 
          
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-
 ENTITY ToggleFF IS
    PORT ( T, Clock, Resetn : IN  STD_LOGIC;
           Q                : OUT STD_LOGIC);
 END ToggleFF;
 
 ARCHITECTURE Behavior OF ToggleFF IS
-   SIGNAL T_out : STD_LOGIC;                         -- Creat a siganl
+   SIGNAL T_out : STD_LOGIC;                         -- Creating a signal
 BEGIN
-   PROCESS (Clock)                                   -- This mean if any changes happen in the clock i will run this process
+   PROCESS (Clock)                                   -- If any changes happen in the clock, this process will run
    BEGIN
       IF (Clock'EVENT AND Clock = '1') THEN          -- Simple nested if statment (if the clock change and it become one then enter the next if)
          IF (Resetn = '0') THEN                      -- Also if the reset is 0 then T_out will be 0
@@ -80,11 +77,8 @@ BEGIN
          END IF;
       END IF;
    END PROCESS;
-   Q <= T_out;                                        -- My output will Assign it to Q the go up the when we are done
+   Q <= T_out;                                        -- Output will be assigned to Q
 END Behavior;
-         
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;                           -- We use this before
 
 ENTITY hex7seg IS
    PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -123,6 +117,8 @@ END Behavior;
   <img src="Photos/10-4bitcase.jpg" style="width: 45%; height: 300px;" title="Enable, Reset = 10"/>  <img src="Photos/11-4bitcase.gif" style="width: 100%; height: 300px;" title="Enable, Reset = 11" />
 </p>
 
+The results shown on the board align with the desired behavior of the counter as it was being designed. When the reset is active (= 0) the counter will reset to zero, otherwise it will continue counting. When the enable is active (= 1) the counter will increment, otherwise it will remain unchanged from the previous value. Hence, in the first photo, when the reset was active but the enable inactive the counter was zero and it wasn't incrementing no matter how many times we press the push button (clock). In the second case, when the reset was active and the enable was active the counter was supposed to increment but it is resetting to zero because the reset is active. In the third case, when the reset was inactive and the enable was inactive, the counter would have incremented if it weren't for the enable being off. Finally, in the fourth case, when the reset was inactive and the enable was active, we were able to observe the counter incrementing on the HEX0 as we press on the push button.
+
 
 </details>
 
@@ -132,6 +128,8 @@ END Behavior;
 	<p align="center">
   <img src="Photos/part11-LUT.png" style="width: 49%; height: 300px;"/> <img src="Photos/part11-gate.png" style="width: 49%; height: 300px;" /> 
 </p>
+
+ In the RTL viewer we can count 3 AND gates and 4 T flip-flops. A managable number of digital logic elements.
 <br>
 	
 </details>
@@ -194,9 +192,6 @@ BEGIN
    digit1: hex7seg PORT MAP (Count(7 DOWNTO 4), HEX1);
    digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0);
 END Behavior;
-         
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
 
 ENTITY ToggleFF IS
    PORT ( T, Clock, Resetn : IN  STD_LOGIC;
@@ -218,9 +213,6 @@ BEGIN
    END PROCESS;
    Q <= T_out;
 END Behavior;
-         
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
 
 ENTITY hex7seg IS
    PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -259,6 +251,8 @@ END Behavior;
   <img src="Photos/10-8bitcase.jpg" style="width: 47%; height: 300px;" title="Enable, Reset = 10"/>  <img src="Photos/11-8bitcase.gif" style="width: 100%; height: 300px;" title="Enable, Reset = 11" />
 </p>
 
+A similar behavior is observed here (as we didn'y change the core behavior) except that now we have two 7-segment displays activated to accomodate the 8 bits. 
+
 </details>
 
 <details>
@@ -266,6 +260,8 @@ END Behavior;
 	<p align="center">
   <img src="Photos/part12-LUT.png" style="width: 49%; height: 300px;"/> <img src="Photos/part12-gate.png" style="width: 49%; height: 300px;" /> 
 </p>
+
+ In the RTL viewer we can count 7 AND gates and 8 T flip-flops. The amount of logic elements approximately doubled in comparison with the 4-bits counter discussed above and although the number is also still somewhat manageable, it becomes increasingly obvious that this method does not scale well. The more bits that we demand in the counter the more the logic elements are going to be needed and the more complex it's going to be to manage them.
 <br>
 
 </details>
@@ -396,6 +392,8 @@ END Behavior;
   <img src="Photos/16bitcase.gif" style="width: 1000px" title="Testing all four cases for Enable, Reset" />
 </p>
 
+The same behavior can be observed with regards to the operation of the board based on the `reset` and `enable` switches. However, here we utilize four 7-segment displays as we are working with 16 bits. Of course, the more bits there are in the number the bigger the maximum reachable number is going to be.
+
 </details>
 
 <details>
@@ -403,6 +401,8 @@ END Behavior;
 	<p align="center">
   <img src="Photos/part2-LUT.png" style="width: 49%; height: 300px;"/> <img src="Photos/part2-gate.png" style="width: 49%; height: 300px;" /> 
 </p>
+
+ In the RTL viewer, we can identify several logic elements that represent different components of the design. The circular symbol with the "+" sign inside represents an adder. The triangular symbols indicate multiplexers. The rectangular element represents a register or counter. This element stores the value and is being used to maintain a count or store intermediate data. Overall, dispite doubling the amount of bits from the last part, the amount of logic elements required for the design actually decreased; a siginficant improvement from the scalability issue in the previous method.
 <br>
 
 
