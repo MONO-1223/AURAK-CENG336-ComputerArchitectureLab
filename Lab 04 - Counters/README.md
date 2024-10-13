@@ -169,7 +169,249 @@ The results shown on the board align with the desired behavior of the counter as
 
 <details>
   <summary>Simulations</summary>
-	<p align="center">
+	
+<br>
+
+``` VHDL
+-- Testbench created online at:
+--   https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl/
+-- Copyright Doulos Ltd
+
+library IEEE;
+use IEEE.Std_logic_1164.all;
+use IEEE.Numeric_Std.all;
+
+entity part1_4bits_tb is
+end;
+
+architecture bench of part1_4bits_tb is
+
+  component part1_4bits 
+     PORT ( SW   : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
+            KEY  : IN  STD_LOGIC_VECTOR(0 DOWNTO 0);
+            HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6));
+  end component;
+
+  signal SW: STD_LOGIC_VECTOR(1 DOWNTO 0);
+  signal KEY: STD_LOGIC_VECTOR(0 DOWNTO 0);
+  signal HEX0: STD_LOGIC_VECTOR(0 TO 6);
+
+  constant clock_period: time := 50 ns;
+  signal stop_the_clock: boolean;
+  
+  signal Clock: STD_LOGIC;
+  
+  signal decoded_hex0: string(1 to 1);
+
+
+
+begin
+
+  uut: part1_4bits port map ( SW   => SW,
+                              KEY  => KEY,
+                              HEX0 => HEX0 );
+
+  stimulus: process
+  begin
+  
+    -- Put initialisation code here
+	 
+	 SW <= "10";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "10";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+
+
+    -- Put test bench stimulus code here
+
+    stop_the_clock <= true;
+    wait;
+  end process;
+
+  clocking: process
+  begin
+    while not stop_the_clock loop
+      Clock <= '0', '1' after clock_period / 2;
+      wait for clock_period;
+    end loop;
+    wait;
+  end process;
+  
+  decode_monitor: process(HEX0)
+	  begin
+	    case HEX0 is
+	      when "0000001" => decoded_hex0 <= "0";
+	      when "1001111" => decoded_hex0 <= "1";
+	      when "0010010" => decoded_hex0 <= "2";
+	      when "0000110" => decoded_hex0 <= "3";
+	      when "1001100" => decoded_hex0 <= "4";
+	      when "0100100" => decoded_hex0 <= "5";
+	      when "0100000" => decoded_hex0 <= "6";
+	      when "0001111" => decoded_hex0 <= "7";
+	      when "0000000" => decoded_hex0 <= "8";
+	      when "0000100" => decoded_hex0 <= "9";
+	      when "0001000" => decoded_hex0 <= "A";
+	      when "1100000" => decoded_hex0 <= "B";
+	      when "0110001" => decoded_hex0 <= "C";
+	      when "1000010" => decoded_hex0 <= "D";
+	      when "0110000" => decoded_hex0 <= "E";
+	      when "0111000" => decoded_hex0 <= "F";
+	      when others    => decoded_hex0 <= "?";  -- For any unknown pattern
+	    end case;
+	  end process;
+
+
+end;
+```
+
+<p align="center">
+  <img src="Photos/part11rtl.png" title="RTL Simulation" />
+</p>
+
+<p align="center">
   <img src="Photos/part11-LUT.png" style="width: 49%; height: 300px;" title="Technology Map Viewer"/> <img src="Photos/part11-gate.png" style="width: 49%; height: 300px;" title="RTL Viewer"/> 
 </p>
 
@@ -332,7 +574,240 @@ A similar behavior is observed here (as we didn'y change the core behavior) exce
 
 <details>
   <summary>Simulations</summary>
-	<p align="center">
+<br>
+
+``` VHDL
+library IEEE;
+use IEEE.Std_logic_1164.all;
+use IEEE.Numeric_Std.all;
+
+entity part1_tb is
+end;
+
+architecture bench of part1_tb is
+
+  component part1 
+     PORT ( SW         : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
+            KEY        : IN  STD_LOGIC_VECTOR(0 DOWNTO 0);
+            HEX1, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6));
+  end component;
+
+  signal SW: STD_LOGIC_VECTOR(1 DOWNTO 0);
+  signal KEY: STD_LOGIC_VECTOR(0 DOWNTO 0);
+  signal HEX1, HEX0: STD_LOGIC_VECTOR(0 TO 6);
+  
+  signal Clock: STD_LOGIC;
+  
+  constant clock_period: time := 50 ns;
+  signal stop_the_clock: boolean;
+  
+  signal decoded_hex0: string(1 to 1);
+
+begin
+
+  uut: part1 port map ( SW   => SW,
+                        KEY  => KEY,
+                        HEX1 => HEX1,
+                        HEX0 => HEX0 );
+								
+
+  stimulus: process
+  begin
+  
+	 SW <= "10";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "10";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "1";
+	 wait for 100 ns;
+	 
+	 SW <= "11";
+	 KEY <= "0";
+	 wait for 100 ns;
+	 
+	 stop_the_clock <= true; -- if this wasnt there the simulation will continue to run forever 
+	 -- and you will have to zoom in and adjust the scrollbar to really see the region of interest
+    wait;
+  end process;
+  
+  clocking: process
+  begin
+    while not stop_the_clock loop
+      Clock <= '0', '1' after clock_period / 2;
+      wait for clock_period;
+    end loop;
+    wait;
+  end process;
+  
+  
+  decode_monitor: process(HEX0)
+	  begin
+	    case HEX0 is
+	      when "0000001" => decoded_hex0 <= "0";
+	      when "1001111" => decoded_hex0 <= "1";
+	      when "0010010" => decoded_hex0 <= "2";
+	      when "0000110" => decoded_hex0 <= "3";
+	      when "1001100" => decoded_hex0 <= "4";
+	      when "0100100" => decoded_hex0 <= "5";
+	      when "0100000" => decoded_hex0 <= "6";
+	      when "0001111" => decoded_hex0 <= "7";
+	      when "0000000" => decoded_hex0 <= "8";
+	      when "0000100" => decoded_hex0 <= "9";
+	      when "0001000" => decoded_hex0 <= "A";
+	      when "1100000" => decoded_hex0 <= "B";
+	      when "0110001" => decoded_hex0 <= "C";
+	      when "1000010" => decoded_hex0 <= "D";
+	      when "0110000" => decoded_hex0 <= "E";
+	      when "0111000" => decoded_hex0 <= "F";
+	      when others    => decoded_hex0 <= "?";  -- For any unknown pattern
+	    end case;
+	  end process;
+  
+end;
+```
+
+<p align="center">
+  <img src="Photos/part12rtl.png" title="RTL Simulation" />
+</p>
+
+<p align="center">
   <img src="Photos/part12-LUT.png" style="width: 49%; height: 300px;" title="Technology Map Viewer"/> <img src="Photos/part12-gate.png" style="width: 49%; height: 300px;" title="RTL Viewer"/> 
 </p>
 
