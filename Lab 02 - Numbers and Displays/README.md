@@ -61,7 +61,8 @@ BEGIN
 END Structure;
 
 -- Entity definition for the BCD to 7-segment display converter
-
+LIBRARY ieee;                  
+USE ieee.std_logic_1164.all;
 ENTITY bcd7seg IS                             -- definding Entity (bcd7seg) which was used above
 
    PORT ( B : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);    -- input B (binary) which have 4 bits
@@ -261,7 +262,6 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
 ENTITY part1 IS  
-
    PORT ( SW         : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);        
           LEDR       : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);       
           HEX1, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6));           
@@ -289,7 +289,8 @@ BEGIN
 END Structure;
 
 -- Defining my Entity
-
+LIBRARY ieee;  -- not repeated, this must be here because this entity cannot see the included libraries for the entity above                
+USE ieee.std_logic_1164.all;
 ENTITY bcd7seg IS                             
 
    PORT ( B : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);    
@@ -561,6 +562,8 @@ END Structure;
 -- Keep in mind that in VHDL, the order of the code doesn’t matter as long as the entity and architecture of a component (like this full adder) are declared somewhere in the file 
 -- or are accessible from other files in the project. 
 
+LIBRARY ieee;                  
+USE ieee.std_logic_1164.all;
 ENTITY fa IS -- This declares the inputs (a, b, ci) and outputs (s, co) for a single full adder
    PORT ( a, b, ci : IN  STD_LOGIC;
           s, co    : OUT STD_LOGIC);
