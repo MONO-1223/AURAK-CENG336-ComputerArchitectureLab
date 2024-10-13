@@ -1,19 +1,14 @@
 # <p align="center">Latches, Flip-flops, and Registers</p>
 
-Do your magic :)
+This lab experiment investigates the design and implementation of fundamental digital storage elements, including latches, flip-flops, and registers, using an Intel FPGA. The objectives are to understand how these storage elements can be created using lookup tables (LUTs) and to explore their behavior through simulation and hardware implementation.
 
 ---
 
-- what is the RS Latch
-- what is D latch (what the difrent between the RS and the D latch) What issue it solve
-- what is the D flib flop
-- defrence between the flib flop and the latch
-- the new simulastion (waveform editor)
-- the LUT digram and the gate digrams
 
-## Part 1: Design and Implementation of an RS Latch
 
-In the first part, we will create an RS latch, which is a basic memory element used in digital circuits to store a single bit of information. The RS latch operates with two main inputs: Set (S) and Reset (R), and produces two outputs: `Q` and its complement `Q'`. The function of the latch is straightforward: when the Set (S) input is activated, the output `Q` becomes 1, and `Q'` becomes 0, effectively setting the latch. Conversely, when the Reset (R) input is activated, the output `Q` becomes 0, and `Q'` becomes 1, resetting the latch. If both inputs are inactive (set to 0), the latch holds its current state, remembering the last set or reset condition. Refer to [Figure 1](Photos/SRlatch.png) for a visual representation of the RS latch.
+## Part 1: Gated RS Latch
+
+In the first part, we will create an [RS latch](https://www.geeksforgeeks.org/latches-in-digital-logic/#sr-latch), which is a basic memory element used in digital circuits to store a single bit of information. The RS latch operates with two main inputs: Set (S) and Reset (R), and produces two outputs: `Q` and its complement `Q'`. The function of the latch is straightforward: when the Set (S) input is activated, the output `Q` becomes 1, and `Q'` becomes 0, effectively setting the latch. Conversely, when the Reset (R) input is activated, the output `Q` becomes 0, and `Q'` becomes 1, resetting the latch. If both inputs are inactive (set to 0), the latch holds its current state, remembering the last set or reset condition. Refer to [Figure 1](Photos/SRlatch.png) for a visual representation of the RS latch.
 
 In this part, we will also explore how the RS latch behaves when both inputs are activated simultaneously, leading to an invalid state where the outputs `Q` and `Q'` are inconsistent. We will implement the RS latch using two cross-coupled NOR gates, which provide the necessary feedback loop to maintain the stored bit of data when both inputs are inactive. This simple latch design serves as a foundation for understanding more advanced memory elements in digital systems.
 
@@ -157,9 +152,9 @@ The second figure represents the same system but is shown in a logic gate design
 
 
 
-## Part 2: Design and Implementation of an D Latch
+## Part 2: Gated D Latch
 
-In the second part, we will focus on creating a D latch, which is a fundamental memory element commonly used in digital circuits to store a single bit of information. Unlike the RS latch, the D latch operates with only two main inputs: `Data (D)` and `Clock (CLK)`, and produces two outputs: `Q` and its complement `Q'`. The key advantage of the D latch is its simplicity—it eliminates the possibility of invalid states by directly linking the Data input to the Set and Reset logic.
+In the second part, we will focus on creating a [D latch](https://www.geeksforgeeks.org/latches-in-digital-logic/#sr-latch), which is a fundamental memory element commonly used in digital circuits to store a single bit of information. Unlike the RS latch, the D latch operates with only two main inputs: `Data (D)` and `Clock (CLK)`, and produces two outputs: `Q` and its complement `Q'`. The key advantage of the D latch is its simplicity—it eliminates the possibility of invalid states by directly linking the Data input to the Set and Reset logic.
 
 The operation of the D latch is straightforward: when the `Clock (CLK)` is high (active), the output `Q` follows the input Data (D), meaning `Q` takes the value of `D`. When the clock is low (inactive), the latch holds its previous state, maintaining the last value that was stored when the `clock` was high. This design ensures that the latch only updates its state during the active phase of the `clock`, providing a more controlled and predictable behavior. Refer to [Figure 3](Photos/DLatch.png) for a visual representation of the D latch.
 
@@ -293,12 +288,12 @@ In the diagram above, we can observe two representations of the D latch: on the 
 
 </details>
 
-## Part 3: Design and Implementation of an D Flip-Flop (Positive and Negative Edge Triggered)
+## Part 3: D Flip-Flop (Positive & Negative Edge Triggered)
 
-In this part, we are going to design a D latch, similar to the one we created in Part 2. Additionally, we will design two types of D flip-flops. One will operate with a `positive edge trigger`, while the other will function with a `negative edge trigger`. We can refer to [Figure 5](Photos/Part3Q.png) for a visual representation of these designs. The key difference between the flip-flops lies in the `clock signal`. In the case of the positive edge-triggered flip-flop, the `clock` input will show a small triangle symbol, indicating that it operates on the `rising edge` of the clock pulse. This means that the D flip-flop will store the input data `(D)` at the moment the clock transitions from a low (0) to a high (1) state.
+In this part, we are going to design a D latch, similar to the one we created in Part 2. Additionally, we will design two types of D flip-flops. One will operate with a `positive edge trigger`, while the other will function with a `negative edge trigger`. We can refer to [Figure 5](Photos/Part3Q.png) for a visual representation of these designs. The key difference between the flip-flops lies in the `clock signal`. In the case of the positive edge-triggered flip-flop, the `clock` input will show a small triangle symbol, indicating that it operates on the `rising edge` of the clock pulse. This means that the D flip-flop will store the input data `(D)` at the moment the clock transitions from a low (0) to a high (1) state. On the other hand, the negative edge-triggered flip-flop can be identified by a clock symbol with both a bubble and a triangle. The bubble signifies inversion, meaning the flip-flop will store the input data when the clock transitions from a high (1) to a low (0) state. Understanding these clock triggers is crucial in sequential logic design, as they control when the flip-flop captures and locks the input value.
 
-On the other hand, the negative edge-triggered flip-flop can be identified by a clock symbol with both a bubble and a triangle. The bubble signifies inversion, meaning the flip-flop will store the input data when the clock transitions from a high (1) to a low (0) state. Understanding these clock triggers is crucial in sequential logic design, as they control when the flip-flop captures and locks the input value. While the D latch captures and holds data as long as the clock is high (level-sensitive), the edge-triggered D flip-flops capture data only at specific moments, depending on the clock's edge.
 
+A D flip-flop (or Data flip-flop) is a type of digital storage device that captures and stores the value of a data input, D, on the triggering edge of a clock signal. The key characteristic of a D flip-flop is that it has a single data input, D, and an output, Q, which takes on the value of the D input only at the clock's edge. Between clock edges, the output remains constant, effectively "locking" the data until the next clock pulse. This behavior makes D flip-flops ideal for synchronous circuits, as they help align data changes with precise clock timing, ensuring stability and reliability in sequential logic operations.
 
 <details>
   <summary>VHDL Code Implementation on the FPGA Board (D Flip-Flop)</summary>
@@ -370,7 +365,9 @@ In the `LUT-level design`, the same components are represented through logic cel
 
 ## Conclusion
 
-Do your magic
+RS latches are often used in circuits to store one bit of information or to serve as building blocks for more complex memory elements like flip-flops and registers.
+
+A latch and a flip-flop are both digital storage devices, but they differ in how they respond to input signals. A latch is level-sensitive, meaning it continuously responds to input changes as long as the control signal (such as a clock or enable signal) is at a certain level (high or low). This makes latches more susceptible to input variations during the control signal’s active phase. In contrast, a flip-flop is edge-sensitive, meaning it only changes its output at specific moments, like the rising or falling edge of a clock signal. This provides more precise control over when the output is updated, making flip-flops better suited for synchronous circuits where timing is critical. Overall, latches are simpler and faster, but flip-flops offer more stable and predictable behavior in clocked systems.
 
 ## Resources
 
