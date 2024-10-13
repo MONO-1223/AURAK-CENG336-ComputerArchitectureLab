@@ -22,6 +22,15 @@ For this part, we will design a 4-bit and 8-bit counter using T flip-flops. This
 <br>
 
 ```VHDL
+
+-- This is an example of Mixed Modeling using both Behavioral Modeling and Structural Modeling techniques.
+-- The ToggleFF and hex7seg components are described using behavioral modeling. This type of modeling specifies the behavior of a component
+-- based on its inputs and outputs, using process blocks and conditional statements.
+-- The top-level part1_4bits entity is an example of structural modeling. In structural modeling, components are instantiated and connected together to form a larger system.
+-- The part1_4bits entity instantiates four instances of the ToggleFF component to create a 4-bit counter. These instances are connected together using internal signals like Enable.
+-- It also instantiates one instance of the hex7seg component to drive the 7-segment display based on the 4-bit counter output.
+-- This approach represents the structure of the design by connecting components rather than describing their behavior directly.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 --
@@ -159,12 +168,12 @@ The results shown on the board align with the desired behavior of the counter as
 
 
 <details>
-  <summary>LUT-Level & Gates-Level Design</summary>
+  <summary>Simulations</summary>
 	<p align="center">
-  <img src="Photos/part11-LUT.png" style="width: 49%; height: 300px;"/> <img src="Photos/part11-gate.png" style="width: 49%; height: 300px;" /> 
+  <img src="Photos/part11-LUT.png" style="width: 49%; height: 300px;" title="Technology Map Viewer"/> <img src="Photos/part11-gate.png" style="width: 49%; height: 300px;" title="RTL Viewer"/> 
 </p>
 
- In the RTL viewer we can count 3 AND gates and 4 T flip-flops. A managable number of digital logic elements.
+ In the RTL viewer we can count 3 AND gates and 4 T flip-flops; a managable number of digital logic elements.
 <br>
 	
 </details>
@@ -183,6 +192,14 @@ The results shown on the board align with the desired behavior of the counter as
 ```VHDL
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
+--
+-- inputs:
+-- KEY0: manual clock
+-- SW0: active low reset
+-- SW1: enable signal for the counter
+--
+-- outputs:
+-- HEX0 - HEX1: hex segment displays
 
 ENTITY part1 IS 
    PORT ( SW         : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
@@ -202,7 +219,7 @@ ARCHITECTURE Behavior OF part1 IS
    SIGNAL Clock, Resetn : STD_LOGIC;
    SIGNAL Count, Enable : STD_LOGIC_VECTOR(7 DOWNTO 0);
 BEGIN
-   
+   -- 8-bit counter based on T-flip flops
    Clock <= KEY(0);
    Resetn <= SW(0);
 
@@ -223,11 +240,17 @@ BEGIN
    Enable(7) <= Count(6) AND Enable(6);
    TFF7: ToggleFF PORT MAP (Enable(7), Clock, Resetn, Count(7));
    
-   
+   -- drive the displays
    digit1: hex7seg PORT MAP (Count(7 DOWNTO 4), HEX1);
    digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0);
 END Behavior;
 
+-- ------------------------------------------------------------------------------------------------------------------
+         
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+-- T Flip-flop
 ENTITY ToggleFF IS
    PORT ( T, Clock, Resetn : IN  STD_LOGIC;
           Q                : OUT STD_LOGIC);
@@ -249,6 +272,11 @@ BEGIN
    Q <= T_out;
 END Behavior;
 
+-- ------------------------------------------------------------------------------------------------------------------
+         
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
 ENTITY hex7seg IS
    PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
           display : OUT STD_LOGIC_VECTOR(0 TO 6));
@@ -256,7 +284,19 @@ END hex7seg;
 
 ARCHITECTURE Behavior OF hex7seg IS
 BEGIN
-  
+   --
+   --       0  
+   --      ---  
+   --     |   |
+   --    5|   |1
+   --     | 6 |
+   --      ---  
+   --     |   |
+   --    4|   |2
+   --     |   |
+   --      ---  
+   --       3  
+   --
    PROCESS (hex)
    BEGIN
       CASE hex IS
@@ -291,9 +331,9 @@ A similar behavior is observed here (as we didn'y change the core behavior) exce
 </details>
 
 <details>
-  <summary>LUT-Level & Gates-Level Design</summary>
+  <summary>Simulations</summary>
 	<p align="center">
-  <img src="Photos/part12-LUT.png" style="width: 49%; height: 300px;"/> <img src="Photos/part12-gate.png" style="width: 49%; height: 300px;" /> 
+  <img src="Photos/part12-LUT.png" style="width: 49%; height: 300px;" title="Technology Map Viewer"/> <img src="Photos/part12-gate.png" style="width: 49%; height: 300px;" title="RTL Viewer"/> 
 </p>
 
  In the RTL viewer we can count 7 AND gates and 8 T flip-flops. The amount of logic elements approximately doubled in comparison with the 4-bits counter discussed above and although the number is also still somewhat manageable, it becomes increasingly obvious that this method does not scale well. The more bits that we demand in the counter the more the logic elements are going to be needed and the more complex it's going to be to manage them.
@@ -316,6 +356,12 @@ In this part, the goal is to implement the same behavior as described in [Part 1
 <br>
 
 ``` VHDL
+-- This is the Behavioral Modelling technique; a high-level abstraction method used in VHDL to describe the behavior of a digital system
+-- without specifying the exact implementation at the gate level. Instead, it describes how the design behaves based on its inputs and outputs.
+-- Behavioral modeling is characterized by the use of process blocks. The behavior inside these processes describes what should happen when certain conditions are met.
+-- Behavioral modeling uses high-level constructs like IF-THEN-ELSE and CASE statements to define the logic of the system.
+-- This model doesn’t specify the actual hardware implementation, such as flip-flops or gates, but describes how the system reacts to signals.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.all; -- Provides definitions for standard logic types
 USE ieee.std_logic_unsigned.all; -- Provides definitions for unsigned arithmetic operations
@@ -441,9 +487,205 @@ The same behavior can be observed with regard to the operation of the board base
 </details>
 
 <details>
-  <summary>LUT-Level & Gates-Level Design</summary>
-	<p align="center">
-  <img src="Photos/part2-LUT.png" style="width: 49%; height: 300px;"/> <img src="Photos/part2-gate.png" style="width: 49%; height: 300px;" /> 
+  <summary>Simulations</summary>
+	<br>
+	
+``` VHDL
+	-- Testbench created online at:
+	--   https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl/
+	-- Copyright Doulos Ltd
+	
+	library IEEE;
+	use IEEE.Std_logic_1164.all;
+	use IEEE.Numeric_Std.all;
+	
+	entity part2_tb is
+	end;
+	
+	architecture bench of part2_tb is
+	
+	  component part2 
+	     PORT ( SW  : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+	            KEY : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+	            HEX3, HEX2, HEX1, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6));
+	  end component;
+
+	  signal SW: STD_LOGIC_VECTOR(1 DOWNTO 0);
+	  signal KEY: STD_LOGIC_VECTOR(0 DOWNTO 0);
+	  signal HEX3, HEX2, HEX1, HEX0: STD_LOGIC_VECTOR(0 TO 6);
+	  signal Clock: STD_LOGIC;
+	
+	  constant clock_period: time := 10 ns;
+	  signal stop_the_clock: boolean;
+	  
+	  signal decoded_hex0: string(1 to 1);  -- String of length 1 to store the hex character
+	
+	begin
+	
+	  uut: part2 port map ( SW   => SW,
+	                        KEY  => KEY,
+	                        HEX3 => HEX3,
+	                        HEX2 => HEX2,
+	                        HEX1 => HEX1,
+	                        HEX0 => HEX0 );
+	
+	  stimulus: process
+	  begin
+	  
+	 -- Put initialisation code here
+	    SW  <= "10";    -- SW(0) = Reset, SW(1) = Enable
+	    KEY <= "0";     -- Initial clock value
+
+    -- Apply test case 1: Initial condition (reset active)
+    wait for 50 ns;
+    
+    -- Apply test case 3: Disable counting but without reset
+    SW <= "10";     -- Disable counting, reset de-asserted
+    KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+    
+    -- Apply test case 4: Reset asserted again
+    SW <= "11";     -- Reset inactive, enable active
+    KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+	 
+	 KEY <= "1";     -- Simulate clock edge
+    wait for 50 ns;
+    
+    KEY <= "0";
+    wait for 50 ns;
+    stop_the_clock <= true;
+    wait;
+	  end process;
+	
+	  clocking: process -- can't remove
+	  begin
+	    while not stop_the_clock loop
+	      Clock <= '0', '1' after clock_period / 2;
+	      wait for clock_period;
+	    end loop;
+	    wait;
+	  end process;
+	  
+	  -- Process to update decoded_hex0 signal based on HEX0 output
+	  decode_monitor: process(HEX0)
+	  begin
+	    case HEX0 is
+	      when "0000001" => decoded_hex0 <= "0";
+	      when "1001111" => decoded_hex0 <= "1";
+	      when "0010010" => decoded_hex0 <= "2";
+	      when "0000110" => decoded_hex0 <= "3";
+	      when "1001100" => decoded_hex0 <= "4";
+	      when "0100100" => decoded_hex0 <= "5";
+	      when "0100000" => decoded_hex0 <= "6";
+	      when "0001111" => decoded_hex0 <= "7";
+	      when "0000000" => decoded_hex0 <= "8";
+	      when "0000100" => decoded_hex0 <= "9";
+	      when "0001000" => decoded_hex0 <= "A";
+	      when "1100000" => decoded_hex0 <= "B";
+	      when "0110001" => decoded_hex0 <= "C";
+	      when "1000010" => decoded_hex0 <= "D";
+	      when "0110000" => decoded_hex0 <= "E";
+	      when "0111000" => decoded_hex0 <= "F";
+	      when others    => decoded_hex0 <= "?";  -- For any unknown pattern
+	    end case;
+	  end process;
+	
+	end;
+```
+
+<p align="center">
+  <img src="Photos/part2testbench.png" title="RTL Simulation" />
+</p>
+
+Shown above is  
+
+<p align="center">
+  <img src="Photos/part2-LUT.png" style="width: 49%; height: 300px;" title="Technology Map Viewer"/> <img src="Photos/part2-gate.png" style="width: 49%; height: 300px;" title="RTL Viewer"/> 
 </p>
 
  In the RTL viewer, we can identify several logic elements that represent different components of the design. The circular symbol with the "+" sign inside represents an adder. The triangular symbols indicate multiplexers. The rectangular element represents a register or counter. This element stores the value and is being used to maintain a count or store intermediate data. Overall, dispite doubling the amount of bits from the last part, the amount of logic elements required for the design actually decreased; a siginficant improvement from the scalability issue in the previous method.
