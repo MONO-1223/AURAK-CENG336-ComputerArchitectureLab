@@ -24,70 +24,105 @@ For this part, we will design a 4-bit and 8-bit counter using T flip-flops. This
 ```VHDL
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
+--
+-- inputs:
+-- KEY0: manual clock
+-- SW0: active low reset
+-- SW1: enable signal for the counter
+--
+-- outputs:
+-- HEX0: hex segment display
 
 ENTITY part1_4bits IS 
-   PORT ( SW   : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);     -- Assigning the input and output and their lengths
+   PORT ( SW   : IN  STD_LOGIC_VECTOR(1 DOWNTO 0); -- Assigning the input and output and their lengths
           KEY  : IN  STD_LOGIC_VECTOR(0 DOWNTO 0);
           HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6));
 END part1_4bits;
 
 ARCHITECTURE Behavior OF part1_4bits IS
-   COMPONENT ToggleFF                                 -- The T-flip-flop component
+   COMPONENT ToggleFF -- The T-flip-flop component
       PORT ( T, Clock, Resetn : IN  STD_LOGIC;
              Q                : OUT STD_LOGIC);
    END COMPONENT;
-   COMPONENT hex7seg                                  -- The HEX component
+   COMPONENT hex7seg -- The HEX component
       PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
              display : OUT STD_LOGIC_VECTOR(0 TO 6));
-   END COMPONENT;                                     
-   SIGNAL Clock, Resetn : STD_LOGIC;                   -- Creating 4 signals
+   END COMPONENT;
+   SIGNAL Clock, Resetn : STD_LOGIC; -- Creating 4 signals
    SIGNAL Count, Enable : STD_LOGIC_VECTOR(3 DOWNTO 0);
 BEGIN
-   
-   Clock <= KEY(0);   -- Assign the clock to KEY 0
-   Resetn <= SW(0);   -- Assign the resetn to SW 0
+   -- 4-bit counter based on T-flip flops
+   Clock <= KEY(0);
+   Resetn <= SW(0);
 
-   Enable(0) <= SW(1); -- Assign the enable to SW 1
-   TFF0: ToggleFF PORT MAP (Enable(0), Clock, Resetn, Count(0));          -- Here we do mapping for the output Count(0) we take it and do AND with the Enable(0) so we get the second input for the second TFF
-   Enable(1) <= Count(0) AND Enable(0);                                   -- And we keep going
-   TFF1: ToggleFF PORT MAP (Enable(1), Clock, Resetn, Count(1));
+   Enable(0) <= SW(1);
+   TFF0: ToggleFF PORT MAP (Enable(0), Clock, Resetn, Count(0)); -- Here we do mapping for the output Count(0) we take it and do AND with the Enable(0) so we get the second input for the second TFF
+   Enable(1) <= Count(0) AND Enable(0);
+   TFF1: ToggleFF PORT MAP (Enable(1), Clock, Resetn, Count(1)); -- And we keep going
    Enable(2) <= Count(1) AND Enable(1);
    TFF2: ToggleFF PORT MAP (Enable(2), Clock, Resetn, Count(2));
    Enable(3) <= Count(2) AND Enable(2);
    TFF3: ToggleFF PORT MAP (Enable(3), Clock, Resetn, Count(3));
    
-   digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0);                 -- Here after we get the output for each TFF we will map the final result to the HEX 0
-END Behavior; 
+   -- drive the displays
+   digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0); -- Here after we get the output for each TFF we will map the final result to the HEX 0
+END Behavior;
          
+
+-- T Flip-flop
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+-- ToggleFF and hex7seg components haven't explicitly declared that they are using the IEEE.Std_logic_1164 library, 
+-- which contains the definition for STD_LOGIC. Although this library is included at the top of the part1_4bits entity, 
+-- you also need to include it inside the ToggleFF and hex7seg components if they're in separate files or otherwise isolated.
+-- You need to add the necessary library and package declarations inside each architecture where STD_LOGIC is used.
+
 ENTITY ToggleFF IS
    PORT ( T, Clock, Resetn : IN  STD_LOGIC;
           Q                : OUT STD_LOGIC);
 END ToggleFF;
 
 ARCHITECTURE Behavior OF ToggleFF IS
-   SIGNAL T_out : STD_LOGIC;                         -- Creating a signal
+   SIGNAL T_out : STD_LOGIC; -- Creating a signal
 BEGIN
-   PROCESS (Clock)                                   -- If any changes happen in the clock, this process will run
+   PROCESS (Clock) -- If any changes happen in the clock, this process will run
    BEGIN
-      IF (Clock'EVENT AND Clock = '1') THEN          -- Simple nested if statment (if the clock change and it become one then enter the next if)
-         IF (Resetn = '0') THEN                      -- Also if the reset is 0 then T_out will be 0
+      IF (Clock'EVENT AND Clock = '1') THEN -- Simple nested if statement (if the clock changes and it becomes one then enter the next if)
+         IF (Resetn = '0') THEN -- Also if the reset is 0 then T_out will be 0
             T_out <= '0';
-         ELSIF (T = '1') THEN                        -- Else if T is 1 then toggel the input (CLOCK)
+         ELSIF (T = '1') THEN -- Else if T is 1 then toggle the input (CLOCK)
             T_out <= NOT T_out;
          END IF;
       END IF;
    END PROCESS;
-   Q <= T_out;                                        -- Output will be assigned to Q
+   Q <= T_out; -- Output will be assigned to Q
 END Behavior;
+         
+
+-- Hex 7-segment display driver
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
 
 ENTITY hex7seg IS
    PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
           display : OUT STD_LOGIC_VECTOR(0 TO 6));
 END hex7seg;
 
-ARCHITECTURE Behavior OF hex7seg IS               
+ARCHITECTURE Behavior OF hex7seg IS
 BEGIN
-  
+   --
+   --       0  
+   --      ---  
+   --     |   |
+   --    5|   |1
+   --     | 6 |
+   --      ---  
+   --     |   |
+   --    4|   |2
+   --     |   |
+   --      ---  
+   --       3  
+   --
    PROCESS (hex)
    BEGIN
       CASE hex IS
@@ -117,7 +152,7 @@ END Behavior;
   <img src="Photos/10-4bitcase.jpg" style="width: 45%; height: 300px;" title="Enable, Reset = 10"/>  <img src="Photos/11-4bitcase.gif" style="width: 100%; height: 300px;" title="Enable, Reset = 11" />
 </p>
 
-The results shown on the board align with the desired behavior of the counter as it was being designed. When the reset is active (= 0) the counter will reset to zero, otherwise it will continue counting. When the enable is active (= 1) the counter will increment, otherwise it will remain unchanged from the previous value. Hence, in the first photo, when the reset was active but the enable inactive the counter was zero and it wasn't incrementing no matter how many times we press the push button (clock). In the second case, when the reset was active and the enable was active the counter was supposed to increment but it is resetting to zero because the reset is active. In the third case, when the reset was inactive and the enable was inactive, the counter would have incremented if it weren't for the enable being off. Finally, in the fourth case, when the reset was inactive and the enable was active, we were able to observe the counter incrementing on the HEX0 as we press on the push button.
+The results shown on the board align with the desired behavior of the counter as it was being designed. When the reset is active (= 0) the counter will reset to zero, otherwise it will continue counting. When the enable is active (= 1) the counter will increment, otherwise it will remain unchanged from the previous value. Hence, in the first photo, when the reset was active but the enable inactive the counter was zero and it wasn't incrementing no matter how many times we pressed the push button (clock). In the second case, when the reset was active and the enable was active the counter was supposed to increment but it is resetting to zero because the reset is active. In the third case, when the reset was inactive and the enable was inactive, the counter would have incremented if it weren't for the enable being off. Finally, in the fourth case, when the reset was inactive and the enable was active, we were able to observe the counter incrementing on the HEX0 as we press on the push button. Note that you may hover your mouse over a picture to get the state description of the test case.
 
 
 </details>
@@ -285,6 +320,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all; -- Provides definitions for standard logic types
 USE ieee.std_logic_unsigned.all; -- Provides definitions for unsigned arithmetic operations
 
+--
 -- inputs:
 -- KEY0: manual clock (when pressed, the counter increments)
 -- SW0: reset (active low)
@@ -296,6 +332,7 @@ USE ieee.std_logic_unsigned.all; -- Provides definitions for unsigned arithmetic
 
 -- Define the entity for the counter design, referred to as part2
 -- This entity describes the inputs and outputs of the counter
+
 ENTITY part2 IS 
    PORT ( SW  : IN STD_LOGIC_VECTOR(1 DOWNTO 0); -- 2-bit switch input vector
           KEY : IN STD_LOGIC_VECTOR(0 DOWNTO 0); -- 1-bit key input vector for manual clock
@@ -338,10 +375,17 @@ ARCHITECTURE Behavior OF part2 IS
    digit0: hex7seg PORT MAP (Count(3 DOWNTO 0), HEX0); -- Map the lower 4 bits of Count to HEX0
 END Behavior;
 
+-- ------------------------------------------------------------------------------------------------------------------
 
-ENTITY hex7seg IS -- The entity declaration specifies the interface of the hex7seg module, including its 
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_unsigned.all;
+
+-- The entity declaration specifies the interface of the hex7seg module, including its
 -- inputs and outputs. It describes what the module does but not how it does it. 
 -- Entity declaration is akin to defining a function.
+
+ENTITY hex7seg IS
    PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0); -- 4-bit input for the hexadecimal digit
           display : OUT STD_LOGIC_VECTOR(0 TO 6)); -- 7-bit output for controlling the 7-segment display
 END hex7seg;
@@ -392,7 +436,7 @@ END Behavior;
   <img src="Photos/16bitcase.gif" style="width: 1000px" title="Testing all four cases for Enable, Reset" />
 </p>
 
-The same behavior can be observed with regards to the operation of the board based on the `reset` and `enable` switches. However, here we utilize four 7-segment displays as we are working with 16 bits. Of course, the more bits there are in the number the bigger the maximum reachable number is going to be.
+The same behavior can be observed with regard to the operation of the board based on the `reset` and `enable` switches. However, here we utilize four 7-segment displays as we are working with 16 bits. Of course, the more bits there are in the number the bigger the maximum reachable number is going to be. Note that we adjusted the code (only for the demo) to be `register = register + big number` because otherwise it would have taken us FFFF button presses in hexadecimal (or 65535 in decimal) to show all counting states with all the four HEXes working. 
 
 </details>
 
