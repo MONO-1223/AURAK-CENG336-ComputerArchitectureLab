@@ -413,20 +413,20 @@ gantt
     todayMarker off
     axisFormat %a-%Y-%m-%d
     section Preparation         
-        Nour Mostafa : active, 2024-09-17 00:00, 01h
-        Mohamed Abouissa : 2024-09-17 00:00, 01h
+        Nour Mostafa : active, 2024-09-24 00:00, 01h
+        Mohamed Abouissa : 2024-09-24 00:00, 01h
     section Quartus         
-        Nour Mostafa : active, 2024-09-18 00:00, 1d
-        Mohamed Abouissa : 2024-09-18 00:00, 1d
+        Nour Mostafa : active, 2024-09-25 00:00, 1d
+        Mohamed Abouissa : 2024-09-25 00:00, 1d
     section ModelSim       
-        Nour Mostafa : active,2024-09-18 00:00, 1d
-        Mohamed Abouissa : 2024-09-18 00:00, 1d
+        Nour Mostafa : active,2024-09-25 00:00, 1d
+        Mohamed Abouissa : 2024-09-25 00:00, 1d
     section Results       
-        Nour Mostafa : active,2024-09-18 00:00, 1d
-        Mohamed Abouissa : 2024-09-18 00:00, 1d
+        Nour Mostafa : active,2024-09-25 00:00, 1d
+        Mohamed Abouissa : 2024-09-25 00:00, 1d
     section Report
-        Nour Mostafa : active,2024-09-24 00:00, 1d
-        Mohamed Abouissa : 2024-09-22 00:00, 1d
+        Nour Mostafa : active,2024-10-01 00:00, 1d
+        Mohamed Abouissa : 2024-09-28 00:00, 2d
 ```
 
 We extend our sincere appreciation to Eng. Umar Adeel for his insightful feedback which has significantly contributed to the successful completion of this experiment.
