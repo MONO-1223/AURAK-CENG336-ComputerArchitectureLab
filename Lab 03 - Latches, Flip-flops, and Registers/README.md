@@ -26,30 +26,42 @@ Refer to [Figure 2](Photos/Part1Q.png) for a visual representation of the gated 
 <br>
 
 ``` VHDL
+-- ENTITY defines the interface of the latch, which has three input ports (Clk, R, and S) and one output port (Q).
+-- ARCHITECTURE contains the implementation details. In this case, signals like R_g, S_g, Qa, and Qb are defined, representing internal states of the latch.
+-- The logic expressions in the architecture specify how the outputs relate to the inputs.
+
+-- 4-input LUTs are fundamental building blocks in FPGAs, capable of implementing any logic function of up to four inputs.
+-- The passage states that a single 4-input LUT is sufficient to realize the RS latch described.
+-- While the RS latch can technically be implemented with a single LUT, it has a limitation: internal signals like R_g and S_g are not directly observable as outputs from the LUT.
+-- This is important because if you want to monitor or debug these internal signals in your circuit, they need to be accessible.
+-- To ensure that the internal signals are preserved in the FPGA's design, the passage mentions the KEEP directive. This is a VHDL attribute that instructs the Quartus compiler to treat
+-- each of these internal signals (R_g, S_g, Qa, and Qb) as separate entities, rather than collapsing them into the LUT.
+-- By including this directive, the compiler allocates individual logic resources (in this case, separate LUTs) for each internal signal, resulting in a circuit that uses four LUTs.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
 ENTITY part1 IS
 
-   PORT ( Clk, R, S : IN  STD_LOGIC;          -- Assigning my inputs R,S and Clk
-          Q         : OUT STD_LOGIC);         -- Assigning my output Q
+   PORT ( Clk, R, S : IN  STD_LOGIC;          -- Assigning inputs R,S and Clk
+          Q         : OUT STD_LOGIC);         -- Assigning output Q
      
 END part1;
 
 ARCHITECTURE Structural OF part1 IS
 
-   SIGNAL R_g, S_g, Qa, Qb : STD_LOGIC ;          -- Creat my signals R_g, S_g, Qa and Qb
+   SIGNAL R_g, S_g, Qa, Qb : STD_LOGIC ;          -- Creating signals R_g, S_g, Qa and Qb
    ATTRIBUTE KEEP: BOOLEAN;                       -- The KEEP attribute is defined as a boolean value, which can be used to instruct the synthesis tool to preserve certain signals during optimization.
    ATTRIBUTE KEEP OF R_g, S_g, Qa, Qb : SIGNAL IS true;           -- By applying the KEEP attribute to R_g, S_g, Qa, and Qb, we ensure that these signals are not optimized away or removed, which is particularly important in maintaining the functionality of the RS latch during synthesis.
 
 BEGIN
 
-   R_g <= R AND Clk;               -- R_g is signal that have the valuse of R AND-ing Clk
-   S_g <= S AND Clk;               -- S_g is signal that have the valuse of S AND-ing Clk
-   Qa <= NOT (R_g OR Qb);          -- Same as shoing in the Question 
-   Qb <= NOT (S_g OR Qa);          -- Same as shoing in the Question 
+   R_g <= R AND Clk;               -- R_g is a signal that has the value of R AND-ing Clk
+   S_g <= S AND Clk;               -- S_g is a signal that has the value of S AND-ing Clk
+   Qa <= NOT (R_g OR Qb);          
+   Qb <= NOT (S_g OR Qa);          
 
-   Q <= Qa;                        -- My primery output Q is the values of my Qa signla
+   Q <= Qa;                        -- primary output Q is the Qa signal
 
 END Structural;                   
 ```
@@ -88,8 +100,6 @@ begin
   stimulus: process
   begin
   
--- Put initialisation code here
-
   R <= '1';
 	S <= '0';
 	clk <= '1';
@@ -109,8 +119,6 @@ begin
 	S <= '1';
 	clk <= '1';
 	wait for 10 ns;
-
--- Put test bench stimulus code here
 
     wait;
   end process;
