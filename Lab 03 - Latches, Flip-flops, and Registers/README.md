@@ -402,7 +402,13 @@ A __timing simulation__ is a more detailed type of simulation used in digital ci
 
 ## Resources
 
-Do your magic
+|1| ALL ABOUT ELECTRONICS (Director). (2022, May 28). Latch and Flip-Flop Explained | Difference between the Latch and Flip-Flop. <br> https://www.youtube.com/watch?v=LTtuYeSmJ2g  
+|2| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.  
+|3| Neso Academy (Director). (2015a, February 2). What is a Clock?. <br> https://www.youtube.com/watch?v=wx0NyUfpm48  
+|4| Neso Academy (Director). (2015b, February 8). Triggering Methods in Flip Flops. <br> https://www.youtube.com/watch?v=Pi_MHyMoenA  
+|5| Neso Academy (Director). (2015c, April 20). SR Latch | NOR and NAND SR Latch. <br> https://www.youtube.com/watch?v=kt8d3CYWGH4  
+|6| Simple Snippets (Director). (2018, February 21). Flip Flops & latches in Digital Electronics with Example of 1 Bit Memory Cell. <br> https://www.youtube.com/watch?v=PVJC_-_JB_A  
+|7| VHDL Testbench Creation Using Perl. (n.d.). Retrieved September 21, 2024, from <br> https://www.doulos.com/knowhow/perl/vhdl-testbench-creation-using-perl/  
 
 <br>
 
