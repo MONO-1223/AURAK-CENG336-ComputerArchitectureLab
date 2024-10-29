@@ -150,14 +150,14 @@ END core;
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
-ENTITY part3 is
+ENTITY part2 is
    PORT ( CLOCK_50 : IN STD_LOGIC;
           SW       : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
           KEY      : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
           HEX5, HEX4, HEX3, HEX2, HEX1, HEX0 : OUT STD_LOGIC_VECTOR(0 to 6) );
 END ENTITY;
 
-ARCHITECTURE Behavior OF part3 IS
+ARCHITECTURE Behavior OF part2 IS
    COMPONENT modulo_counter_er IS
       GENERIC ( n : NATURAL  := 4; k : INTEGER := 15 );
 		-- n is a generic parameter of type NATURAL, which is a non-negative integer. It specifies the bit-width of the counter.
