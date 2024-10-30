@@ -57,7 +57,7 @@ BEGIN
    LEDR (16 DOWNTO 8) <= "000000000"; -- Set the unused bits of LEDR (16 to 8) to '0' to prevent any floating values.
 END rtl;
 
--- Import the IEEE library again for the "modulo_counter" component.
+-----------------------------------------------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 -- Use the std_logic_unsigned package to enable unsigned arithmetic operations on STD_LOGIC_VECTOR.
@@ -251,6 +251,7 @@ BEGIN
    digit0: bcd7seg PORT MAP (H0, HEX0);
       
 END Behavior;
+-----------------------------------------------------------------------------------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -286,6 +287,7 @@ BEGIN
    rollover <= '1' WHEN (counter = CONV_STD_LOGIC_VECTOR(k-1, n)) ELSE '0';   
 END Behavior;
 
+-----------------------------------------------------------------------------------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -324,6 +326,7 @@ BEGIN
    rollover <= '1' WHEN (counter = CONV_STD_LOGIC_VECTOR(k-1, n)) ELSE '0';   
 END Behavior;
 
+-----------------------------------------------------------------------------------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
