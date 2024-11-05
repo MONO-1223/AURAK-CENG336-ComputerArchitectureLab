@@ -247,8 +247,9 @@ Through simulation and hardware testing, the functionality of each arithmetic op
 |7| Namitha Ramachandran (Director). (2020, May 12). DESIGN OF ACCUMULATOR REGISTER [Video recording]. <br> https://www.youtube.com/watch?v=iKQtPntfUDc  
 |8| Neso Academy (Director). (2022, October 11). Overflow in Signed and Unsigned Numbers [Video recording]. <br> https://www.youtube.com/watch?v=7towQUO9aZI  
 |9| SnickFreakOG. (2022, May 18). Accumulator from behavioral to structural [Reddit Post]. R/VHDL. <br> www.reddit.com/r/VHDL/comments/usik9m/accumulator_from_behavioral_to_structural/  
-|10| vlsifacts. (2023, March 10). What is Overflow in case of Binary Arithmetic. VLSIFacts. <br> https://www.vlsifacts.com/what-is-overflow-in-case-of-binary-arithmetic/  
-|11| webadmin. (2024, May 19). Fundamentals of Accumulator Circuit Design. <br> https://zpcylinder.com/fundamentals-of-accumulator-circuit-design/
+|10| Terasic Technologies. (2012). DE2-115 User Manual.   
+|11| vlsifacts. (2023, March 10). What is Overflow in case of Binary Arithmetic. VLSIFacts. <br> https://www.vlsifacts.com/what-is-overflow-in-case-of-binary-arithmetic/  
+|12| webadmin. (2024, May 19). Fundamentals of Accumulator Circuit Design. <br> https://zpcylinder.com/fundamentals-of-accumulator-circuit-design/
 
 
 <br>
