@@ -214,15 +214,15 @@ END Behavior;
 <br>
 
 <p align="center">
-  <img src="Photos/part1fpga.gif" style="width: 496px; height: 320px; object-fit: cover;" title="Allowing the timer to run freely up to 1 minute with manual timer pausing" />
-  <img src="Photos/part2fpga.gif" style="width: 496px; height: 320px; margin: 0 10px; object-fit: cover;" title="Setting a starting minute for the timer on HEX4 using SW[3 DOWNTO 0]" />
+  <img src="Photos/part1fpga.gif" style="width: 496px; height: 320px; object-fit: cover;" title="Testing a 0 adder, a 1 adder, a 9 adder, and the reset button." />
+  <img src="Photos/part2fpga.gif" style="width: 496px; height: 320px; margin: 0 10px; object-fit: cover;" title="Testing a 0 adder, a 1 adder, a 1 subtractor, a 28 subtractor, and the reset button." />
 </p>
 
 // anchor
 
 
 <p align="center">
-  <img src="Photos/part2waveform.png" title="Testing all counting cases." />
+  <img src="Photos/part2waveform.png" title="Testing reset, 1 adder, then 1 subtractor." />
 </p>
 
 // anchor
