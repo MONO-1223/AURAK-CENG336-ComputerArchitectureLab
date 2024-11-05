@@ -1,6 +1,6 @@
 # <p align="center">Adders and Subtractors</p>
 
-The purpose of this experiment is to design, implement, and verify arithmetic circuits capable of performing addition and subtraction of binary numbers, utilizing VHDL and the Intel DE2-115 Cyclone IV-E EP4CE115F29C7 Altera FPGA board.
+The purpose of this experiment is to design, implement, and verify arithmetic circuits capable of performing addition and subtraction of binary numbers, utilizing VHDL and the Intel DE2-115 Cyclone IV-E EP4CE115F29C7 Altera FPGA board.  
 
 ---
 
