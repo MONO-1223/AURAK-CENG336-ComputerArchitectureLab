@@ -205,12 +205,6 @@ END Behavior;
 
 ```
 
-<p align="center">
-  <img src="Photos/part1.gif" style="width: 1000px" title="Testing all counting cases." />
-</p>
-
-// anchor
-
 </details>
 
 
@@ -220,7 +214,15 @@ END Behavior;
 <br>
 
 <p align="center">
-  <img src="Photos/part1wave.png" title="Testing all counting cases." />
+  <img src="Photos/part1fpga.gif" style="width: 496px; height: 320px; object-fit: cover;" title="Allowing the timer to run freely up to 1 minute with manual timer pausing" />
+  <img src="Photos/part2fpga.gif" style="width: 496px; height: 320px; margin: 0 10px; object-fit: cover;" title="Setting a starting minute for the timer on HEX4 using SW[3 DOWNTO 0]" />
+</p>
+
+// anchor
+
+
+<p align="center">
+  <img src="Photos/part2waveform.png" title="Testing all counting cases." />
 </p>
 
 // anchor
@@ -228,35 +230,6 @@ END Behavior;
 	
 </details>
 
-
-
-
-
-<p align="center">
-  <img src="Photos/part21.gif" style="width: 333px; height: 250px; object-fit: cover;" title="Allowing the timer to run freely up to 1 minute with manual timer pausing" />
-  <img src="Photos/part22.gif" style="width: 333px; height: 250px; margin: 0 10px; object-fit: cover;" title="Setting a starting minute for the timer on HEX4 using SW[3 DOWNTO 0]" />
-  <img src="Photos/part23.gif" style="width: 333px; height: 250px; object-fit: cover;" title="Setting a starting minute for the timer on both HEX5 and HEX4 using SW[7 DOWNTO 4] and SW[3 DOWNTO 0] respectively" />
-</p>
-
-
-
-// anchor
-</details>
-
-<details>
-  <summary>Waveform Simulation</summary>
-	<br>
-
-<p align="center">
-  <img src="Photos/part2wave.png" title="Testing different cases of button settings" />
-</p>
-
-// anchor
-
-<br>
-
-
-</details>
 
 ## Conclusion
 
