@@ -219,14 +219,26 @@ END Behavior;
   <img src="Photos/part2fpga.gif" style="width: 496px; height: 320px; margin: 0 10px; object-fit: cover;" title="Testing a 0 adder, a 1 adder, a 1 subtractor, a 28 subtractor, and the reset button." />
 </p>
 
-// anchor
+Shown above are different test scenarios for both parts of the lab; one with all adding cases and the other with a mix of adding and subtracting. The adding and subtracting operations are happening on hexadecimal numbers. The results are not only shown on the LEDRs but also on the 7-segment displays. On the 7SD, the input value from the switches is displayed on the 2 HEXes on the left meanwhile the result of the adder/subtractor is displayed on the 2 HEXes on the right. Note that the LEDRs are more appropriate for displaying the output of the adder/subtractor as they are one step ahead of the HEX digits because the HEXes take one extra clock cycle to display the result since the first result is 00 because we need to set the value of the input (A) using switches and it has to be represented on the left HEXes first before it gets processed and produces a result that displays on the right HEXes whereas the LEDRs are showing the result of the adder directly; they don't mirror the state of the switch under them first and that is why they are faster to react to the process than HEXes.
 
+The GIF on the left shows adding by 0, where nothing happens because the initial value was 0 and the added value to it is 0 so nothing is changing. Although, if we had a non-zero initial value first then changed the switches to 0 it would have been a clearer demonstration that the value is not changing because 0 is being added to it, whereas the first case looks like a reset. In the second test we changed the switches value to 1 and starting pressing the manual clock. On each clock tick, the value was getting incremented by 1 like so 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 0A → 0B → 0C → 0D → 0E → 0F → 10 → 11 → 12 → 13 → 14 → 15 → 16 → 17 → 18 → 19 → 1A → 1B → 1C → 1D → 1E → 1F → 20 → 21 → 22 ... FF. The 9 adder operates in a similar manner. As for the GIF on the right, we could is in the 1 subtractor case that the value saved in the regsiter is going down one by one from 20 → 1F → 1E → 1D → 1C → 1B → 1A → 19 → 18 etc... Similarily, for the 28 subtractor case, we can see the case 00 - 28 = D8. Since \( 28 \) (hex) is larger than \( 00 \) (hex), the result of \( 00 - 28 \) will be negative. In hexadecimal systems, negative numbers are typically represented using two's complement notation. To find the two's complement of \( 28 \) (hex), we first invert \( 28 \), which gives us \( D7 \). Then, by adding \( 1 \) to \( D7 \), we arrive at \( D8 \). Therefore, \( 00 - 28 \) is represented as \( D8 \) in two's complement hexadecimal notation, indicating a negative result.
+
+According to the referenced DE2-115 manual, the push-button switches on the FPGA board are designed to operate with a specific logic behavior: when the switch is not pressed, it outputs a high logic level (logic '1'), and when the switch is pressed, it outputs a low logic level (logic '0'). This configuration is commonly referred to as active-low behavior. In this context, the KEY0 push-button switch, which is utilized as a reset input in our circuit, adheres to this active-low characteristic. Although we did not explicitly define this active-low functionality in the VHDL code, it is inherently understood based on the design of the switch itself. When KEY0 is pressed, it sends a low logic level (logical '0') to the connected circuit, effectively triggering the reset operation. Conversely, when the switch is not pressed, it returns to a high logic level (logical '1'), indicating that the reset condition is inactive. The debouncing mechanism integrated into the switch ensures that any noise or fluctuations caused by the mechanical action of pressing the button are filtered out, providing a stable signal. This makes the switch suitable for use as a clock or reset input in digital circuits, ensuring that the circuit responds reliably to the intended button press without unintended glitches.
 
 <p align="center">
   <img src="Photos/part2waveform.png" title="Testing reset, 1 adder, then 1 subtractor." />
 </p>
 
-// anchor
+First to explain the setup of the waveform simulation, we have chosen to 
+
+
+We can observe that the simulation and the board results are in agreement.
+
+Although, upon scrutiniy, we have identified a bug in the code where 
+
+so the sw 9 is like 2 manual clocks without having to use the key 1 to start decerementing the first time that we switch from add mode to subtract mode - it's just something dumb in the code - problem for the leds only tho 
+
+
 <br>
 	
 </details>
