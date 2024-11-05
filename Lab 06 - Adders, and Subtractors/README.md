@@ -19,7 +19,7 @@ The output of the accumulator is displayed using `LED` indicators and `7-segment
 ## Implementation
 
 <details>
-  <summary>VHDL Code Implementation on the FPGA Board</summary>
+  <summary>VHDL Code</summary>
 <br>
 
 ```VHDL
@@ -215,7 +215,7 @@ END Behavior;
 
 
 <details>
-  <summary>Waveform Simulation</summary>
+  <summary>Practical & Simulation Results</summary>
 	
 <br>
 
