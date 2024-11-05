@@ -35,7 +35,7 @@ The output of the accumulator is displayed using `LED` indicators and `7-segment
 --           HEX3-2 shows input A
 --           HEX1-0 shows the output sum
 
--- A is the input, S is the output of the sub or subtraction 
+-- A is the input, S is the output of the sum or subtraction 
 
 Library ieee;
 USE ieee.std_logic_1164.all;
