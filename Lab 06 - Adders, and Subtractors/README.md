@@ -238,8 +238,18 @@ Through simulation and hardware testing, the functionality of each arithmetic op
 
 
 ## Resources
+|1| Adders and Subtractors in Digital Electronics. (n.d.). Retrieved November 5, 2024, from <br> https://www.tutorialspoint.com/adders-and-subtractors-in-digital-electronics  
+|2| ALL ABOUT ELECTRONICS (Director). (2022, February 19). 4-bit Adder and Subtractor Circuit Explained [Video recording]. <br> https://www.youtube.com/watch?v=J7gPUP0aRug  
+|3| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.    
+|4| Digital Design: With an Introduction to the Verilog HDL. (n.d.). Retrieved November 5, 2024, from <br> https://www.goodreads.com/book/show/211780.Digital_Design  
+|5| Digital Fundametals. (n.d.). Retrieved November 5, 2024, from <br> https://www.goodreads.com/book/show/942639.Digital_Fundamentals  
+|6| Kevin Patterson (Kevin H. Patterson) (Director). (2022, April 27). 8 bit Accumulator v1 [Video recording]. <br> https://www.youtube.com/watch?v=d6PE1pXMLQM  
+|7| Namitha Ramachandran (Director). (2020, May 12). DESIGN OF ACCUMULATOR REGISTER [Video recording]. <br> https://www.youtube.com/watch?v=iKQtPntfUDc  
+|8| Neso Academy (Director). (2022, October 11). Overflow in Signed and Unsigned Numbers [Video recording]. <br> https://www.youtube.com/watch?v=7towQUO9aZI  
+|9| SnickFreakOG. (2022, May 18). Accumulator from behavioral to structural [Reddit Post]. R/VHDL. <br> www.reddit.com/r/VHDL/comments/usik9m/accumulator_from_behavioral_to_structural/  
+|10| vlsifacts. (2023, March 10). What is Overflow in case of Binary Arithmetic. VLSIFacts. <br> https://www.vlsifacts.com/what-is-overflow-in-case-of-binary-arithmetic/  
+|11| webadmin. (2024, May 19). Fundamentals of Accumulator Circuit Design. <br> https://zpcylinder.com/fundamentals-of-accumulator-circuit-design/
 
-|1| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.  
 
 <br>
 
