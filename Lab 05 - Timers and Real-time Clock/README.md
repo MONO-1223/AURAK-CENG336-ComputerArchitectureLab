@@ -18,6 +18,10 @@ The task involves creating a modulo-k counter by modifying the design of an 8-bi
 <br>
 
 ```VHDL
+-- This code uses Register Transfer Level (RTL) modeling with behavioral modeling.
+-- RTL is a design abstraction that represents data flow between registers on each clock cycle. This style is typical for describing synchronous circuits like counters.
+-- The PROCESS block in the modulo_counter component describes behavior using sequential statements (IF and ELSIF) instead of individual gate-level components. The code defines how the counter should respond to the clock and reset signals and how it resets or increments. Behavioral modeling focuses on the desired operation (like counting) rather than specific hardware implementation details.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
@@ -31,15 +35,16 @@ END ENTITY;
 ARCHITECTURE rtl OF part1 IS
    -- Declare a component named "modulo_counter" to be instantiated within "part1".
    -- This component will have parameters for bit width (n) and the modulo value (k).
-   COMPONENT modulo_counter IS
-      GENERIC ( n : NATURAL := 4; k : INTEGER := 15 );
-      -- Define the ports for "modulo_counter": 
-      -- clock and reset_n are inputs, Q outputs the counter value, 
-      -- and rollover is set high when the counter reaches its maximum value (k-1).
+   COMPONENT modulo_counter IS       -- Define the ports for "modulo_counter":
+      GENERIC ( n : NATURAL := 4; k : INTEGER := 15 ); -- natural is a predefined type in VHDL representing non-negative integer values, including zero
+     -- generic is used to define parameters for VHDL components or entities, allowing configurable values that can be set externally at the time of instantiation.
+     -- This provides flexibility by letting you parameterize your design without modifying the core code. In other words, Generics allow us to customize the behavior or dimensions of a module, such as setting array sizes, frequencies, or thresholds, based on specific requirements.
       PORT ( clock    : IN  STD_LOGIC;
              reset_n  : IN  STD_LOGIC;
              Q        : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0);
              rollover : OUT STD_LOGIC );
+      -- clock and reset_n are inputs, Q outputs the counter value, 
+      -- and rollover is set high when the counter reaches its maximum value (k-1).
    END COMPONENT;
 BEGIN
    -- Instantiate "modulo_counter" component as "my_counter".
@@ -115,7 +120,8 @@ END core;
   <img src="Photos/part1.gif" style="width: 1000px" title="Testing all counting cases." />
 </p>
 
-// anchor
+Tested above are different cases of the general n-bit counter. KEY 0 acts as a reset button whereas KEY 1 acts as a manual clock. Every time KEY 1 is clicked the counter increments by 1 as displayed on the red LEDs which act as a binary counter indicator. The counting starts from 0 all the way up to 19. Once reached, we can see the rollover sign on LEDR17 activated indicating that the counter has reached its maximum count value and then returning, or "rolling over," to zero on the next count. This behavior is typical in counters designed to cycle through a specific range of values in a repetitive pattern.
+
 
 </details>
 
@@ -129,7 +135,8 @@ END core;
   <img src="Photos/part1wave.png" title="Testing all counting cases." />
 </p>
 
-// anchor
+The generated waveform is in agreement with the FPGA implementation as well as the expected output of the code. We can observe that KEY 0 indeed is an active low button because as long as we kept it high during this wave, the counter worked normally; incrementing by 1 each clock. The wave of KEY 1 simulated a button press where you have to press and release and thus alternate between high and low. On the rising edge of the wave we can see the value displayed on the LEDRs incremented by 1 starting from 00000000 = 0 to 00010011 = 19 then back to 0 again.
+
 <br>
 	
 </details>
