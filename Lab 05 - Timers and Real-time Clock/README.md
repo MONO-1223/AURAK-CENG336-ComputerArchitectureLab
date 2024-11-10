@@ -395,7 +395,7 @@ In this setup, the rightmost four switches control the right HEX display of the 
 
 The waveform results accurately reflect the behavior observed on the FPGA. The value changes occur on the rising edge of the clock. When KEY0 is high, the watch pauses and stops counting, while it resumes normal operation when KEY0 is low. KEY1 remains low throughout the entire simulation since the clock is automatically driven by the board; there is no need to simulate manual button presses by periodically making the wave high and low (like in the Clock, for example). The primary role of KEY1 is to load the initial value, set by the switches, onto the HEX display, and to reset the watch to this value when pressed again. Regarding the switches, the right minute HEX display initially shows values from 8 to 9, then increments to 10 (which would display 'A', but it is invalid and won't show on the board), followed by 11 (which would display 'B', another invalid value), and continuing with 12 ('C' - invalid), 13 ('D' - invalid), 14 ('E' - invalid), and 15 ('F' - invalid). The left minute HEX display operates similarly, starting with a value of 1, then we start operating both digits of the minutes' HEXes with values "1" "1", "1" "2", "1" "3", and "1" "4". As for the output on the HEX displays, initially, all segments show 0, as the clock is low. When the clock goes high and KEY1 is low (not resetting) while KEY0 is low (not pausing the watch), the value in the switches (00001011 = 11 = B) causes the right HEX display to go inactive. This is because, as we mentioned before, letters are not allowed to display on the HEX display in our code, so it shows all segments as low (1111111). The value remains held because the clock is low and KEY0 is high, keeping the watch paused. At 150 ns, when the clock goes high again and the value in the switches changes to 00010010 (representing "1" "2"), the value 12 is displayed on both the right and left minute HEX displays. The segments for "12" are drawn as 0010010 for the "2" and 1001111 for the "1" on the HEX display segments, resulting in the correct time being shown.
 
-Noteworthy is that during the set up for this waveform simulation, we did not use our typical way of setting up the waves by using Edit - Value - Count Value - Count Every, we can simply highlight a region of the wave by pressing and holding the mouse cursor over it then selecting the "1" or "0" buttons available in the toolbar to manually set the value of the wave at a specific time.
+Noteworthy is that during the set up for this waveform simulation, we did not use our typical way of setting up the waves by using Edit - Value - Count Value - Count Every, we can simply highlight a region of the wave by pressing and holding the mouse cursor over it then selecting the "Force High (1)" or "Force Low (0)" buttons available in the toolbar to manually set the value of the wave at a specific time.
 <br>
 
 
@@ -407,7 +407,23 @@ In this lab, we successfully designed and implemented an 8-bit modulo-k counter 
 
 ## Resources
 
-|1| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.  
+|1| Andrew MASTERS (Director). (2016, March 1). 1 bit and 2 bit counter [Video recording]. <br> https://www.youtube.com/watch?v=lj-QGx-Wyw4  
+|2| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.  
+|3| Design Mod—N synchronous Counter. (2021, May 1). GeeksforGeeks. <br> https://www.geeksforgeeks.org/design-mod-n-synchronous-counter/  
+|4| How To Electronics (Director). (2019, July 14). Stopwatch Using 4 Digit 7 Segment Display & Arduino [Video recording]. <br> https://www.youtube.com/watch?v=XhlMOEGGkOc  
+|5| Logic Circuit official web site. (n.d.). Retrieved November 9, 2024, from <br> https://www.logiccircuit.org/index.html  
+|6| MArobotic (Director). (2022, February 1). How to make Stopwatch with 7Segment Display Module MAX7219 | how to Arduino control 6digit Stopwatch [Video recording]. 
+ <br> https://www.youtube.com/watch?v=dLodeF9Ds2U  
+|7| Neso Academy (Director). (2015a, March 12). Introduction to Counters | Important [Video recording]. <br> https://www.youtube.com/watch?v=iaIu5SYmWVM  
+|8| Neso Academy (Director). (2015b, March 30). Modulus of the Counter & Counting up to Particular Value [Video recording]. <br> https://www.youtube.com/watch?v=l20xHDJPHBM  
+|9| Neso Academy (Director). (2015c, April 4). 3-Bit & 4-bit Up/Down Synchronous Counter [Video recording]. <br> https://www.youtube.com/watch?app=desktop&v=svFUEJkoeVY  
+|10| Rania Hussein (Director). (2016, April 4). Creating a waveform simulation in Quartus Prime Lite Edition [Video recording]. <br> https://www.youtube.com/watch?v=e_ksjHd6sY0  
+|11| Siddiqui, O. (n.d.-a). Circuit design Stopwatch using 7-Segment Display. Tinkercad. Retrieved November 10, 2024, from <br> https://www.tinkercad.com/things/9UV25tTGCKB  
+|12| Siddiqui, O. (n.d.-b). Circuit design Stopwatch Using LCD. Tinkercad. Retrieved November 10, 2024, from <br> https://www.tinkercad.com/things/kvsYLnUJuAN  
+|13| Simple Digital Stopwatch Circuit Diagram using 555 Timer IC & CD 4033. (n.d.). Retrieved November 10, 2024, from <br> https://circuitdigest.com/electronic-circuits/digital-stopwatch-circuit-diagram  
+|14| Storr, W. (2021, March 12). MOD Counters are Truncated Modulus Counters. Basic Electronics Tutorials. <br> https://www.electronics-tutorials.ws/counter/mod-counters.html  
+|15| What is MOD Counters: Design Mod – N Synchronous Counter—Semiconductor for You. (n.d.). Retrieved November 10, 2024, from <br> https://www.semiconductorforu.com/what-is-mod-counters-design-mod-n-synchronous-counter/  
+
 
 <br>
 
