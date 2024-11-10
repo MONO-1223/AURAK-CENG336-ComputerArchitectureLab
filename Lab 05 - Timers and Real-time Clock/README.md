@@ -378,8 +378,11 @@ END Behavior;
 </p>
 
 
+The FPGA-based design implements a real-time, settable clock that displays time in minutes, seconds, and hundredths of a second (MM:SS:HH format). To set an initial time, users can adjust switches SW(7:0) to represent a two-digit minute value, which the clock will use as a starting point. Pressing KEY(1) loads this initial time on the HEX displays; which means that when you press it again it will be like resetting the clock back to the initial time you set using the switches. The clock can be resumed or paused by holding the KEY(0), allowing users to control its timing without resetting the display. This setup enables real-time timekeeping with user-defined initial values and intuitive start/stop functionality.
 
-// anchor
+In this setup, the rightmost four switches control the right HEX display of the minutes, while the leftmost switches control the left HEX display of the minutes. Instead of the typical binary pattern of 128, 64, 32, 16, 8, 4, 2, 1, these switches follow a different arrangement of 8421 for each four switches controlling the display, corresponding to each digit separately. The maximum value that can be set for the minutes is 99, ensuring only two-digit numbers are displayed. Additionally, if the value to be displayed requires a letter (such as in hexadecimal notation), the display will show absolutely nothing, leaving the segment blank instead.
+
+
 </details>
 
 <details>
@@ -390,8 +393,9 @@ END Behavior;
   <img src="Photos/part2wave.png" title="Testing different cases of button settings" />
 </p>
 
-// anchor
+The waveform results accurately reflect the behavior observed on the FPGA. The value changes occur on the rising edge of the clock. When KEY0 is high, the watch pauses and stops counting, while it resumes normal operation when KEY0 is low. KEY1 remains low throughout the entire simulation since the clock is automatically driven by the board; there is no need to simulate manual button presses by periodically making the wave high and low (like in the Clock, for example). The primary role of KEY1 is to load the initial value, set by the switches, onto the HEX display, and to reset the watch to this value when pressed again. Regarding the switches, the right minute HEX display initially shows values from 8 to 9, then increments to 10 (which would display 'A', but it is invalid and won't show on the board), followed by 11 (which would display 'B', another invalid value), and continuing with 12 ('C' - invalid), 13 ('D' - invalid), 14 ('E' - invalid), and 15 ('F' - invalid). The left minute HEX display operates similarly, starting with a value of 1, then we start operating both digits of the minutes' HEXes with values "1" "1", "1" "2", "1" "3", and "1" "4". As for the output on the HEX displays, initially, all segments show 0, as the clock is low. When the clock goes high and KEY1 is low (not resetting) while KEY0 is low (not pausing the watch), the value in the switches (00001011 = 11 = B) causes the right HEX display to go inactive. This is because, as we mentioned before, letters are not allowed to display on the HEX display in our code, so it shows all segments as low (1111111). The value remains held because the clock is low and KEY0 is high, keeping the watch paused. At 150 ns, when the clock goes high again and the value in the switches changes to 00010010 (representing "1" "2"), the value 12 is displayed on both the right and left minute HEX displays. The segments for "12" are drawn as 0010010 for the "2" and 1001111 for the "1" on the HEX display segments, resulting in the correct time being shown.
 
+Noteworthy is that during the set up for this waveform simulation, we did not use our typical way of setting up the waves by using Edit - Value - Count Value - Count Every, we can simply highlight a region of the wave by pressing and holding the mouse cursor over it then selecting the "1" or "0" buttons available in the toolbar to manually set the value of the wave at a specific time.
 <br>
 
 
