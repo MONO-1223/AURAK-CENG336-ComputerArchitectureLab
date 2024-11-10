@@ -4,7 +4,7 @@ The objective of this lab was to design, simulate, and implement digital circuit
 
 ---
 
-The __modulo__ operation, commonly denoted as __mod__ or `%`, calculates the remainder of the division of one number by another. For example, in the expression 7 mod 3, the result is 1, because when 7 is divided by 3, it leaves a remainder of 1. Similarly, 10 mod 5 results in 0 since 10 is perfectly divisible by 5. 
+The __modulo__ operation, commonly denoted as __mod__ or `%`, calculates the remainder of the division of one number by another. For example, in the expression 7 mod 3, the result is 1, because when 7 is divided by 3, it leaves a remainder of 1. Similarly, 10 mod 5 results in 0 since 10 is perfectly divisible by 5.  
 
 A __modulo counter__ is a specialized digital counter that counts in a cyclic manner, resetting its count to zero after reaching a predefined maximum value, known as the __modulus__. This behavior is fundamental in various digital applications, where it is often necessary to cycle through a limited set of values. For instance, a modulo-10 counter counts from 0 to 9 before rolling over back to 0. The primary utility of such counters is to manage repetitive counting sequences, which can be crucial in applications like timers, clocks, and digital event counters. Modulo counters enable efficient resource usage, as they only require the bits necessary to represent the desired counting range. This compact design is particularly beneficial in digital circuits where space and power efficiency are critical. 
 
