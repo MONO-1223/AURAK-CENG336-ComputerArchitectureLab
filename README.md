@@ -22,7 +22,6 @@ In VHDL, you can mix multiple modeling techniques within the same code. Combinin
 In VHDL, the <= symbol is used as the signal assignment operator rather than a simple = because it represents a more complex behavior tailored for hardware design. Here’s why:
 1. Signal Propagation: In VHDL, <= indicates that a value will be assigned to a signal after a certain time delay, representing the natural propagation delay in real hardware. Unlike in software programming where = means immediate assignment, <= reflects that signals in hardware don't change instantly—they propagate and update at specific intervals depending on how the circuit is clocked or scheduled.
 
-
 2. Concurrency: VHDL is a concurrent language, meaning many assignments and operations happen simultaneously. The <= operator supports this by allowing updates to signals at the same time across the design. If VHDL used =, which typically implies sequential and immediate assignment in software languages like C++, it would conflict with this concurrent execution model.
 
 3 Distinction Between Signals and Variables: In VHDL, there is a difference between signals (which model connections in hardware) and variables (used for temporary storage in processes). Variables use := for immediate, sequential assignments, while signals use <= to handle hardware-like updates. The distinction is crucial in designs with processes or complex circuits.
@@ -60,6 +59,10 @@ There isn't a fully developed emulator that visually simulates the Altera DE2-11
 One such tool is Quartus Prime, combined with ModelSim for waveform simulation. While Quartus Prime doesn't generate a graphical view of the physical FPGA board, it does enable simulation of your Verilog or VHDL code. With this, you can observe how your logic design would function on the FPGA. This simulation includes testing the behavior of inputs and outputs, such as switches, LEDs, and buttons, in response to different signals. The process involves designing the logic, running the simulation in Quartus/ModelSim, and viewing the results through waveform viewers. Though this doesn't provide a "physical board" view, it offers insight into how the internal components of the FPGA (such as registers and I/Os) react to various inputs.
 
 The reason full FPGA emulators do not exist stems from the inherent flexibility of FPGAs. Unlike microcontrollers or standard processors, FPGAs are highly customizable, and each design fundamentally alters the chip's behavior. This makes it incredibly challenging to simulate the entire chip, with all its customizable gates and peripheral interactions, in a real-time visual format. As a result, the industry typically relies on logic simulators, like ModelSim, to analyze and test the behavior of the design rather than attempting to emulate the entire board visually.
+
+Note that a project can include both Verilog and VHDL code. In an FPGA design, it's possible to combine modules written in Verilog with those written in VHDL, as most FPGA design tools, like Quartus, support mixed-language projects. This allows developers to take advantage of the strengths or preferences associated with each language, reuse existing code, or integrate IP cores written in a different HDL.
+
+To manage mixed-language designs, you typically designate one language for the top-level module and use it to instantiate lower-level modules regardless of their language. 
 
 Here’s a rundown of some of the recurring Quartus Prime file extensions:
 1. __QDF - Quartus Design File:__ This file is often used for storing design logic in a form Quartus can read, typically intermediate.
