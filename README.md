@@ -14,6 +14,14 @@ In VHDL projects using Quartus, the name of the top-level entity must match the 
 
 In VHDL, you can mix multiple modeling techniques within the same code. Combining structural, dataflow, and behavioral modeling approaches allows for a more versatile design, enabling each part of the system to be modeled in the most suitable way. For example, structural modeling can organize different components hierarchically, while behavioral modeling within a process can handle complex control logic. Mixing techniques can optimize performance, readability, and resource usage in your FPGA design.
 
+In VHDL, the <= symbol is used as the signal assignment operator rather than a simple = because it represents a more complex behavior tailored for hardware design. Here’s why:
+1. Signal Propagation: In VHDL, <= indicates that a value will be assigned to a signal after a certain time delay, representing the natural propagation delay in real hardware. Unlike in software programming where = means immediate assignment, <= reflects that signals in hardware don't change instantly—they propagate and update at specific intervals depending on how the circuit is clocked or scheduled.
+
+
+2. Concurrency: VHDL is a concurrent language, meaning many assignments and operations happen simultaneously. The <= operator supports this by allowing updates to signals at the same time across the design. If VHDL used =, which typically implies sequential and immediate assignment in software languages like C++, it would conflict with this concurrent execution model.
+
+3 Distinction Between Signals and Variables: In VHDL, there is a difference between signals (which model connections in hardware) and variables (used for temporary storage in processes). Variables use := for immediate, sequential assignments, while signals use <= to handle hardware-like updates. The distinction is crucial in designs with processes or complex circuits.
+
 In terms of assignment operators, VHDL uses <= for concurrent assignment, which sets signals based on the logic described in the architecture and effectively models hardware behavior by updating signals when conditions are met. The symbol => serves a different role, specifying which bits of a vector or parts of a structure should receive values in component instantiations or signal mappings.  In other words, => is used in port mappings to specify connections between entity ports and signals within a component instance. This enables flexible mapping by associating specific signals with the entity’s inputs and outputs. Unlike procedural languages, VHDL doesn’t execute line-by-line instructions; it updates values across all concurrent processes at once. This simultaneous execution models real-time circuit behavior, where changes in inputs trigger immediate recalculations across interconnected components.
 
 The reason VHDL operates concurrently is that it is designed to simulate and synthesize real digital systems, which require all parts to function at the same time rather than in a stepwise manner. This concurrency allows VHDL to describe everything from combinational logic (like multiplexers or adders) to complex sequential logic (like state machines and counters). VHDL’s concurrent execution is what makes it optimal for simulating hardware systems, enabling the description of logic that mirrors real-world parallel operation, crucial for the design and testing of reliable digital hardware.
@@ -33,6 +41,14 @@ The entity is consistent across all VHDL modeling techniques. Whether using stru
 
 
 When designing with dataflow modeling, the number of lines in the code often reflects the number of outputs. Each output assignment has its own line to define how it’s derived based on input values. If there is only one output, then only one line is necessary, but if there are multiple outputs, multiple assignment statements will be present, one per output signal.
+
+RTL and TTL are both historical families of digital logic design. They define types of circuits used to implement logical functions in hardware:
+
+1. __RTL (Resistor-Transistor Logic):__ RTL was an early form of digital logic circuit design that used resistors and transistors to build logical gates. It was a precursor to TTL and is now mostly obsolete. RTL circuits were limited by slower switching speeds and higher power consumption compared to newer technologies.
+
+2. __TTL (Transistor-Transistor Logic):__ TTL circuits, which use only transistors (and not resistors for logic functions), became the standard for digital logic design in the 1970s and 1980s. TTL logic is faster and more power-efficient than RTL. These circuits were widely used in microprocessors and other early digital systems.
+
+In this lab, even though we’re using an FPGA with an Intel Altera DE2-115 board rather than physical TTL or RTL circuits, understanding these fundamentals is still relevant. FPGAs emulate these digital logic behaviors with lookup tables (LUTs), flip-flops, and configurable logic blocks. While TTL and RTL are physical implementations, FPGAs provide a reprogrammable way to simulate these types of logic designs and behaviors in digital circuits. This concept is important as it gives insight into the FPGA’s flexibility to model a wide range of digital logic families, including TTL.
 
 There isn't a fully developed emulator that visually simulates the Altera DE2-115 FPGA board, showing the physical chip and all its peripherals as they would respond to your uploaded code. However, there are tools available that offer partial emulation or simulation of specific aspects of the FPGA, which can assist in testing our designs virtually. Though these tools don't provide a complete visual representation of the board, they do offer ways to simulate its behavior in an interactive manner.
 
