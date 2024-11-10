@@ -412,7 +412,7 @@ In this lab, we successfully designed and implemented an 8-bit modulo-k counter 
 |3| Design Mod—N synchronous Counter. (2021, May 1). GeeksforGeeks. <br> https://www.geeksforgeeks.org/design-mod-n-synchronous-counter/  
 |4| How To Electronics (Director). (2019, July 14). Stopwatch Using 4 Digit 7 Segment Display & Arduino [Video recording]. <br> https://www.youtube.com/watch?v=XhlMOEGGkOc  
 |5| Logic Circuit official web site. (n.d.). Retrieved November 9, 2024, from <br> https://www.logiccircuit.org/index.html  
-|6| MArobotic (Director). (2022, February 1). How to make Stopwatch with 7Segment Display Module MAX7219 | how to Arduino control 6digit Stopwatch [Video recording]. 
+|6| MArobotic (Director). (2022, February 1). How to make Stopwatch with 7Segment Display Module MAX7219 [Video recording]. 
  <br> https://www.youtube.com/watch?v=dLodeF9Ds2U  
 |7| Neso Academy (Director). (2015a, March 12). Introduction to Counters | Important [Video recording]. <br> https://www.youtube.com/watch?v=iaIu5SYmWVM  
 |8| Neso Academy (Director). (2015b, March 30). Modulus of the Counter & Counting up to Particular Value [Video recording]. <br> https://www.youtube.com/watch?v=l20xHDJPHBM  
