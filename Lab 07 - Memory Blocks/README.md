@@ -236,7 +236,10 @@ END SYN;
   <img src="Photos/waveform.png" title="anchor" />
 </p>
 
-// anchor
+In the simulation waveform, we observe the clock, write, address, data in, and data out signals in action. At the `first clock rising edge`, the write signal is low, indicating a `read` operation at address `00000`. Since nothing has been written yet, the output reads `0000`. On the `second rising edge`, the write signal goes high, enabling a `write` operation at address `00000` with the input data `1010`, which is reflected immediately on data out.
+
+By the `fifth rising edge`, the write is still high, and the address changes to `11111`, where data in `0101` is written and displayed on data out simultaneously. In the `sixth and seventh rising edges`, the write signal is low, so the module performs `read` operations. It retrieves `1010` from address `00000` and `0101` from address `11111`, confirming that the saved data is correctly stored and accessed.
+
 
 </details>
 
