@@ -23,7 +23,156 @@ The `M9K` and `M10K` memory blocks offer notable features, including input and o
 <br>
 
 ```VHDL
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
 
+ENTITY part2 IS 
+PORT ( KEY : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+       SW  : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
+       HEX5, HEX4, HEX2, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6);
+       LEDR : OUT STD_LOGIC_VECTOR(9 DOWNTO 0) );
+END part2;
+
+ARCHITECTURE Behavior OF part2 IS
+   COMPONENT ram32x4 
+      PORT ( address : IN  STD_LOGIC_VECTOR (4 DOWNTO 0);
+             clock   : IN  STD_LOGIC ;
+             data    : IN  STD_LOGIC_VECTOR (3 DOWNTO 0);
+             wren    : IN  STD_LOGIC  := '1';
+             q       : OUT STD_LOGIC_VECTOR (3 DOWNTO 0));
+   END COMPONENT;
+   COMPONENT hex7seg
+      PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
+             display : OUT STD_LOGIC_VECTOR(0 TO 6));
+   END COMPONENT;
+   SIGNAL Clock, Write : STD_LOGIC;
+   SIGNAL Address : STD_LOGIC_VECTOR(4 DOWNTO 0); 
+   SIGNAL DataIn, DataOut : STD_LOGIC_VECTOR(3 DOWNTO 0); 
+BEGIN
+   Clock <= KEY(0);
+   Write <= SW(9);
+   DataIn <= SW(3 DOWNTO 0);
+   Address <= SW(8 DOWNTO 4);
+
+   -- instantiate memory module
+   -- module ram32x4 (address, clock, data, wren, q)
+   U1: ram32x4 PORT MAP (Address, Clock, DataIn, Write, DataOut);
+
+   -- display the data input, data output, and address on the 7-segs
+   digit0: hex7seg PORT MAP (DataOut(3 DOWNTO 0), HEX0);
+   digit2: hex7seg PORT MAP (DataIn(3 DOWNTO 0), HEX2);
+   digit5: hex7seg PORT MAP ("000" & Address(4), HEX5);
+   digit4: hex7seg PORT MAP (Address(3 DOWNTO 0), HEX4);
+
+   LEDR(3 DOWNTO 0) <= DataIn;
+   LEDR(8 DOWNTO 4) <= Address;
+   LEDR(9) <= Write;
+END Behavior;
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+-- the B input blanks the display when B = 1
+ENTITY hex7seg IS
+   PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
+          display : OUT STD_LOGIC_VECTOR(0 TO 6));
+END hex7seg;
+
+ARCHITECTURE Behavior OF hex7seg IS
+BEGIN
+   --
+   --       0  
+   --      ---  
+   --     |   |
+   --    5|   |1
+   --     | 6 |
+   --      ---  
+   --     |   |
+   --    4|   |2
+   --     |   |
+   --      ---  
+   --       3  
+   --
+   PROCESS (hex)
+   BEGIN
+      CASE (hex) IS
+         WHEN "0000" => display <= "0000001";
+         WHEN "0001" => display <= "1001111";
+         WHEN "0010" => display <= "0010010";
+         WHEN "0011" => display <= "0000110";
+         WHEN "0100" => display <= "1001100";
+         WHEN "0101" => display <= "0100100";
+         WHEN "0110" => display <= "1100000";
+         WHEN "0111" => display <= "0001111";
+         WHEN "1000" => display <= "0000000";
+         WHEN "1001" => display <= "0001100";
+         WHEN "1010" => display <= "0001000";
+         WHEN "1011" => display <= "1100000";
+         WHEN "1100" => display <= "0110001";
+         WHEN "1101" => display <= "1000010";
+         WHEN "1110" => display <= "0110000";
+         WHEN OTHERS => display <= "0111000";
+      END CASE;
+   END PROCESS;
+END Behavior;
+
+```
+
+```VHDL
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+LIBRARY altera_mf;
+USE altera_mf.altera_mf_components.all;
+
+ENTITY ram32x4 IS
+	PORT
+	(
+		address		: IN STD_LOGIC_VECTOR (4 DOWNTO 0);
+		clock		: IN STD_LOGIC  := '1';
+		data		: IN STD_LOGIC_VECTOR (3 DOWNTO 0);
+		wren		: IN STD_LOGIC ;
+		q		: OUT STD_LOGIC_VECTOR (3 DOWNTO 0)
+	);
+END ram32x4;
+
+
+ARCHITECTURE SYN OF ram32x4 IS
+
+	SIGNAL sub_wire0	: STD_LOGIC_VECTOR (3 DOWNTO 0);
+
+BEGIN
+	q    <= sub_wire0(3 DOWNTO 0);
+
+	altsyncram_component : altsyncram
+	GENERIC MAP (
+		clock_enable_input_a => "BYPASS",
+		clock_enable_output_a => "BYPASS",
+		intended_device_family => "Cyclone IV E",
+		lpm_hint => "ENABLE_RUNTIME_MOD=NO",
+		lpm_type => "altsyncram",
+		numwords_a => 32,
+		operation_mode => "SINGLE_PORT",
+		outdata_aclr_a => "NONE",
+		outdata_reg_a => "UNREGISTERED",
+		power_up_uninitialized => "FALSE",
+		ram_block_type => "M9K",
+		read_during_write_mode_port_a => "NEW_DATA_NO_NBE_READ",
+		widthad_a => 5,
+		width_a => 4,
+		width_byteena_a => 1
+	)
+	PORT MAP (
+		address_a => address,
+		clock0 => clock,
+		data_a => data,
+		wren_a => wren,
+		q_a => sub_wire0
+	);
+
+
+
+END SYN;
 
 ```
 
