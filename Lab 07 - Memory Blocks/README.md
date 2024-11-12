@@ -16,7 +16,11 @@ The `M9K` and `M10K` memory blocks offer notable features, including input and o
 
 ## Procedure & Implementation
 
-// anchor
+In this lab, we will implement a memory circuit on an FPGA using a `DE-series` board. Our goal is to create a simple `32x4 RAM` module that interacts with the FPGA’s hardware features, such as `slide switches` and `seven segment displays`. We will develop a Quartus project and a VHDL file that instantiates the `ram32x4` module with connections to the DE-series board's input and output pins.
+
+Using the slide switches `SW` on the FPGA board, we will load data into specific memory locations. Switches `SW 0 to 3` will provide the 4-bit data input for the RAM, while switches `SW 4 to 8` will specify the 5-bit address to access specific memory locations. The Write operation is controlled by `SW 9`, and `KEY 0` is used as the `Clock` input for synchronous data loading.
+
+For visualization, the current address, data input, and data output values will be displayed on the board’s `seven-segment displays`. Specifically, `HEX 4 and 5` will show the address, `HEX 2` will display the data being loaded into the memory, and `HEX 0` will show the data read out from the memory. By testing this setup, we will confirm that data can be stored in and retrieved from various memory locations in the RAM module. This practical exercise helps to reinforce concepts of memory implementation, data storage, and hardware interfacing on FPGAs.
 
 <details>
   <summary>VHDL Code</summary>
