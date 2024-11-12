@@ -243,9 +243,9 @@ By the `fifth rising edge`, the write is still high, and the address changes to 
 
 </details>
 
-## Conclusion
+This lab successfully demonstrated the design, implementation, and testing of a `32x4-bit` RAM module on an FPGA, with practical control and display elements such as switches and seven-segment displays. By interfacing the RAM with the `DE-series` board's hardware features, we explored how FPGA memory resources, specifically `M9K` or `M10K` blocks, support configurable memory structures.
 
-// anchor
+Through both simulation and hands-on testing, we confirmed that data could be written to and read from specified memory addresses, validating the module's functionality and timing. The simulation waveform provided a clear visualization of memory operations, highlighting how the write and read functions performed as expected. This exercise reinforced important concepts in FPGA-based memory design, including clock synchronization, signal routing, and hardware interfacing. Overall, the lab provided a practical understanding of memory management on reconfigurable hardware, which is essential for future applications in digital system design.
 
 ## Resources
 |3| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.   
