@@ -1,6 +1,6 @@
 # <p align="center">Memory Blocks</p>
 
-This lab explores the design and implementation of a `32x4`-bit Random Access Memory (RAM) module on an FPGA platform, utilizing the `DE-series` boards equipped with Intel FPGAs. The objective was to create a memory module that allows data storage and retrieval via slide switches and visual feedback through seven-segment displays. Using VHDL, we developed a custom RAM module, interfacing it with hardware features such as switches for data input and address selection, and a clock control for synchronous operation. The system allows users to input 4-bit data into specific memory locations and display the corresponding address and data values on the FPGA’s 7 segment displays. Simulation and practical results demonstrated the module's ability to store and read data effectively, reinforcing concepts of memory implementation, hardware interfacing, and FPGA-based system design.
+This lab focuses on designing a `32x4-bit RAM` module on an FPGA using `DE-series` boards. Using VHDL, we interfaced the RAM with slide switches for data input, address selection, and clock control. The system stores and retrieves data, displaying address and data values on seven-segment displays. Both simulation and practical results confirmed the successful operation of the memory module, demonstrating FPGA-based memory implementation and hardware interfacing.
 
 ---
 
