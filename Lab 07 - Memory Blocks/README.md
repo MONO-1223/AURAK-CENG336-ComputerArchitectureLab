@@ -25,14 +25,44 @@
 <details>
   <summary>Practical Results</summary>
 	
-<br>
+<be>
 
-<p align="center">
-  <img src="Photos/part1fpga.gif" style="width: 496px; height: 320px; object-fit: cover;" title="Testing a 0 adder, a 1 adder, a 9 adder, and the reset button." />
-  <img src="Photos/part2fpga.gif" style="width: 496px; height: 320px; margin: 0 10px; object-fit: cover;" title="Testing a 0 adder, a 1 adder, a 1 subtractor, a 28 subtractor, and the reset button." />
+ <p align="center">	 
+  <img src="Photos/workaround-reset-case.jpg" title="0000 1000 = 08"/>
 </p>
 
+// anchor
 
+<p align="center">
+  <img src="Photos/writing-5-into-00address-in-memory.jpg" style="width: 49%; height: 300px;" title=""/> <img src="Photos/reading-from-00address-in-memory.jpg.jpg" style="width: 49%; height: 300px;" title="" /> 
+ </p>
+
+// anchor
+
+ <p align="center">
+  <img src="Photos/writing-8-into-01address-in-memory.jpg" style="width: 49%; height: 300px;" title=""/>  <img src="Photos/reading-from-01address-in-memory.jpg.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
+ </p>
+
+// anchor
+
+ <p align="center">
+  <img src="Photos/checking-a-memory-location-we-didnt-write-anything-to.jpg" style="width: 49%; height: 300px;" title="0000 0100 = 04"/> <img src="Photos/wroteandread-value-in11adress.jpg" style="width: 49%; height: 300px;" title="0000 0101 = 05" />
+<img src="Photos/overwriting-by-writing-a-new-value-into-same-address.jpg" style="width: 49%; height: 300px;" title="0000 0110 = 06"/>  <img src="Photos/confirming-the-overwrite-by-reading-from-address.jpg" style="width: 49%; height: 300px;" title="0000 0111 = 07" />
+ </p>
+
+// anchor
+  
+ <p align="center">
+<img src="Photos/reading-proofthat5issavedinthisaddressregardlessofthedatainnow.jpg" style="width: 49%; height: 300px;" title="0000 1000 = 08"/> <img src="Photos/reading-proofthat8issavedinthisaddressregardlessofthedatainnow.jpg" style="width: 49%; height: 300px;" title="0000 1001 = 09" />
+</p>
+
+// anchor
+
+ <p align="center">	 
+  <img src="Photos/workaround-reset-case.jpg" title="0000 1000 = 08"/>
+</p>
+
+// anchor
 	
 </details>
 
@@ -42,8 +72,10 @@
 <br>
 
 <p align="center">
-  <img src="Photos/part2waveform.png" title="Testing reset, 1 adder, then 1 subtractor." />
+  <img src="Photos/waveform.png" title="anchor" />
 </p>
+
+// anchor
 
 </details>
 
