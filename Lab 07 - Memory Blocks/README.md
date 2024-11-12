@@ -84,7 +84,8 @@
 // anchor
 
 ## Resources
-|3| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.    
+|3| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.   
+// anchor
 
 <br>
 
