@@ -330,6 +330,22 @@ The reference simulator takes the following command-line arguments: `./csim-ref 
 
 <br>
 
+<p align="center">
+  <img src="Photos/clean-build-envr-then-compile-and-build.png" style="width: 49%; height: 300px;" title="make command"/> <img src="Photos/testing-csim-short-and-verbose.png" style="width: 49%; height: 300px;" title="Testing csim" /> 
+</p>
+
+// anchor
+
+<br>
+
+<p align="center">
+  <img src="Photos/evaluating-partA.png" title="Running the cache simulator using different cache parameters and traces" />
+</p>
+
+// anchor
+
+<br>
+
 ### Questions
 
 1. __What is the command you used to install `make` command?__
