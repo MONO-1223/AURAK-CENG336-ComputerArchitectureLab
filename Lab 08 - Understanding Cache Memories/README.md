@@ -1150,6 +1150,9 @@ int main(int argc, char* argv[])
 
 // anchor 
 
+
+When evaluating a transpose function on a direct-mapped cache, conflict misses can significantly hinder performance, especially when accessing data along the diagonal of a matrix. These misses occur when multiple data elements map to the same cache line, causing frequent evictions. To mitigate this, it’s essential to consider access patterns that reduce the likelihood of conflict misses. 
+
 Cache performance can be enhanced through several optimization techniques. Blocking (tiling) involves dividing large datasets, like matrices, into smaller blocks that fit within the cache, ensuring efficient access patterns and reducing cache misses. Loop optimization reorders algorithmic loops to improve spatial and temporal locality, aligning memory access patterns with cache structures. In some systems, software-controlled caches allow developers to explicitly manage cache contents using specialized instructions or APIs, giving greater control over data placement and access.
 
 
