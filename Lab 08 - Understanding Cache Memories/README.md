@@ -14,7 +14,7 @@ Contrary to common misconceptions, tools like WinRAR and 7-Zip are capable of ha
 
 
 
-## Part 1: Cache Memory Simulator in C
+## Part 1: Cache Memory Simulator
 
 // anchor
 
@@ -1156,16 +1156,16 @@ gantt
     todayMarker off
     axisFormat %a-%Y-%m-%d
     section Preparation         
-        Nour Mostafa : active, 2024-10-22 00:00, 01h
-        Mohamed Abouissa : 2024-10-22 00:00, 01h
-    section Quartus         
-        Nour Mostafa : active, 2024-10-23 00:00, 1d
-    section ModelSim       
-        Nour Mostafa : active,2024-10-23 00:00, 1d
+        Nour Mostafa : active, 2024-11-12 00:00, 01h
+        Mohamed Abouissa : 2024-11-12 00:00, 01h
+    section Linux Ubuntu         
+        Mohamed Abouissa : 2024-11-13 00:00, 1d
+    section Linux Mint       
+        Nour Mostafa : active,2024-11-13 00:00, 1d
     section Results       
-        Nour Mostafa : active,2024-10-23 00:00, 1d
+        Nour Mostafa : active,2024-11-17 00:00, 1d
     section Report
-        Mohamed Abouissa : 2024-10-25 00:00, 4d
+        Mohamed Abouissa : 2024-11-19 00:00, 1d
 ```
 
 We extend our sincere appreciation to Eng. Umar Adeel for his insightful feedback which has significantly contributed to the successful completion of this experiment.
