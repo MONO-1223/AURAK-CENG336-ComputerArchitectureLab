@@ -304,7 +304,21 @@ The reference simulator takes the following command-line arguments: `./csim-ref 
 - `-b <b>`: Number of block bits (B =2b is the block size) 
 - `-t <tracefile>`: Name of the valgrind trace to replay 
 
-// anchor results and discussions
+<br>
+
+<p align="center">
+  <img src="Photos/virtualbox.png" style="width: 49%; height: 300px;" title="VirtualBox Software"/> <img src="Photos/system-specs.png" style="width: 49%; height: 300px;" title="Virtual Computer System Specifications" /> 
+</p>
+
+// anchor
+
+<p align="center">
+  <img src="Photos/command-to-extract-tar-contents-on-linux.png" style="width: 49%; height: 300px;" title="Extracting the .tar file through the command line"/> <img src="Photos/inside-the-created-directory.png" style="width: 49%; height: 300px;" title="Examining the created folder's contents after the extraction" /> 
+</p>
+
+// anchor
+
+### Questions
 
 1. __What is the command you used to install `make` command?__
 2. __What is the command you used to install `valgrind` simulator?__
