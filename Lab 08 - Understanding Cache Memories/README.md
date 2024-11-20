@@ -12,7 +12,11 @@ __Cache__ is a small, high-speed memory located either within the processor or c
 
 ## Part 1: Cache Memory Simulator
 
-// anchor
+Create a program that accepts three command-line arguments: s, E, and b. It takes a Valgrind memory trace file as input, simulates the hit, miss, and eviction behavior of a cache memory on this trace, and outputs the total number of hits, misses, and evictions.
+
+Note that command-line arguments are parameters passed to a program at the time you run it in the terminal or command prompt. They are provided immediately after the program name when invoking it, and the program reads them directly without prompting the user interactively. If this code is run in any compiler, you won't be prompted to enter s, E, and b. This brings our attention to a slightly irrelevant but valuable piece of information: There are two common styles of program interaction, and they are often chosen based on the purpose and design goals of the software.
+1. __Interactive Input Style__: The program prompts the user interactively during execution to enter the required inputs. In other words, when you run this program, it will pause execution and prompt you to type in the values. The advantages of this are that it's easy for beginners to understand and use and it's user-friendly for small-scale or one-off programs. The disadvantages are that it's not ideal for automation and it makes testing and debugging harder because the program relies on live user input.
+2. __Command-Line Argument Style__: The program takes input directly from the command line when it is executed, without prompting the user interactively. The advantage of that is that it's perfect for automation and scripting, easier to test, as inputs can be predefined in scripts or commands, and more flexible for large-scale or repeatable tasks. The disadvantage is that it can be less intuitive for beginners as it requires the user to be well-informed about how the program operates and what it needs from them without being prompted and to remember the syntax of passing different types of arguments.
 
 <details>
   <summary>C Code</summary>
