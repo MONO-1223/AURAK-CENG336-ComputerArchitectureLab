@@ -1183,6 +1183,21 @@ int main(int argc, char* argv[])
   <summary>Analysis of Results</summary>
 	<br>
 
+<p align="center">
+  <img src="Photos/evaluating-partB1.png" style="width: 32%; height: 205px;" title="Running the code with 32 x 32"/> 
+  <img src="Photos/evaluating-partB2.png" style="width: 32%; height: 205px;" title="Running the code with 64 x 64"/>
+  <img src="Photos/evaluating-partB3.png" style="width: 32%; height: 205px;" title="Running the code with 61 x 67" />
+</p>
+
+// anchor
+
+<br>
+
+<p align="center">
+  <img src="Photos/example-debugging-function0.png" style="width: 49%; height: 300px;" title=""/> <img src="Photos/example-debugging-function0continued.png" style="width: 49%; height: 300px;" title="" /> 
+</p>
+
+// anchor
 
 <br>
 
