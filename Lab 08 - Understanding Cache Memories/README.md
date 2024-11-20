@@ -312,11 +312,23 @@ The reference simulator takes the following command-line arguments: `./csim-ref 
 
 // anchor
 
+<br>
+
 <p align="center">
   <img src="Photos/command-to-extract-tar-contents-on-linux.png" style="width: 49%; height: 300px;" title="Extracting the .tar file through the command line"/> <img src="Photos/inside-the-created-directory.png" style="width: 49%; height: 300px;" title="Examining the created folder's contents after the extraction" /> 
 </p>
 
 // anchor
+
+<br>
+
+<p align="center">
+  <img src="Photos/installing-valgrind-and-running.png" style="width: 49%; height: 300px;" title="Valgrind command"/> <img src="Photos/end-of-valgrind.png" style="width: 49%; height: 300px;" title="Valgrind command continued" /> 
+</p>
+
+// anchor
+
+<br>
 
 ### Questions
 
