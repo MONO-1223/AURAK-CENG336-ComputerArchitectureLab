@@ -1,3 +1,27 @@
+# <p align="center">Understanding Cache Memories</p>
+
+This lab aims to 
+
+---
+
+This lab is designed to run on a Linux 64-bit x86-64 architecture machine. Linux is widely adopted in academic and professional settings for its open-source nature, high customizability, and robust performance, especially when handling tasks requiring efficiency and stability.
+
+The `.tar` file format, short for Tape Archive, is a popular method for bundling multiple files and directories into a single file. Originating from Unix systems, `.tar` serves primarily as a container rather than a compressed file format. It simplifies the organization, distribution, and backup of data by grouping related files into a cohesive archive. While .tar files are often associated with compression, they are not inherently compressed. However, they are frequently used alongside compression algorithms like gzip or bzip2, resulting in hybrid file extensions such as `.tar.gz` or `.tar.bz2`. A *tarball* is simply a colloquial term for a .tar archive, often referring to both plain .tar files and their compressed counterparts. Tarballs are a staple in software distribution and deployment on Linux systems, making it easier to package and distribute multiple files. For instance, source code for software projects is often distributed as tarballs to ensure consistency across installations.
+
+Contrary to common misconceptions, tools like WinRAR and 7-Zip are capable of handling .tar files and tarballs. However, the issue might arise if the file is not properly associated with these tools or if the file type is misunderstood as requiring compression extraction. It's important to note: .tar files are not compressed, and extracting them does not reduce their size further. Improper handling of .tar files in some tools might lead to errors or data loss, especially when dealing with compressed tarballs, due to unsupported compression methods.
+
+// anchor
+
+
+
+## Part 1: Cache Memory Simulator in C
+
+// anchor
+
+<details>
+  <summary>C Code</summary>
+<br>
+
 ``` C
 /* 
  * csim.c - A cache simulator that can replay traces from Valgrind
@@ -268,18 +292,66 @@ int main(int argc, char* argv[])
 }
 ```
 
+</details>
+
+
+<details>
+  <summary>Analysis of Results</summary>
+	
+<br>
+
+The reference simulator takes the following command-line arguments: `./csim-ref [-hv] -s <s> -E <E> -b <b> -t <tracefile>`
+- `-h`: Optional help flag that prints usage info 
+- `-v`: Optional verbose flag that displays trace info 
+- `-s <s>`: Number of set index bits (S =2s is the number of sets) 
+- `-E <E>`: Associativity (number of lines per set) 
+- `-b <b>`: Number of block bits (B =2b is the block size) 
+- `-t <tracefile>`: Name of the valgrind trace to replay 
+
+// anchor results and discussions
+
+1. __What is the command you used to install `make` command?__
+2. __What is the command you used to install `valgrind` simulator?__
+3. __Why did we use `valgrind`?__
+4. __Capture the output of the following command and explain it `linux> valgrind --log-fd=1 --tool=lackey -v --trace-mem=yes ls -l`.__
+5. __Capture the output of the following command and explain it `linux> ./csim-ref -s 4 -E 1 -b 4 -t traces/yi.trace`.__
+6. __Calculate the S, E, and B.__
+
+
+<br>
+	
+</details>
+
+
+
+
+
+## Part 2: Optimizing a Small Matrix Transpose Function to Minimize Cache Misses
+
+// anchor
+
+<details>
+<summary>C Code</summary>
+<br>
+
+`trans.c`:
+This file contains multiple implementations of the matrix transpose function. The primary function is `transpose_submit`, which is the solution that will be graded. Additional transpose functions are provided for experimentation and comparison. The `registerFunctions` function registers all the transpose functions so they can be evaluated. The `is_transpose` function is a helper to check if the transpose was performed correctly.
+
+
+`test-trans.c`:
+This file is designed to test the correctness and performance of the transpose functions defined in `trans.c`. It uses external tools and libraries to generate memory traces and evaluate cache performance. The `eval_perf` function runs the registered transpose functions, validates their correctness, and measures cache misses. The main function sets up the testing environment, installs signal handlers, and calls `eval_perf` to perform the evaluation.
+
+<br>
 
 ``` C
 /* 
  * trans.c - Matrix transpose B = A^T
- *
  * Each transpose function has a prototype of the form:
- *
  * void trans(int M, int N, int A[N][M], int B[M][N]);
- *
  * Each function is evaluated by counting the number of misses 
  * on a 1KB direct mapped cache with a block size of 32 bytes.
- */ 
+ */
+
 #include <stdio.h>
 #include "cachelab.h"
 
@@ -443,8 +515,12 @@ void transpose_submit(int M, int N, int A[N][M], int B[M][N]){
  * a simple one below to help you get started. 
  */ 
 char trans_desc[] = "Simple row-wise scan transpose";
-void trans(int M, int N, int A[N][M], int B[M][N])
-{
+void trans(int M, int N, int A[N][M], int B[M][N]) 
+{ 
+// inefficient due to its access pattern resulting in relatively many cache misses 
+// This function iterates over the matrix A row by row. For each element A[i][j], it assigns the value to B[j][i].
+// This row-wise access pattern does not utilize the spatial locality of the cache effectively, leading to more cache misses compared to a blocked or tiled approach.
+
     int i, j, tmp;
     for (i = 0; i < N; i++){
         for (j = 0; j < M; j++){
@@ -792,6 +868,7 @@ int is_transpose(int M, int N, int A[N][M], int B[M][N]){
  *     student's transpose functions and records the results for their
  *     official submitted version as well.
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -1049,3 +1126,48 @@ int main(int argc, char* argv[])
     return 0;
 }
 ```
+
+
+</details>
+
+<details>
+  <summary>Analysis of Results</summary>
+	<br>
+
+
+<br>
+
+</details>
+
+## Conclusion
+
+// anchor 
+
+## Resources
+
+// anchor
+
+<br>
+
+```mermaid
+gantt
+    title Work Division Gantt Chart
+    tickInterval 1day
+    todayMarker off
+    axisFormat %a-%Y-%m-%d
+    section Preparation         
+        Nour Mostafa : active, 2024-10-22 00:00, 01h
+        Mohamed Abouissa : 2024-10-22 00:00, 01h
+    section Quartus         
+        Nour Mostafa : active, 2024-10-23 00:00, 1d
+    section ModelSim       
+        Nour Mostafa : active,2024-10-23 00:00, 1d
+    section Results       
+        Nour Mostafa : active,2024-10-23 00:00, 1d
+    section Report
+        Mohamed Abouissa : 2024-10-25 00:00, 4d
+```
+
+We extend our sincere appreciation to Eng. Umar Adeel for his insightful feedback which has significantly contributed to the successful completion of this experiment.
+
+This publication adheres to all regulatory laws and guidelines established by the American University of Ras Al Khaimah (AURAK) regarding the dissemination of academic materials.
