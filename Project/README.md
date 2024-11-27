@@ -19,11 +19,176 @@ The Altera DE2-115 board, which uses an Intel (formerly Altera) Cyclone IV FPGA,
 <br>
 
 ``` VHDL
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_unsigned.all;
 
+ENTITY part1 IS
+    PORT (
+        SW : IN STD_LOGIC_VECTOR(7 DOWNTO 0); -- Input 8 switches for numbers A, B
+        HEX5, HEX4, HEX2, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6); -- 7 segment display outputs
+        Overflow : OUT STD_LOGIC --; -- Overflow indicator
+		  -- A_out : OUT std_logic_vector(3 downto 0); -- Expose A for the simulation only, otherwise comment out due to the ucf file incompatibility
+        -- B_out : OUT std_logic_vector(3 downto 0); -- Expose B for the simulation only, otherwise comment out due to the ucf file incompatibility
+        -- P_out : OUT std_logic_vector(7 downto 0)  -- Expose P for the simulation only, otherwise comment out due to the ucf file incompatibility
+    );
+END part1;
+
+ARCHITECTURE Structure OF part1 IS
+    COMPONENT fa
+        PORT (
+            a, b, ci : IN STD_LOGIC; -- Inputs to the full adder
+            s, co : OUT STD_LOGIC -- Outputs of the full adder
+        );
+    END COMPONENT;
+
+    COMPONENT display7seg
+        PORT (
+            binary : IN STD_LOGIC_VECTOR(3 DOWNTO 0); -- 4-bit input for 7-segment display
+            hex : OUT STD_LOGIC_VECTOR(0 TO 6) -- 7-segment display output
+        );
+    END COMPONENT;
+
+    SIGNAL A, B : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL P : STD_LOGIC_VECTOR(7 DOWNTO 0);
+    SIGNAL carryb1 : STD_LOGIC_VECTOR(3 DOWNTO 1); -- carries for row B1
+    SIGNAL carryb2 : STD_LOGIC_VECTOR(3 DOWNTO 1); -- carries for row B2
+    SIGNAL carryb3 : STD_LOGIC_VECTOR(3 DOWNTO 1); -- carries for row B3
+    SIGNAL ParProB1 : STD_LOGIC_VECTOR(5 DOWNTO 2); -- partial products from row B1
+    SIGNAL ParProB2 : STD_LOGIC_VECTOR(6 DOWNTO 3); -- partial products from row B2
+
+    -- Intermediate signals for logical operations
+    SIGNAL A0B0_sig, A1B0_sig, A2B0_sig, A3B0_sig : STD_LOGIC;
+    SIGNAL A0B1_sig, A1B1_sig, A2B1_sig, A3B1_sig : STD_LOGIC;
+    SIGNAL A0B2_sig, A1B2_sig, A2B2_sig, A3B2_sig : STD_LOGIC;
+    SIGNAL A0B3_sig, A1B3_sig, A2B3_sig, A3B3_sig : STD_LOGIC;
+
+BEGIN
+    -- Assign input numbers A and B from SW switches
+    A <= SW(7 DOWNTO 4);
+    B <= SW(3 DOWNTO 0);
+	 
+	 -- A_out <= A; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
+	 -- B_out <= B; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
+	 -- P_out <= P; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
+
+    -- Intermediate signals for logical operations
+    A0B0_sig <= A(0) AND B(0);
+    A1B0_sig <= A(1) AND B(0);
+    A2B0_sig <= A(2) AND B(0);
+    A3B0_sig <= A(3) AND B(0);
+
+    A0B1_sig <= A(0) AND B(1);
+    A1B1_sig <= A(1) AND B(1);
+    A2B1_sig <= A(2) AND B(1);
+    A3B1_sig <= A(3) AND B(1);
+
+    A0B2_sig <= A(0) AND B(2);
+    A1B2_sig <= A(1) AND B(2);
+    A2B2_sig <= A(2) AND B(2);
+    A3B2_sig <= A(3) AND B(2);
+
+    A0B3_sig <= A(0) AND B(3);
+    A1B3_sig <= A(1) AND B(3);
+    A2B3_sig <= A(2) AND B(3);
+    A3B3_sig <= A(3) AND B(3);
+
+    P(0) <= A0B0_sig;
+
+    -- Instantiate full adders for the three rows of the multiplier
+    -- Row 1
+    a0b1: fa PORT MAP (A1B0_sig, A0B1_sig, '0', P(1), carryb1(1));
+    a1b1: fa PORT MAP (A2B0_sig, A1B1_sig, carryb1(1), ParProB1(2), carryb1(2));
+    a2b1: fa PORT MAP (A3B0_sig, A2B1_sig, carryb1(2), ParProB1(3), carryb1(3));
+    a3b1: fa PORT MAP ('0', A3B1_sig, carryb1(3), ParProB1(4), ParProB1(5));
+
+    -- Row 2
+    a0b2: fa PORT MAP (ParProB1(2), A0B2_sig, '0', P(2), carryb2(1));
+    a1b2: fa PORT MAP (ParProB1(3), A1B2_sig, carryb2(1), ParProB2(3), carryb2(2));
+    a2b2: fa PORT MAP (ParProB1(4), A2B2_sig, carryb2(2), ParProB2(4), carryb2(3));
+    a3b2: fa PORT MAP (ParProB1(5), A3B2_sig, carryb2(3), ParProB2(5), ParProB2(6));
+
+    -- Row 3
+    a0b3: fa PORT MAP (ParProB2(3), A0B3_sig, '0', P(3), carryb3(1));
+    a1b3: fa PORT MAP (ParProB2(4), A1B3_sig, carryb3(1), P(4), carryb3(2));
+    a2b3: fa PORT MAP (ParProB2(5), A2B3_sig, carryb3(2), P(5), carryb3(3));
+    a3b3: fa PORT MAP (ParProB2(6), A3B3_sig, carryb3(3), P(6), P(7));
+
+    -- Overflow detection
+    Overflow <= '1' WHEN (A(3) AND B(3)) = '1' ELSE '0';
+
+    -- Display A, B and P hexadecimal values through a 7-seg decoder
+    digit3: display7seg PORT MAP (A, HEX2);
+    digit2: display7seg PORT MAP (B, HEX0);
+    digit1: display7seg PORT MAP (P(7 DOWNTO 4), HEX5);
+    digit0: display7seg PORT MAP (P(3 DOWNTO 0), HEX4);
+END Structure;
+
+-- Full Adder entity
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY fa IS
+    PORT (
+        a, b, ci : IN STD_LOGIC; -- Inputs to the full adder
+        s, co : OUT STD_LOGIC -- Outputs of the full adder
+    );
+END fa;
+
+-- Architecture for the full adder entity
+ARCHITECTURE Structure OF fa IS
+    SIGNAL a_xor_b : STD_LOGIC;
+BEGIN
+    a_xor_b <= a XOR b;
+    s <= a_xor_b XOR ci;
+    co <= (NOT(a_xor_b) AND b) OR (a_xor_b AND ci);
+END Structure;
+
+-- 7-segment display entity
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY display7seg IS
+    PORT (
+        binary : IN STD_LOGIC_VECTOR(3 DOWNTO 0); -- 4-bit input for 7-segment display
+        hex : OUT STD_LOGIC_VECTOR(0 TO 6) -- 7-segment display output
+    );
+END display7seg;
+
+-- Architecture for the 7-segment display entity
+ARCHITECTURE Behavior OF display7seg IS
+BEGIN
+    PROCESS (binary)
+    BEGIN
+        CASE binary IS
+            WHEN "0000" => hex <= "0000001"; -- 0
+            WHEN "0001" => hex <= "1001111"; -- 1
+            WHEN "0010" => hex <= "0010010"; -- 2
+            WHEN "0011" => hex <= "0000110"; -- 3
+            WHEN "0100" => hex <= "1001100"; -- 4
+            WHEN "0101" => hex <= "0100100"; -- 5
+            WHEN "0110" => hex <= "0100000"; -- 6
+            WHEN "0111" => hex <= "0001111"; -- 7
+            WHEN "1000" => hex <= "0000000"; -- 8
+            WHEN "1001" => hex <= "0001100"; -- 9
+            WHEN "1010" => hex <= "0001000"; -- A
+            WHEN "1011" => hex <= "1100000"; -- B
+            WHEN "1100" => hex <= "0110001"; -- C
+            WHEN "1101" => hex <= "1000010"; -- D
+            WHEN "1110" => hex <= "0110000"; -- E
+            WHEN OTHERS => hex <= "0111000"; -- F
+        END CASE;
+    END PROCESS;
+END Behavior;
 ```
 
 <p align="center">
   <img src="Photos/altera-success1.png" style="width: 49%; height: 300px;" title="Successful Compilation"/> <img src="Photos/altera-success2.png" style="width: 49%; height: 300px;" title="Programmed the board successfully" /> 
+</p>
+
+<p align="center">
+  <img src="Photos/pins1.png" style="width: 49%; height: 300px;" title="0x0 = 0"/> <img src="Photos/pins2.png" style="width: 49%; height: 300px;" title="0x2 = 0" /> 
+  <img src="Photos/pins3.png" style="width: 49%; height: 300px;" title="1xb = b"/>  <img src="Photos/pins4.png" style="width: 49%; height: 300px;" title="5x8 = 28" />
 </p>
 
 <p align="center">
@@ -32,8 +197,7 @@ The Altera DE2-115 board, which uses an Intel (formerly Altera) Cyclone IV FPGA,
   <img src="Photos/altera5.jpg" style="width: 49%; height: 300px;" title="9xA = 5A"/> <img src="Photos/altera6.jpg" style="width: 49%; height: 300px;" title="ExF = d2" />
 </p>
 
-// anchor
-
+This VHDL code implements a 4-bit binary multiplier on an FPGA, taking two 4-bit inputs (A and B) via switches and displaying the results on 7-segment displays. The part1 entity defines the top-level module, with the inputs and outputs, including 7-segment displays for the inputs and product and an overflow indicator. The multiplication is performed using the partial products method: each bit of B is ANDed with all bits of A to produce intermediate signals (A0B0_sig to A3B3_sig). These partial products are summed using a hierarchical structure of full adders (fa components) to account for carries across rows, producing the final 8-bit product (P). Overflow is detected based on the most significant bits of A and B. The 7-segment display decoder (display7seg) converts 4-bit binary values (A, B, and portions of P) into signals that drive the HEX displays. A key feature is modularity, as the code separates concerns into distinct components for arithmetic (fa) and display logic (display7seg). The design ensures the multiplier operates efficiently by organizing the summation of partial products across rows using logical cascades of adders.
 
 </details>
 
@@ -127,8 +291,6 @@ end;
   <img src="Photos/quartus-rtl.png" style="width: 33%; height: 300px;" title="RTL Schematic" /> <img src="Photos/quartus-technology-postfitting.png" style="width: 33%; height: 300px;" title="Post-fitting Technology Schematic"/> <img src="Photos/quartus-technology-postmapping.png" style="width: 33%; height: 300px;" title="Post-mapping Technology Schematic"/>   
 </p>
 
-// anchor
-
 	
 </details>
 
@@ -143,12 +305,6 @@ The Nexys 4 DDR board uses a Xilinx Artix-7 FPGA, supported by Xilinx ISE and th
 <details>
 <summary>VHDL Implementation</summary>
 <br>
-
-The ArrayMultiplier entity serves as the main module, implementing a 4x4 binary multiplier using combinational logic and sequential control. It takes an 8-bit input SW, where the higher 4 bits represent one operand (A) and the lower 4 bits represent the other operand (B). The outputs include en to enable specific 7-segment displays, HEX to display values on a 7-segment display, and a clock signal (clk_100MHz) to manage the timing for display switching. The multiplication logic relies on generating partial products and summing them using full adders (fa components). The results, represented as an 8-bit product P, are displayed on 7-segment displays using the display7seg component. The fa component implements a full adder, a fundamental building block of digital circuits used for binary addition. It takes three inputs: two bits (a and b) and a carry-in (ci), and outputs the sum (s) and a carry-out (co). The adder uses basic XOR, AND, and OR gates to generate these outputs. This component is instantiated multiple times in the ArrayMultiplier module to sum the partial products generated during multiplication, creating a ripple-carry adder structure. The display7seg component is responsible for converting 4-bit binary inputs into the 7-segment display's active-low encoding. Each case in its process corresponds to a specific hexadecimal digit (0–F) and maps the binary input to its appropriate 7-segment representation. This component allows the results of the computation (operands and product) to be displayed meaningfully on 7-segment displays, enhancing user interaction. The multiplication process in ArrayMultiplier uses combinational logic to calculate partial products. Signals like A0B0_sig, A1B0_sig, etc., represent the bitwise AND of individual bits of A and B. These partial products are summed row by row using the instantiated full adders (fa). For instance, the first row calculates the least significant bits (P(0)) and carries for the next row (carryb1). The subsequent rows propagate these carries and sum higher-order partial products to compute the final 8-bit product. To handle display control, the design includes a multiplexing mechanism driven by a fast counter (counter) and a 2-bit signal (display_selector). The counter increments on each rising edge of the clock signal (clk_100MHz) and toggles the display_selector value once it reaches a threshold (99999), enabling slow toggling between displays. A PROCESS block monitors display_selector to select which digit to display (A, B, or parts of P) on the appropriate 7-segment display, enabled through en. The enable signals (en) manage which 7-segment display is active at any time. Based on the value of display_selector, one of four displays is enabled: A is shown on HEX0, B on HEX2, the lower 4 bits of the product (P(3 DOWNTO 0)) on HEX4, and the upper 4 bits of the product (P(7 DOWNTO 4)) on HEX5. This approach ensures efficient use of limited 7-segment displays to show all relevant values in a time-multiplexed manner. The interactions between components are seamless and modular. The ArrayMultiplier serves as the overarching system, coordinating the operation of all subcomponents. The full adders perform the arithmetic operations required for multiplication, while the display7seg components format and display the results. The counter and display_selector ensure the dynamic selection of values for the 7-segment displays, while en signals activate only one display at a time, preventing overlap. Collectively, the system combines arithmetic, logical, and display control to achieve a functional and interactive array multiplier circuit.
-
-The core of the 4x4 binary multiplier is a purely combinational circuit. The multiplication process involves generating partial products using bitwise AND operations and summing these using full adders (fa components). These full adders operate without memory or clock signals—they directly compute the outputs (sum and carry) based on the current inputs. Since the multiplication produces the result (P) purely from the instantaneous state of the inputs (A and B), it is entirely combinational.
-
-The display mechanism, on the other hand, relies on sequential logic because it uses a clock signal (clk_100MHz) to drive a counter and generate a time-dependent control signal (display_selector). This sequential control determines which value (A, B, or parts of P) is shown on the 7-segment displays at any given time. The counter increments on each clock edge, and the PROCESS block controlling the display selection reacts to this time-dependent signal, making the display mechanism sequential in nature.
 
 ``` VHDL
 library IEEE;
@@ -408,7 +564,11 @@ NET "HEX<6>" LOC=L18 | IOSTANDARD=LVCMOS33; #IO_L4P_T0_D04_14
   <img src="Photos/nexys5.jpg" style="width: 49%; height: 300px;" title="9xA = 5A"/> <img src="Photos/nexys6.jpg" style="width: 49%; height: 300px;" title="ExF = d2" />
 </p>
 
-// anchor
+The ArrayMultiplier entity serves as the main module, implementing a 4x4 binary multiplier using combinational logic and sequential control. It takes an 8-bit input SW, where the higher 4 bits represent one operand (A) and the lower 4 bits represent the other operand (B). The outputs include en to enable specific 7-segment displays, HEX to display values on a 7-segment display, and a clock signal (clk_100MHz) to manage the timing for display switching. The multiplication logic relies on generating partial products and summing them using full adders (fa components). The results, represented as an 8-bit product P, are displayed on 7-segment displays using the display7seg component. The fa component implements a full adder, a fundamental building block of digital circuits used for binary addition. It takes three inputs: two bits (a and b) and a carry-in (ci), and outputs the sum (s) and a carry-out (co). The adder uses basic XOR, AND, and OR gates to generate these outputs. This component is instantiated multiple times in the ArrayMultiplier module to sum the partial products generated during multiplication, creating a ripple-carry adder structure. The display7seg component is responsible for converting 4-bit binary inputs into the 7-segment display's active-low encoding. Each case in its process corresponds to a specific hexadecimal digit (0–F) and maps the binary input to its appropriate 7-segment representation. This component allows the results of the computation (operands and product) to be displayed meaningfully on 7-segment displays, enhancing user interaction. The multiplication process in ArrayMultiplier uses combinational logic to calculate partial products. Signals like A0B0_sig, A1B0_sig, etc., represent the bitwise AND of individual bits of A and B. These partial products are summed row by row using the instantiated full adders (fa). For instance, the first row calculates the least significant bits (P(0)) and carries for the next row (carryb1). The subsequent rows propagate these carries and sum higher-order partial products to compute the final 8-bit product. To handle display control, the design includes a multiplexing mechanism driven by a fast counter (counter) and a 2-bit signal (display_selector). The counter increments on each rising edge of the clock signal (clk_100MHz) and toggles the display_selector value once it reaches a threshold (99999), enabling slow toggling between displays. A PROCESS block monitors display_selector to select which digit to display (A, B, or parts of P) on the appropriate 7-segment display, enabled through en. The enable signals (en) manage which 7-segment display is active at any time. Based on the value of display_selector, one of four displays is enabled: A is shown on HEX0, B on HEX2, the lower 4 bits of the product (P(3 DOWNTO 0)) on HEX4, and the upper 4 bits of the product (P(7 DOWNTO 4)) on HEX5. This approach ensures efficient use of limited 7-segment displays to show all relevant values in a time-multiplexed manner. The interactions between components are seamless and modular. The ArrayMultiplier serves as the overarching system, coordinating the operation of all subcomponents. The full adders perform the arithmetic operations required for multiplication, while the display7seg components format and display the results. The counter and display_selector ensure the dynamic selection of values for the 7-segment displays, while en signals activate only one display at a time, preventing overlap. Collectively, the system combines arithmetic, logical, and display control to achieve a functional and interactive array multiplier circuit.
+
+The core of the 4x4 binary multiplier is a purely combinational circuit. The multiplication process involves generating partial products using bitwise AND operations and summing these using full adders (fa components). These full adders operate without memory or clock signals—they directly compute the outputs (sum and carry) based on the current inputs. Since the multiplication produces the result (P) purely from the instantaneous state of the inputs (A and B), it is entirely combinational.
+
+The display mechanism, on the other hand, relies on sequential logic because it uses a clock signal (clk_100MHz) to drive a counter and generate a time-dependent control signal (display_selector). This sequential control determines which value (A, B, or parts of P) is shown on the 7-segment displays at any given time. The counter increments on each clock edge, and the PROCESS block controlling the display selection reacts to this time-dependent signal, making the display mechanism sequential in nature.
 
 
 </details>
@@ -534,8 +694,6 @@ END;
   <img src="Photos/xilinx-technologyschematic.png" style="width: 49%; height: 300px;" title=" Expanded Technology Schematic"/> <img src="Photos/xilinx-technlogyschematicdetails.png" style="width: 49%; height: 300px;" title="Zoomed Technology Schematic" />
 </p>
 
-// anchor
-
 </details>
 
 ## Project Learning Outcomes
@@ -553,7 +711,7 @@ Designing and implementing a complex digital system is rarely a straightforward 
 2. Hexadecimal multiplication involves multiplying numbers represented in base-16, where each digit can range from 0 to 15 (0 to F). The process is similar to decimal multiplication but adapted for base-16 arithmetic. For example, when multiplying 5 by 8 in decimal, the calculation is straightforward (5 x 8 = 40). Now, let's consider the same numbers in hexadecimal (5 x 8 = 28). Though both multiplications give the same numerical value (40 in decimal), the representation differs between the two systems. The decimal result is 40, while the hexadecimal result is 28. This shows how the numeral systems (decimal and hexadecimal) express numbers differently. This [example](Photos/proj-requirements1.png) illustrates how the multiplication process can be represented in different numeral systems and implementations. The multiplication in decimal uses the standard columnar method. The multiplication process in binary uses a similar procedure. Another implementation shows the multiplication operation in a more systematic form, using individual bit multiplications and their corresponding positions in the result, indicating how the process might be handled in a hardware implementation, such as an array multiplier.
 3. Both the Nexys and Altera FPGA boards feature similar segment arrangements for their hexadecimal displays. However, there is a key difference in how the hardware for these displays is implemented. On the Nexys board, the same hardware is used to control the segments of all the hex displays, meaning that the same set of signals is shared across each display. In contrast, the Altera board has dedicated hardware for the segments of each of its hexadecimal displays, allowing for more independent control and potentially improved performance in handling multiple displays simultaneously. This difference in hardware design affects how each board manages the display outputs, with the Altera board offering more flexibility due to its dedicated resources for each display.
 
-4. The aim is to display distinct numbers on each of the four digits of the two 4-digit 7-segment displays on the Nexys4 DDR board. The challenge arises because only one set of control signals (CA, CB, CC, CD, CE, CF, CG) is available for all the segments, meaning all active displays show the same digit simultaneously unless a multiplexing strategy is implemented. To achieve this, we use a technique called time-division multiplexing. The approach involves sequencing through each digit individually, activating only one at a time while lighting up the appropriate segments for that digit. By switching between the digits at a speed fast enough for the human eye to perceive all digits as lit simultaneously (a phenomenon known as persistence of vision), we can create the illusion of displaying distinct numbers on all digits at once. The display sequence works as follows: for each active digit, the corresponding "ANx" signal is grounded (or driven high depending on the board configuration) while all other ANx signals are floated (disabled). This activates the selected digit, allowing the control signals (CA through CG) to light up the appropriate segments for the desired number. After a small fraction of a second, the next digit is selected, its segments are illuminated, and the process repeats for all digits in sequence. This rapid blinking needs to occur at a frequency of at least 1kHz to ensure the display appears steady to the human eye without noticeable flickering. For optimal results, frequencies of 5kHz to 10kHz can be used.
+4. The aim is to display distinct numbers on each of the four digits of the two 4-digit 7-segment displays on the Nexys4 DDR board. The challenge arises because [only one set of control signals (CA, CB, CC, CD, CE, CF, CG) is available for all the segments](Photos/hexessharingsegments.png), meaning all active displays show the same digit simultaneously unless a multiplexing strategy is implemented. To achieve this, we use a technique called time-division multiplexing. The approach involves sequencing through each digit individually, activating only one at a time while lighting up the appropriate segments for that digit. By switching between the digits at a speed fast enough for the human eye to perceive all digits as lit simultaneously (a phenomenon known as persistence of vision), we can create the illusion of displaying distinct numbers on all digits at once. The display sequence works as follows: for each active digit, the corresponding "ANx" signal is grounded (or driven high depending on the board configuration) while all other ANx signals are floated (disabled). This activates the selected digit, allowing the control signals (CA through CG) to light up the appropriate segments for the desired number. After a small fraction of a second, the next digit is selected, its segments are illuminated, and the process repeats for all digits in sequence. This rapid blinking needs to occur at a frequency of at least 1kHz to ensure the display appears steady to the human eye without noticeable flickering. For optimal results, frequencies of 5kHz to 10kHz can be used.
 5. Pipelining significantly enhances a processor's performance by increasing its instruction throughput—the number of instructions completed per unit of time. This is achieved by dividing the execution of instructions into multiple stages, such as fetch, decode, execute, memory access, and write-back, and processing different instructions concurrently in each stage. By allowing multiple instructions to overlap in execution, pipelining reduces the overall time required to complete a sequence of instructions compared to processing them sequentially. The impact of pipelining is most apparent in applications with a steady flow of independent instructions, as the pipeline can remain fully utilized. However, the actual performance gain depends on factors like the pipeline's depth, the complexity of the stages, and the ability to handle pipeline hazards. In modern processors, deeper pipelines enable higher clock speeds but introduce challenges such as increased branch misprediction penalties and higher power consumption. Despite these trade-offs, pipelining remains a foundational strategy in computer architecture, as it dramatically improves performance without requiring proportionally higher hardware resources. The effectiveness of pipelining is a key determinant of a processor's overall efficiency and computational power. Pipelining is conceptually relevant to the project because the design of a system like the array multiplier or the control logic for driving multiple 7-segment displays relies on principles that can be likened to pipelining.
    - In the project, to display numbers on multiple 7-segment displays, we cycle through the digits rapidly using a clock signal and control logic. This sequential activation of digits creates the illusion of all digits being displayed simultaneously. This is similar to the concept of pipelining, where overlapping tasks create an efficient flow, even though only one step is executed at each stage of the pipeline at a given moment.
    - The array multiplier was designed using modular components, such as full adders and binary-BCD converters, which could be processed in a structured sequence. While this isn't exactly pipelining, it reflects a similar approach to breaking tasks into manageable stages and optimizing how they are processed.
