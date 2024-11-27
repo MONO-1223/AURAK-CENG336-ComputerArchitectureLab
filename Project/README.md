@@ -4,13 +4,15 @@
 
 ---
 
-## Introduction
+The project involves creating a digital array multiplier using switches and 7-segment displays on an FPGA. Switches SW7–4 are used to represent the 4-bit binary number A, while switches SW3–0 represent the 4-bit binary number B. The hexadecimal values of A and B are displayed on the 7-segment displays HEX2 and HEX0, respectively. The 8-bit result of the multiplication, P = A × B, is shown on the 7-segment displays HEX5 and HEX4, providing a visual representation of the output. This design ensures the input and output are clearly indicated and easy to verify.
 
-// anchor
+A [digital array](Photos/proj-requirements2.png) multiplier is a combinational circuit designed to multiply two binary numbers. It works by generating partial products and summing them to produce the final result. The circuit mimics the principle of longhand multiplication, where each bit of one operand (the multiplier) is ANDed with all bits of the other operand (the multiplicand). The partial products are then aligned and added using adders, all within a structured hardware framework.  To handle the summation of partial products, an array multiplier typically relies on full adders as its building blocks. Full adders are used to sum the bits from different rows of the array, along with any carry generated during the addition. This design makes the array multiplier efficient for high-speed binary multiplication. The name *array multiplier* stems from the circuit's structure, which resembles an array of logic gates organized in rows and columns. Each row is dedicated to generating partial products for a specific bit of the multiplier, while the columns handle the addition of these partial products. The systematic arrangement of gates simplifies the design and facilitates parallel processing of the binary multiplication, making it both intuitive and effective for hardware implementations.
 
-## Project Instructions
+An array multiplier operates in parallel, generating all partial products simultaneously and summing them in a single step. In contrast, a serial multiplier works sequentially, processing one bit of the multiplier at a time, which requires multiple clock cycles to complete the operation. This difference makes the array multiplier significantly faster but also more hardware-intensive compared to the serial multiplier. The hardware requirements also vary between the two. An array multiplier uses more resources, including multiple adders and logic gates working concurrently. On the other hand, a serial multiplier is more resource-efficient but needs additional control logic to manage the sequential operations. Consequently, array multipliers are favored in high-performance applications where speed is crucial, while serial multipliers are better suited for low-power or resource-constrained environments.
 
-The project involves creating a digital multiplier using switches and 7-segment displays on an FPGA. Switches SW7–4 are used to represent the 4-bit binary number A, while switches SW3–0 represent the 4-bit binary number B. The hexadecimal values of A and B are displayed on the 7-segment displays HEX2 and HEX0, respectively. The 8-bit result of the multiplication, P = A × B, is shown on the 7-segment displays HEX5 and HEX4, providing a visual representation of the output. This design ensures the input and output are clearly indicated and easy to verify.
+Hexadecimal multiplication involves multiplying numbers represented in base-16, where each digit can range from 0 to 15 (0 to F). The process is similar to decimal multiplication but adapted for base-16 arithmetic. For example, when multiplying 5 by 8 in decimal, the calculation is straightforward (5 x 8 = 40). Now, let's consider the same numbers in hexadecimal (5 x 8 = 28). Though both multiplications give the same numerical value (40 in decimal), the representation differs between the two systems. The decimal result is 40, while the hexadecimal result is 28. This shows how the numeral systems (decimal and hexadecimal) express numbers differently. This [example](Photos/proj-requirements1.png) illustrates how the multiplication process can be represented in different numeral systems and implementations. The multiplication in decimal uses the standard columnar method. The multiplication process in binary uses a similar procedure. Another implementation shows the multiplication operation in a more systematic form, using individual bit multiplications and their corresponding positions in the result, indicating how the process might be handled in a hardware implementation, such as an array multiplier.
+
+
 
 ## Implementation on ALTERA DE2-115 Cyclone IV-E EP4CE115F29C7 FPGA Using Quartus Prime
 
@@ -23,6 +25,19 @@ The project involves creating a digital multiplier using switches and 7-segment 
 ``` VHDL
 
 ```
+
+<p align="center">
+  <img src="Photos/altera-success1.png" style="width: 49%; height: 300px;" title="Successful Compilation"/> <img src="Photos/altera-success2.png" style="width: 49%; height: 300px;" title="Programmed the board successfully" /> 
+</p>
+
+<p align="center">
+  <img src="Photos/altera1.jpg" style="width: 49%; height: 300px;" title="0x0 = 0"/> <img src="Photos/altera2.jpg" style="width: 49%; height: 300px;" title="0x2 = 0" /> 
+  <img src="Photos/altera3.jpg" style="width: 49%; height: 300px;" title="1xb = b"/>  <img src="Photos/altera4.jpg" style="width: 49%; height: 300px;" title="5x8 = 28" />
+  <img src="Photos/altera5.jpg" style="width: 49%; height: 300px;" title="9xA = 5A"/> <img src="Photos/altera6.jpg" style="width: 49%; height: 300px;" title="ExF = d2" />
+</p>
+
+// anchor
+
 
 </details>
 
@@ -107,6 +122,16 @@ begin
 
 end;
 ```
+
+<p align="center">
+  <img src="Photos/quartus-testbench.png" style="width: 49%; height: 300px;" title="Testbench RTL Simulation Result"/> <img src="Photos/quartus-waveform.png" style="width: 49%; height: 300px;" title="Waveform Simulation Result" /> 
+</p>
+
+<p align="center">
+  <img src="Photos/quartus-rtl.png" style="width: 33%; height: 300px;" title="RTL Schematic" /> <img src="Photos/quartus-technology-postfitting.png" style="width: 33%; height: 300px;" title="Post-fitting Technology Schematic"/> <img src="Photos/quartus-technology-postmapping.png" style="width: 33%; height: 300px;" title="Post-mapping Technology Schematic"/>   
+</p>
+
+// anchor
 
 	
 </details>
@@ -326,8 +351,6 @@ BEGIN
 END Behavior;
 ```
 
-<br>
-
 ``` ini
 ## This file is a general .ucf for the Nexys4 DDR Rev C board
 ## Rename the used signals according to the project
@@ -369,7 +392,17 @@ NET "HEX<5>" LOC=T11 | IOSTANDARD=LVCMOS33; #IO_L19P_T3_A10_D26_14
 NET "HEX<6>" LOC=L18 | IOSTANDARD=LVCMOS33; #IO_L4P_T0_D04_14
 ```
 
-<br>
+<p align="center">
+  <img src="Photos/nexys-success1.png" style="width: 49%; height: 300px;" title="Successful Compilation"/> <img src="Photos/nexys-success2.png" style="width: 49%; height: 300px;" title="Programmed the board successfully" /> 
+</p>
+
+<p align="center">
+  <img src="Photos/nexys1.jpg" style="width: 49%; height: 300px;" title="0x0 = 0"/> <img src="Photos/nexys2.jpg" style="width: 49%; height: 300px;" title="0x2 = 0" /> 
+  <img src="Photos/nexys3.jpg" style="width: 49%; height: 300px;" title="1xb = b"/>  <img src="Photos/nexys4.jpg" style="width: 49%; height: 300px;" title="5x8 = 28" />
+  <img src="Photos/nexys5.jpg" style="width: 49%; height: 300px;" title="9xA = 5A"/> <img src="Photos/nexys6.jpg" style="width: 49%; height: 300px;" title="ExF = d2" />
+</p>
+
+// anchor
 
 
 </details>
@@ -485,6 +518,15 @@ BEGIN
 
 END;
 ```
+
+<p align="center">
+  <img src="Photos/xilinx-testbenchsimulation.png" title="Testbench Simulation Result" />
+</p>
+<p align="center">
+  <img src="Photos/xilinx-rtlschematic.png" style="width: 49%; height: 300px;" title="Abstract RTL Schematic"/> <img src="Photos/xilinx-rtlschematic2.png" style="width: 49%; height: 300px;" title="Expanded RTL Schematic" /> 
+  <img src="Photos/xilinx-rtldetails1.png" style="width: 49%; height: 300px;" title="Expanded Full Adder Instance RTL Schematic"/>  <img src="Photos/xilinx-rtldetails2.png" style="width: 49%; height: 300px;" title="Expanded 7 Segment Display Instance RTL Schematic" />
+  <img src="Photos/xilinx-technologyschematic.png" style="width: 49%; height: 300px;" title=" Expanded Technology Schematic"/> <img src="Photos/xilinx-technlogyschematicdetails.png" style="width: 49%; height: 300px;" title="Zoomed Technology Schematic" />
+</p>
 
 
 </details>
