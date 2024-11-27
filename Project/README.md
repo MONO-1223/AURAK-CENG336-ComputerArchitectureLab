@@ -1,6 +1,6 @@
 # <p align="center">Array Multiplier</p>
 
-// anchor
+This project's objective is to design, implement, and simulate a digital array multiplier using eight switches and four 7-segment displays on 2 different FPGA boards and programming platforms. 
 
 ---
 
@@ -12,7 +12,7 @@ A [digital array](Photos/proj-requirements2.png) multiplier is a combinational c
 
 ## Implementation on ALTERA DE2-115 Cyclone IV-E EP4CE115F29C7 FPGA Using Quartus Prime
 
-// anchor
+The Altera DE2-115 board, which uses an Intel (formerly Altera) Cyclone IV FPGA, is traditionally supported by Quartus Prime, Altera's development software. Quartus Prime is a robust toolchain designed for FPGA design, including synthesis, simulation, and configuration. It offers a wide range of features for both beginners and advanced users, including the ability to design in both schematic and HDL (Hardware Description Language) formats, as well as integration with various hardware design tools. However, Quartus Prime's ecosystem can sometimes be overwhelming, especially for those new to FPGA design, and its compatibility with newer FPGA families may be more limited as time progresses. While the DE2-115 board is known for its reliability in academic environments and for prototyping, it may not be as well-suited for very high-performance applications, as it is a mid-range FPGA with certain hardware limitations. 
 
 <details>
   <summary>VHDL Implementation</summary>
@@ -138,7 +138,7 @@ end;
 
 ## Implementation on Artix 7 Nexys 4 DDR XC7A100T-CSG324 FPGA Using Xilinx ISE
 
-// anchor
+The Nexys 4 DDR board uses a Xilinx Artix-7 FPGA, supported by Xilinx ISE and the more modern Vivado suite. Vivado offers enhanced features, better support for high-speed designs, and improved simulation and debugging capabilities compared to ISE. The Artix-7 FPGA balances performance and power efficiency, making it suitable for various applications. Vivado's user-friendly interface and improved tools allow for faster development cycles and better performance optimization, though it has a learning curve and limited backward compatibility with older FPGA families. ISE, designed for older Windows versions, can be challenging to run on modern systems, causing compatibility issues and requiring Linux knowledge for configuration. Moreover, since ISE is no longer actively updated, there are limited resources available for resolving such issues, which may force users to rely on outdated tools and manuals. The Nexys 4 DDR board simplifies setup with a single USB cable, unlike the Altera DE2-115, which requires both a USB and battery cable and a USB Blaster driver. The Nexys 4 uses USB-JTAG for programming, while the DE2-115 uses a USB-Blaster for JTAG-based programming. Xilinx FPGAs are used in defense and military applications, subject to strict export control regulations (ITAR and EAR) due to their high performance and reconfigurability. These regulations ensure that advanced technology is used only in authorized applications, making it difficult for foreign entities to access certain Xilinx products due to licensing.
 
 <details>
 <summary>VHDL Implementation</summary>
@@ -533,6 +533,13 @@ END;
 
 ## Project Learning Outcomes
 
+
+The status of out project is complete as our design has been successfully implemented. All components and functionalities were thoroughly tested, and the results align perfectly with the project requirements. The system performs as intended, demonstrating accurate and reliable operation under various conditions. Any initial challenges or issues encountered during the design and implementation phases were resolved effectively, ensuring that the final output meets the specified objectives.
+
+In this project, several specific design skills and philosophies were employed, including bottom-up design and divide-and-conquer strategies, both of which played a crucial role in achieving the final successful implementation. The bottom-up design approach involves starting with the development and testing of smaller, low-level components before integrating them into larger, more complex systems. In this project, individual modules, such as the 7-segment decoder, binary-to-BCD converter, and digit multiplexer, were designed and thoroughly tested as standalone units. Moreover, on Nexys 4, we started by using LEDS to test the functinality, then we used only one hex then multiple hexes in sequence all showing the same number, then multiple hexes at the same time showing the same number, then, finally, multiple hexes at the same time showing different numbers. This modular approach ensured that each component functioned correctly in isolation, making it easier to identify and address potential issues early in the development process. Once the smaller components were verified, they were integrated step by step, forming the complete system. This philosophy allowed us to build a robust and reliable design incrementally, ensuring that the foundation of the system was strong before tackling higher levels of complexity. The divide-and-conquer strategy involves breaking the overall problem into smaller, more manageable sub-problems, solving each independently, and then combining their solutions. For this project, the task of displaying multiple digits on the 7-segment display was divided into distinct sub-tasks, such as controlling individual segments, multiplexing data to select the appropriate digit, and synchronizing the timing to achieve seamless visual fusion. By addressing these smaller challenges separately, the complexity of the overall system was significantly reduced. This approach not only made debugging and testing more straightforward but also facilitated a clearer understanding of the project’s requirements and constraints at each stage of development.
+
+Designing and implementing a complex digital system is rarely a straightforward process. It involves a combination of theoretical understanding, practical application, and iterative problem-solving. This project, which focused on creating a functional array multiplier and integrating it with FPGA hardware, required meticulous planning and attention to detail. While the initial design process laid a solid foundation, the path to achieving the final working system was not without its obstacles. From understanding the intricacies of hardware-software integration, parsing errors, synthesis errors, mapping errors, to debugging unexpected behaviors in the circuit, we encountered numerous errors and challenges along the way. These hurdles not only tested our technical skills but also highlighted the importance of persistence and adaptability in digital design. The following discussion explores the specific challenges we faced and how each was addressed to bring the project to fruition.
+
 1. An array multiplier operates in parallel, generating all partial products simultaneously and summing them in a single step. In contrast, a serial multiplier works sequentially, processing one bit of the multiplier at a time, which requires multiple clock cycles to complete the operation. This difference makes the array multiplier significantly faster but also more hardware-intensive compared to the serial multiplier. The hardware requirements also vary between the two. An array multiplier uses more resources, including multiple adders and logic gates working concurrently. On the other hand, a serial multiplier is more resource-efficient but needs additional control logic to manage the sequential operations. Consequently, array multipliers are favored in high-performance applications where speed is crucial, while serial multipliers are better suited for low-power or resource-constrained environments.
 
 2. Hexadecimal multiplication involves multiplying numbers represented in base-16, where each digit can range from 0 to 15 (0 to F). The process is similar to decimal multiplication but adapted for base-16 arithmetic. For example, when multiplying 5 by 8 in decimal, the calculation is straightforward (5 x 8 = 40). Now, let's consider the same numbers in hexadecimal (5 x 8 = 28). Though both multiplications give the same numerical value (40 in decimal), the representation differs between the two systems. The decimal result is 40, while the hexadecimal result is 28. This shows how the numeral systems (decimal and hexadecimal) express numbers differently. This [example](Photos/proj-requirements1.png) illustrates how the multiplication process can be represented in different numeral systems and implementations. The multiplication in decimal uses the standard columnar method. The multiplication process in binary uses a similar procedure. Another implementation shows the multiplication operation in a more systematic form, using individual bit multiplications and their corresponding positions in the result, indicating how the process might be handled in a hardware implementation, such as an array multiplier.
@@ -544,25 +551,123 @@ END;
    
 6. In VHDL, it is not allowed to perform a port map inside a case statement. This restriction arises because a case statement is used to execute one of several possible branches based on the value of a given expression, and the actions within each branch must be deterministic at compile-time. Port mapping, on the other hand, involves connecting signals or components dynamically, which is a structural operation that typically occurs outside of control flow constructs like case statements. To resolve this, you should place the port map outside the case statement, ensuring that the mapping is done in a way that is consistent with VHDL's synthesis rules and maintains clarity and functionality in the design.
 7. During the troubleshooting process of the design on Xilinx, the goal was to ensure that the output on the Nexys 4 DDR FPGA board matched the result we had previously achieved on the Altera FPGA board. This required a systematic approach to verify and adjust several aspects of the design. First, we reviewed the VHDL code and constraints to ensure that the correct pin assignments and timing were set up for the Xilinx board. Next, we carefully examined the mapping of the signals and outputs, making sure that any differences in the configuration between the two boards were accounted for. Additionally, we used simulation tools to check the functional correctness of the design before programming the FPGA. By comparing the waveform results and ensuring proper signal mapping, we were able to identify and resolve any discrepancies. Ultimately, this iterative process helped us align the behavior on the Nexys 4 DDR FPGA board with the expected results, ensuring consistency across both platforms.
+8. A User Constraints File (UCF) is a text file used in FPGA design workflows, specifically with Xilinx tools such as ISE, to define constraints for a design. These constraints primarily map the logical signals in a design to physical pins on the FPGA device, specifying how the design interacts with the external hardware. For example, a UCF file can assign a clock signal to a specific FPGA pin or configure input/output standards like voltage levels. By providing this essential information, the UCF file bridges the gap between the logical design and the physical implementation on the FPGA board, enabling correct operation and efficient resource utilization. Properly configuring the UCF file is critical to ensuring that the FPGA design functions as intended in real-world applications.
 
 
-8. The flickering issue on the display was caused by the multiplexing frequency being too low. To resolve this and make the display appear constant, we increased the clock divider’s output frequency. By generating a faster clock signal, we were able to raise the multiplexing frequency, effectively reducing the flickering and ensuring that the display remains stable and continuous.
+9. The flickering issue on the display was caused by the multiplexing frequency being too low. To resolve this and make the display appear constant, we increased the clock divider’s output frequency. By generating a faster clock signal, we were able to raise the multiplexing frequency, effectively reducing the flickering and ensuring that the display remains stable and continuous.
 
-The Nexys 4 DDR board uses a Xilinx Artix-7 FPGA, which is supported by Xilinx ISE (Integrated Software Environment) or the more modern Vivado suite. Xilinx ISE was historically the main development tool for Xilinx FPGAs but has largely been replaced by Vivado for newer devices, which offers enhanced features, better support for high-speed designs, and improved simulation and debugging capabilities. Xilinx's Artix-7 FPGA is known for its balance between performance and power efficiency, making it suitable for a wide range of applications, from academic projects to industry-level designs. Vivado's modern, user-friendly interface and improved synthesis and implementation tools allow for faster development cycles and better performance optimization compared to ISE. However, Vivado is not always backward-compatible with older FPGA families, and its learning curve can still present challenges for newcomers. On the other hand, Xilinx ISE can present significant hurdles for users, particularly when trying to run it on modern operating systems. ISE, which was originally designed to run on older versions of Windows, is only officially supported on Windows XP, Vista, some early Windows 7 versions, and Windows 10 (not always). This makes it difficult for users working with newer versions of Windows (e.g. Windows 11), as Xilinx ISE may fail to install or function correctly, causing frustration and wasting valuable time in troubleshooting compatibility issues. Additionally, although some users have had success running ISE on Linux, this is typically limited to specific distributions, and configuring ISE on Linux may require more advanced knowledge of the operating system, as well as additional dependencies. This can be a major obstacle for those without extensive Linux experience. Moreover, since ISE is no longer actively updated, there are limited resources available for resolving such issues, which may force users to rely on outdated tools and manuals. The Nexys 4 DDR board offers a more streamlined setup process compared to the Altera DE2-115 board. For the Nexys 4, you only need to connect a single USB cable from the computer to the board, eliminating the need for additional connections or components. In contrast, the Altera DE2-115 requires both a USB cable and a battery cable for proper operation. Additionally, the Altera board necessitates the installation of a USB Blaster driver to facilitate communication between the board and the development environment. On the other hand, the Nexys 4 board simplifies the process further, as it doesn't require any additional drivers to be installed. This makes the Nexys 4 more user-friendly and convenient, especially for those who seek a quicker and hassle-free development experience without dealing with additional hardware setup or driver installation. Nexys 4 DDR board (based on Xilinx FPGAs) typically uses USB for programming, and this USB connection involves a UART-based interface for communication with the computer. However, the primary method for configuring the FPGA on the Nexys 4 board is via USB and its built-in USB-JTAG functionality (not just UART). Altera DE2-115 board (based on Intel Altera FPGAs) uses a USB-Blaster cable that facilitates JTAG-based programming. The JTAG interface is the primary method for programming the FPGA on the DE2-115, but the USB-Blaster provides the connection and works with software like Quartus for programming and debugging. Xilinx, a major FPGA manufacturer, has been associated with various defense and military applications over the years. Due to the sensitive nature of these applications, certain Xilinx products became subject to strict export control regulations, specifically under the International Traffic in Arms Regulations (ITAR) and the Export Administration Regulations (EAR) enforced by the United States government. This is because FPGAs, including those from Xilinx, are often used in military technologies, aerospace systems, and other defense-related fields. Their high performance and reconfigurability make them ideal for processing complex algorithms, controlling sophisticated hardware, and enabling encryption and signal processing for secure communications. As a result of Xilinx's involvement in military and defense applications, the company has had to comply with stringent U.S. government regulations, which include heavy licensing requirements for the export of its products. These licensing requirements can make it difficult for foreign entities to access certain Xilinx technologies, particularly the higher-end models that are classified as "military-grade." The U.S. government's control over these products ensures that advanced technology does not fall into the wrong hands and that they are used only in authorized applications
-
-
-The Altera DE2-115 board, which uses an Intel (formerly Altera) Cyclone IV FPGA, is traditionally supported by Quartus Prime, Altera's development software. Quartus Prime is a robust toolchain designed for FPGA design, including synthesis, simulation, and configuration. It offers a wide range of features for both beginners and advanced users, including the ability to design in both schematic and HDL (Hardware Description Language) formats, as well as integration with various hardware design tools. However, Quartus Prime's ecosystem can sometimes be overwhelming, especially for those new to FPGA design, and its compatibility with newer FPGA families may be more limited as time progresses. While the DE2-115 board is known for its reliability in academic environments and for prototyping, it may not be as well-suited for very high-performance applications, as it is a mid-range FPGA with certain hardware limitations. The Altera DE2-115 board, which uses an Intel (formerly Altera) Cyclone IV FPGA, is traditionally supported by Quartus Prime, Altera's development software. Quartus Prime is a robust toolchain designed for FPGA design, including synthesis, simulation, and configuration. It offers a wide range of features for both beginners and advanced users, including the ability to design in both schematic and HDL (Hardware Description Language) formats, as well as integration with various hardware design tools. However, Quartus Prime's ecosystem can sometimes be overwhelming, especially for those new to FPGA design, and its compatibility with newer FPGA families may be more limited as time progresses. While the DE2-115 board is known for its reliability in academic environments and for prototyping, it may not be as well-suited for very high-performance applications, as it is a mid-range FPGA with certain hardware limitations.
-
+## Conclusion
 
 Implementing the same digital design project on two different platforms, using two different FPGA boards, offers several valuable benefits. By comparing the performance, ease of use, and compatibility of the two platforms, we gain a deeper understanding of the nuances between different FPGA architectures and development environments. Each platform, whether it's the Altera DE2-115 or the Nexys 4 DDR, has its own unique set of tools, libraries, and constraints, making it crucial to explore how these factors influence the design workflow. In doing so, we are exposed to the limitations and strengths of each FPGA family, which can help us optimize our designs for various applications. Additionally, by testing the same design on two platforms, we can ensure better portability and scalability of our work, enabling us to apply our designs to a wider range of projects and industries. The hands-on experience with different hardware and development tools simulates the flexibility and adaptability needed in industry, where FPGA designs often need to be deployed across different hardware configurations. It also enhances our ability to troubleshoot, optimize, and adapt to future challenges in FPGA development. 
 
-
-In conclusion, the implementation of the array multiplier in this lab project successfully ensured consistent results across both the FPGA boards and simulators, validating the design's accuracy and efficiency. Array multipliers are widely used in digital systems where fast multiplication is crucial, such as in processors, digital signal processing (DSP) units, and embedded systems. Their parallel processing capability allows them to perform multiplications much faster than sequential methods, making them integral to the performance of modern computing devices. The importance of array multipliers lies in their ability to enhance the speed and efficiency of arithmetic operations, which are fundamental to a variety of computational tasks, including scientific calculations, encryption, and real-time data processing. This project not only reinforced the theoretical concepts behind array multipliers but also provided valuable hands-on experience in translating those concepts into a working hardware implementation.
+In closing, the implementation of the array multiplier in this lab project successfully ensured consistent results across both the FPGA boards and simulators, validating the design's accuracy and efficiency. Array multipliers are widely used in digital systems where fast multiplication is crucial, such as in processors, digital signal processing (DSP) units, and embedded systems. Their parallel processing capability allows them to perform multiplications much faster than sequential methods, making them integral to the performance of modern computing devices. The importance of array multipliers lies in their ability to enhance the speed and efficiency of arithmetic operations, which are fundamental to a variety of computational tasks, including scientific calculations, encryption, and real-time data processing. This project not only reinforced the theoretical concepts behind array multipliers but also provided valuable hands-on experience in translating those concepts into a working hardware implementation.
 
 
 ## Resources
 
-// anchor
+| 1 | Abstract programmer (Director). (2024, May 10). How to create a shared folder in VirtualBox (Windows host and guest) [Video recording]. <br> https://www.youtube.com/watch?v=mXAI-kyW4lk  
+
+| 2 | AllisonCSULB (Director). (2012, April 5). Xilinx 12.x Basic Example [Video recording]. <br> https://www.youtube.com/watch?v=5FmGPENgw60  
+
+| 3 | Areibi, S. (n.d.). Creating a Project using Xilinx ISE 14.7: A Half Adder Circuit using Schematic Capture.  
+
+| 4 | AspiringCanadian. (2020, February 19). VirtualBox stuck on Windows Logo [Forum post]. Super User. <br> https://superuser.com/q/1208895  
+
+| 5 | awitizered. (2024, September 21). Xilinx alternatives [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/1fm3387/xilinx_alternatives/  
+
+| 6 | Basic Codes to display on LCD of Altera DE2 Board. (2017, January 12). EmbDev.Net. <br> https://embdev.net/topic/416415  
+
+| 7 | Basic VHDL course. (n.d.). YouTube. Retrieved November 11, 2024, from <br> http://www.youtube.com/playlist?list=PLIbRYKjjYOPkhpxnkQ0fwTXnmgsiCMcVV  
+
+| 8 | Beginners Guide to get started with Xilinx FPGA Programming. (n.d.). YouTube. Retrieved November 11, 2024, from <br> http://www.youtube.com/playlist?list=PLqOe1_kmWOx33G3gOzQSajSdrTtW9shBO  
+
+| 9 | Brilliant_Tankers. (2023, June 1). Newbie’s complaints about Xilinx software [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/13xpm56/newbies_complaints_about_xilinx_software/  
+
+| 10 | Chinmay Todankar (Director). (2018, April 18). How to upload VHDL programs on FPGA using xilinx [Video recording]. <br> https://www.youtube.com/watch?v=CJ4oxg3xobM  
+
+| 11 | Corrigall, E. (2017, October 29). Answer to “VirtualBox stuck on Windows Logo” [Online post]. Super User. <br> https://superuser.com/a/1263414  
+
+| 12 | DarthHudson. (2021, October 28). Xilinx ISE 14.7 on windows 11? [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/qhpbj0/xilinx_ise_147_on_windows_11/  
+
+| 13 | Diaz, M. D. (2019, April 5). How to use different 7-segment for different numbers in FPGA board? [Forum post]. Electrical Engineering Stack Exchange. <br> https://electronics.stackexchange.com/q/430992  
+
+| 14 | Digilent, Inc. (Director). (2014, December 30). Nexys4-DDR introduction [Video recording]. <br> https://www.youtube.com/watch?v=nk__TzBZ6_I  
+
+| 15 | Digilent, Inc. (Director). (2015, February 14). Nexys4 DDR Unboxing [Video recording]. <br> https://www.youtube.com/watch?v=Y-R4ScnmV6g  
+
+| 16 | Does anybody use Xilinx ISE on Linux? I need to get it going on my computer and I have some questions. (2014, February 5). [Reddit Post]. R/ECE. <br> www.reddit.com/r/ECE/comments/1x1dqb/does_anybody_use_xilinx_ise_on_linux_i_need_to/  
+
+| 17 | Downloads. (n.d.). AMD. Retrieved November 12, 2024, from <br> https://www.xilinx.com/support/download.html  
+
+| 18 | Dr.HariPrasad Naik Bhattu (Director). (2023, June 17). Xilinx Vivado to Design NOT, NAND, NOR Gates. [Video recording]. <br> https://www.youtube.com/watch?v=sA5YEIFzCOw  
+
+| 19 | Ekeeda (Director). (2022, April 5). Implementation of Full Adder Using VHDL Code and Considering data Flow Modeling | VHDL in EXTC [Video recording]. <br> https://www.youtube.com/watch?v=zQYfr5yuPE4  
+
+| 20 | Electro DeCODE (Director). (2020, November 16). How to Create First Xilinx FPGA Project in Vivado? | FPGA Programming | Verilog Tutorials | Nexys 4 [Video recording]. <br> https://www.youtube.com/watch?v=bw7umthnRYw  
+
+| 21 | electronicmmusic. (2023, January 19). Xilinx ISE 14.7 really needs OVB to run on WIN10? [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/10g7n7m/xilinx_ise_147_really_needs_ovb_to_run_on_win10/  
+
+| 22 | FPGA Design using VHDL Lectures. (n.d.). YouTube. Retrieved November 11, 2024, from <br> http://www.youtube.com/playlist?list=PLZv8x7uxq5XY-IQfQFb6mC6OXzz0h8ceF  
+
+| 23 | FPGAs for Beginners (Director). (2021, October 10). Setting up a Nexys board in Linux! [Video recording]. <br> https://www.youtube.com/watch?v=9gJdh8Rb1vI  
+
+| 24 | FPGAs For Dummies®, 2nd Intel® Special Edition. (n.d.). Intel. Retrieved November 27, 2024, from <br> https://www.intel.com/content/www/us/en/content-details/775363/fpgas-for-dummies-2nd-intel-special-edition.html  
+
+| 25 | Freecores/hd44780_driver. (2024). [VHDL]. FreeCores. <br> https://github.com/freecores/hd44780_driver (Original work published 2014)  
+
+| 26 | Fundamentals of VHDL with XIlinx Vivado Design Suite. (n.d.). YouTube. Retrieved November 11, 2024, from <br> http://www.youtube.com/playlist?list=PLrkc7rkl1Xyiem3OreD12DzmpQk4Zf5Df  
+
+| 27 | GEEKrar Guides (Director). (2022a, March 31). Install Linux Mint Cinnamon VirtualBox (2022) | Linux Mint 20.3 Una [Video recording]. <br> https://www.youtube.com/watch?v=j7XO1RXiOLs  
+
+| 28 | GEEKrar Guides (Director). (2022b, November 17). *NEW* Install VirtualBox 7 and Extension Pack [Video recording]. <br> https://www.youtube.com/watch?v=omQ6mLF2zYA  
+
+| 29 | gonya707. (2021, October 10). PSA: Xilinx ISE suite / PlanAhead don’t work on Windows 11 [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/q5avv0/psa_xilinx_ise_suite_planahead_dont_work_on/  
+
+| 30 | Gyancity Research Lab (Director). (2015, December 19). Xilinx Synthesis Technology [Video recording]. <br> https://www.youtube.com/watch?v=fgFYy9crXe8  
+
+| 31 | Haitham Ramadan (Director). (2023, October 30). تسطيب Xilinx ISE 14.7 كامل و حل جميع مشاكل الكراك و ال Simulation . [Video recording]. <br> https://www.youtube.com/watch?v=igM-13zj2AY  
+
+| 32 | HD44780U (LCD-II), (Dot Matrix Liquid Crystal Display Controller/Driver). (n.d.).  
+
+| 33 | HDL Design using Vivado. (n.d.). AMD. Retrieved November 11, 2024, from <br> https://www.amd.com/en/corporate/university-program/vivado/vivado-teaching-material/hdl-design.html  
+
+| 34 | Hosseini, S. (2024). SayidHosseini/DE2-115_VHDL_PS2-CLCD [VHDL]. <br> https://github.com/SayidHosseini/DE2-115_VHDL_PS2-CLCD (Original work published 2019)  
+
+| 35 | Inderjit Singh Dhanjal (Director). (2021, April 23). 4 x 4 Array Multiplier Design 1 [Video recording]. <br> https://www.youtube.com/watch?v=q0SzMHSyVy0  
+
+| 36 | Installing Vivado, Vitis, and Digilent Board Files—Digilent Reference. (n.d.). Retrieved November 12, 2024, from <br> https://digilent.com/reference/programmable-logic/guides/installing-vivado-and-vitis  
+
+| 37 | Kaj Norman Nielsen (Director). (2011, November 23). Xilinx ISE adding User Constraint File and creating a bit file for FPGA download [Video recording]. <br> https://www.youtube.com/watch?v=UjrBo_EyKXE  
+
+| 38 | Laurence Gregg (Director). (2018, September 9). How to Download and Install Xilinx ISE 14.7 Windows 10 [Video recording]. <br> https://www.youtube.com/watch?v=VMEIPCjqinA  
+
+| 39 | Lets Learn (Director). (2020, October 21). Xilinx ISE Design Suite 14.7 Simulation Tutorial || VHDL Code for  AND Gate [Video recording]. <br> https://www.youtube.com/watch?v=EUZi0U5ybVo  
+
+| 40 | Nexys 4 DDR (Legacy)—Digilent Reference. (n.d.). Retrieved November 12, 2024, from <br> https://digilent.com/reference/programmable-logic/nexys-4-ddr/start?srsltid=AfmBOorrrgWuW6loPRDIQL2l9Th14qIV3LdHCucI6GFy7943ukqQ1gm4  
+
+| 41 | Nexys 4 DDR Reference Manual—Digilent Reference. (n.d.). Retrieved November 23, 2024, from <br> https://digilent.com/reference/programmable-logic/nexys-4-ddr/reference-manual?srsltid=AfmBOoo-pOn9l6vr9RYnjdyk2GyUwgW49ivbSBmtLKRMu1B-I99QhAv9  
+
+| 42 | Nexys-4-DDR-Keyboard/src/hdl/Seg_7_Display.v at master · Digilent/Nexys-4-DDR-Keyboard. (n.d.). GitHub. Retrieved November 27, 2024, from <br> https://github.com/Digilent/Nexys-4-DDR-Keyboard/blob/master/src/hdl/Seg_7_Display.v  
+
+| 43 | Pefhany, S. “speff.” (2019, April 5). Answer to “How to use different 7-segment for different numbers in FPGA board?” [Online post]. Electrical Engineering Stack Exchange. <br> https://electronics.stackexchange.com/a/430996  
+
+| 44 | Problems HD44780—LCD - ALTERA DE2-115... (2012, June 11). <br> https://community.intel.com/t5/Programmable-Devices/Problems-HD44780-LCD-ALTERA-DE2-115/m-p/179786#M57818  
+
+| 45 | Russell. (2022, June 9). VHDL Tutorial—Introduction to VHDL for beginners. Nandland. <br> https://nandland.com/introduction-to-vhdl-for-beginners-with-code-examples/  
+
+| 46 | spicker23. (2019, January 30). Need help from experienced Xilinx users with choosing software [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/alae7d/need_help_from_experienced_xilinx_users_with/  
+
+| 47 | SumptuosusElephanti. (2023, January 29). ISE 14.7 on windows 10 [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/10ofkbi/ise_147_on_windows_10/  
+
+| 48 | Team, S. (2014, April 7). VHDL Code for Full Adder. <br> https://allaboutfpga.com/vhdl-code-for-full-adder/  
+
+| 49 | TinaDesignSuite (Director). (2021, July 14). Programming Xilinx FPGA boards in VHDL with TINA [Video recording]. <br> https://www.youtube.com/watch?v=_t7MyEKuD9A  
+
+| 50 | VHDL Digital Clock Main. (n.d.). [Paste Site]. Pastebin.Com. Retrieved November 27, 2024, from <br> https://pastebin.com/z5CGAaCB  
+
+| 51 | Vijayalaxmi Kumbhar (Director). (2023, October 16). 4-bit ALU using Xilinx ISE Design Suite 14.2 [Video recording]. <br> https://www.youtube.com/watch?v=4dpycOUjDoQ  
+
+| 52 | Xilinx Intro. (n.d.). Retrieved November 12, 2024, from <br> https://www.cs.ucr.edu/~windhs/lab1/xilinx/xilinx_intro.html  
 
 <br>
 
