@@ -28,7 +28,7 @@ ENTITY part1 IS
         SW : IN STD_LOGIC_VECTOR(7 DOWNTO 0); -- Input 8 switches for numbers A, B
         HEX5, HEX4, HEX2, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6); -- 7 segment display outputs
         Overflow : OUT STD_LOGIC --; -- Overflow indicator
-		  -- A_out : OUT std_logic_vector(3 downto 0); -- Expose A for the simulation only, otherwise comment out due to the ucf file incompatibility
+	-- A_out : OUT std_logic_vector(3 downto 0); -- Expose A for the simulation only, otherwise comment out due to the ucf file incompatibility
         -- B_out : OUT std_logic_vector(3 downto 0); -- Expose B for the simulation only, otherwise comment out due to the ucf file incompatibility
         -- P_out : OUT std_logic_vector(7 downto 0)  -- Expose P for the simulation only, otherwise comment out due to the ucf file incompatibility
     );
@@ -68,9 +68,9 @@ BEGIN
     A <= SW(7 DOWNTO 4);
     B <= SW(3 DOWNTO 0);
 	 
-	 -- A_out <= A; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
-	 -- B_out <= B; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
-	 -- P_out <= P; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
+    -- A_out <= A; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
+    -- B_out <= B; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
+    -- P_out <= P; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
 
     -- Intermediate signals for logical operations
     A0B0_sig <= A(0) AND B(0);
@@ -122,9 +122,10 @@ BEGIN
     digit2: display7seg PORT MAP (B, HEX0);
     digit1: display7seg PORT MAP (P(7 DOWNTO 4), HEX5);
     digit0: display7seg PORT MAP (P(3 DOWNTO 0), HEX4);
+
 END Structure;
 
--- Full Adder entity
+-- Full Adder entity -------------------------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
@@ -144,7 +145,7 @@ BEGIN
     co <= (NOT(a_xor_b) AND b) OR (a_xor_b AND ci);
 END Structure;
 
--- 7-segment display entity
+-- 7-segment display entity --------------------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
@@ -246,10 +247,10 @@ begin
                         HEX2     => HEX2,
                         HEX0     => HEX0,
                         Overflow => Overflow, 
-							A_out => A, -- Map A_out to A
-							B_out => B, -- Map B_out to B
-							P_out => P  -- Map P_out to P	
-							);
+			A_out => A, -- Map A_out to A
+			B_out => B, -- Map B_out to B
+			P_out => P  -- Map P_out to P	
+			);
 
   stimulus: process
   begin
@@ -314,13 +315,13 @@ use IEEE.STD_LOGIC_ARITH.ALL;
  
 entity ArrayMultiplier is -- 4X4 Array Multiplier
 	PORT (
-		  SW : In STD_LOGIC_VECTOR(7 DOWNTO 0);
-        en : OUT STD_LOGIC_VECTOR(7 DOWNTO 0); -- Input 8 switches for numbers A, B
-		  clk_100MHz : in STD_LOGIC; 
-		  HEX : OUT STD_LOGIC_VECTOR(0 TO 6)--; -- 7 segment display outputs
-		  -- A_out : OUT std_logic_vector(3 downto 0); -- Expose A for the simulation only, otherwise comment out due to the ucf file incompatibility
-        -- B_out : OUT std_logic_vector(3 downto 0); -- Expose B for the simulation only, otherwise comment out due to the ucf file incompatibility
-        -- P_out : OUT std_logic_vector(7 downto 0)  -- Expose P for the simulation only, otherwise comment out due to the ucf file incompatibility
+		SW : In STD_LOGIC_VECTOR(7 DOWNTO 0);
+		en : OUT STD_LOGIC_VECTOR(7 DOWNTO 0); -- Input 8 switches for numbers A, B
+		clk_100MHz : in STD_LOGIC; 
+		HEX : OUT STD_LOGIC_VECTOR(0 TO 6)--; -- 7 segment display outputs
+		-- A_out : OUT std_logic_vector(3 downto 0); -- Expose A for the simulation only, otherwise comment out due to the ucf file incompatibility
+        	-- B_out : OUT std_logic_vector(3 downto 0); -- Expose B for the simulation only, otherwise comment out due to the ucf file incompatibility
+        	-- P_out : OUT std_logic_vector(7 downto 0)  -- Expose P for the simulation only, otherwise comment out due to the ucf file incompatibility
 		);
 end ArrayMultiplier;
  
@@ -367,25 +368,25 @@ begin
 	 -- P_out <= P; -- for the simulation only, otherwise comment out due to the ucf file incompatibility
 	
 	 -- Array multiplier logic
-    A0B0_sig <= A(0) AND B(0);
-    A1B0_sig <= A(1) AND B(0);
-    A2B0_sig <= A(2) AND B(0);
-    A3B0_sig <= A(3) AND B(0);
-
-    A0B1_sig <= A(0) AND B(1);
-    A1B1_sig <= A(1) AND B(1);
-    A2B1_sig <= A(2) AND B(1);
-    A3B1_sig <= A(3) AND B(1);
-
-    A0B2_sig <= A(0) AND B(2);
-    A1B2_sig <= A(1) AND B(2);
-    A2B2_sig <= A(2) AND B(2);
-    A3B2_sig <= A(3) AND B(2);
-
-    A0B3_sig <= A(0) AND B(3);
-    A1B3_sig <= A(1) AND B(3);
-    A2B3_sig <= A(2) AND B(3);
-    A3B3_sig <= A(3) AND B(3);
+	    A0B0_sig <= A(0) AND B(0);
+	    A1B0_sig <= A(1) AND B(0);
+	    A2B0_sig <= A(2) AND B(0);
+	    A3B0_sig <= A(3) AND B(0);
+	
+	    A0B1_sig <= A(0) AND B(1);
+	    A1B1_sig <= A(1) AND B(1);
+	    A2B1_sig <= A(2) AND B(1);
+	    A3B1_sig <= A(3) AND B(1);
+	
+	    A0B2_sig <= A(0) AND B(2);
+	    A1B2_sig <= A(1) AND B(2);
+	    A2B2_sig <= A(2) AND B(2);
+	    A3B2_sig <= A(3) AND B(2);
+	
+	    A0B3_sig <= A(0) AND B(3);
+	    A1B3_sig <= A(1) AND B(3);
+	    A2B3_sig <= A(2) AND B(3);
+	    A3B3_sig <= A(3) AND B(3);
 	 
 	 P(0) <= A0B0_sig;
 
