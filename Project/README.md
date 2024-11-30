@@ -188,8 +188,8 @@ END Behavior;
 </p>
 
 <p align="center">
-  <img src="Photos/pins1.png" style="width: 49%; height: 300px;" title="0x0 = 0"/> <img src="Photos/pins2.png" style="width: 49%; height: 300px;" title="0x2 = 0" /> 
-  <img src="Photos/pins3.png" style="width: 49%; height: 300px;" title="1xb = b"/>  <img src="Photos/pins4.png" style="width: 49%; height: 300px;" title="5x8 = 28" />
+  <img src="Photos/pins1.png" style="width: 49%; height: 300px;" title="Pin Assignments"/> <img src="Photos/pins2.png" style="width: 49%; height: 300px;" title="Pin Assignments" /> 
+  <img src="Photos/pins3.png" style="width: 49%; height: 300px;" title="Pin Assignments"/>  <img src="Photos/pins4.png" style="width: 49%; height: 300px;" title="Pin Assignments" />
 </p>
 
 <p align="center">
