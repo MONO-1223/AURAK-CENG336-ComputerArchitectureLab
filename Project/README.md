@@ -784,14 +784,14 @@ In closing, the implementation of the array multiplier in this lab project succe
 |10| Chinmay Todankar (Director). (2018, April 18). How to upload VHDL programs on FPGA using xilinx [Video recording]. <br> https://www.youtube.com/watch?v=CJ4oxg3xobM  
 |11| Corrigall, E. (2017, October 29). Answer to “VirtualBox stuck on Windows Logo” [Online post]. Super User. <br> https://superuser.com/a/1263414  
 |12| DarthHudson. (2021, October 28). Xilinx ISE 14.7 on windows 11? [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/qhpbj0/xilinx_ise_147_on_windows_11/  
-|13| Diaz, M. D. (2019, April 5). How to use different 7-segment for different numbers in FPGA board? [Forum post]. Electrical Engineering Stack Exchange. <br> https://electronics.stackexchange.com/q/430992  
+|13| Diaz, M. D. (2019, April 5). How to use different 7-segment for different numbers in FPGA board? [Forum post]. EE Stack Exchange. <br> https://electronics.stackexchange.com/q/430992  
 |14| Digilent, Inc. (Director). (2014, December 30). Nexys4-DDR introduction [Video recording]. <br> https://www.youtube.com/watch?v=nk__TzBZ6_I  
 |15| Digilent, Inc. (Director). (2015, February 14). Nexys4 DDR Unboxing [Video recording]. <br> https://www.youtube.com/watch?v=Y-R4ScnmV6g  
-|16| Does anybody use Xilinx ISE on Linux? I need to get it going on my computer and I have some questions. (2014, February 5). [Reddit Post]. R/ECE. <br> www.reddit.com/r/ECE/comments/1x1dqb/does_anybody_use_xilinx_ise_on_linux_i_need_to/  
+|16| Does anybody use Xilinx ISE on Linux? I need to get it going on my computer and I have some questions. (2014, February 5). [Reddit Post]. <br> www.reddit.com/r/ECE/comments/1x1dqb/does_anybody_use_xilinx_ise_on_linux_i_need_to/  
 |17| Downloads. (n.d.). AMD. Retrieved November 12, 2024, from <br> https://www.xilinx.com/support/download.html  
 |18| Dr.HariPrasad Naik Bhattu (Director). (2023, June 17). Xilinx Vivado to Design NOT, NAND, NOR Gates. [Video recording]. <br> https://www.youtube.com/watch?v=sA5YEIFzCOw  
-|19| Ekeeda (Director). (2022, April 5). Implementation of Full Adder Using VHDL Code and Considering data Flow Modeling | VHDL in EXTC [Video recording]. <br> https://www.youtube.com/watch?v=zQYfr5yuPE4  
-|20| Electro DeCODE (Director). (2020, November 16). How to Create First Xilinx FPGA Project in Vivado? | FPGA Programming | Verilog Tutorials | Nexys 4 [Video recording]. <br> https://www.youtube.com/watch?v=bw7umthnRYw  
+|19| Ekeeda (Director). (2022, April 5). Implementation of Full Adder Using VHDL Code and Considering data Flow Modeling | VHDL in EXTC. <br> https://www.youtube.com/watch?v=zQYfr5yuPE4  
+|20| Electro DeCODE. (2020, November 16). How to Create First Xilinx FPGA Project in Vivado? | FPGA Programming | Verilog Tutorials | Nexys 4. <br> https://www.youtube.com/watch?v=bw7umthnRYw  
 |21| electronicmmusic. (2023, January 19). Xilinx ISE 14.7 really needs OVB to run on WIN10? [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/10g7n7m/xilinx_ise_147_really_needs_ovb_to_run_on_win10/  
 |22| FPGA Design using VHDL Lectures. (n.d.). YouTube. Retrieved November 11, 2024, from <br> http://www.youtube.com/playlist?list=PLZv8x7uxq5XY-IQfQFb6mC6OXzz0h8ceF  
 |23| FPGAs for Beginners (Director). (2021, October 10). Setting up a Nexys board in Linux! [Video recording]. <br> https://www.youtube.com/watch?v=9gJdh8Rb1vI  
@@ -808,13 +808,13 @@ In closing, the implementation of the array multiplier in this lab project succe
 |34| Hosseini, S. (2024). SayidHosseini/DE2-115_VHDL_PS2-CLCD [VHDL]. <br> https://github.com/SayidHosseini/DE2-115_VHDL_PS2-CLCD (Original work published 2019)  
 |35| Inderjit Singh Dhanjal (Director). (2021, April 23). 4 x 4 Array Multiplier Design 1 [Video recording]. <br> https://www.youtube.com/watch?v=q0SzMHSyVy0  
 |36| Installing Vivado, Vitis, and Digilent Board Files—Digilent Reference. (n.d.). Retrieved November 12, 2024, from <br> https://digilent.com/reference/programmable-logic/guides/installing-vivado-and-vitis  
-|37| Kaj Norman Nielsen (Director). (2011, November 23). Xilinx ISE adding User Constraint File and creating a bit file for FPGA download [Video recording]. <br> https://www.youtube.com/watch?v=UjrBo_EyKXE  
+|37| Kaj Norman Nielsen (Director). (2011, November 23). Xilinx ISE adding User Constraint File and creating a bit file for FPGA download. <br> https://www.youtube.com/watch?v=UjrBo_EyKXE  
 |38| Laurence Gregg (Director). (2018, September 9). How to Download and Install Xilinx ISE 14.7 Windows 10 [Video recording]. <br> https://www.youtube.com/watch?v=VMEIPCjqinA  
 |39| Lets Learn (Director). (2020, October 21). Xilinx ISE Design Suite 14.7 Simulation Tutorial || VHDL Code for  AND Gate [Video recording]. <br> https://www.youtube.com/watch?v=EUZi0U5ybVo  
 |40| Nexys 4 DDR (Legacy)—Digilent Reference. (n.d.). Retrieved November 12, 2024, from <br> https://digilent.com/reference/programmable-logic/nexys-4-ddr/start?srsltid=AfmBOorrrgWuW6loPRDIQL2l9Th14qIV3LdHCucI6GFy7943ukqQ1gm4  
 |41| Nexys 4 DDR Reference Manual—Digilent Reference. (n.d.). Retrieved November 23, 2024, from <br> https://digilent.com/reference/programmable-logic/nexys-4-ddr/reference-manual?srsltid=AfmBOoo-pOn9l6vr9RYnjdyk2GyUwgW49ivbSBmtLKRMu1B-I99QhAv9  
-|42| Nexys-4-DDR-Keyboard/src/hdl/Seg_7_Display.v at master · Digilent/Nexys-4-DDR-Keyboard. (n.d.). GitHub. Retrieved November 27, 2024, from <br> https://github.com/Digilent/Nexys-4-DDR-Keyboard/blob/master/src/hdl/Seg_7_Display.v  
-|43| Pefhany, S. “speff.” (2019, April 5). Answer to “How to use different 7-segment for different numbers in FPGA board?” [Online post]. Electrical Engineering Stack Exchange. <br> https://electronics.stackexchange.com/a/430996  
+|42| Nexys-4-DDR-Keyboard/src/hdl/Seg_7_Display.v at master (n.d.). GitHub. Retrieved November 27, 2024, from <br> https://github.com/Digilent/Nexys-4-DDR-Keyboard/blob/master/src/hdl/Seg_7_Display.v  
+|43| Pefhany, S. (2019, April 5). Answer to “How to use different 7-segment for different numbers in FPGA board?” EE Stack Exchange. <br> https://electronics.stackexchange.com/a/430996  
 |44| Problems HD44780—LCD - ALTERA DE2-115... (2012, June 11). <br> https://community.intel.com/t5/Programmable-Devices/Problems-HD44780-LCD-ALTERA-DE2-115/m-p/179786#M57818  
 |45| Russell. (2022, June 9). VHDL Tutorial—Introduction to VHDL for beginners. Nandland. <br> https://nandland.com/introduction-to-vhdl-for-beginners-with-code-examples/  
 |46| spicker23. (2019, January 30). Need help from experienced Xilinx users with choosing software [Reddit Post]. R/FPGA. <br> www.reddit.com/r/FPGA/comments/alae7d/need_help_from_experienced_xilinx_users_with/  
