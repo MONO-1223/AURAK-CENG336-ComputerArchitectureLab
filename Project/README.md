@@ -800,7 +800,7 @@ In closing, the implementation of the array multiplier in this lab project succe
 |22| FPGA Design using VHDL Lectures. (n.d.). YouTube. Retrieved November 11, 2024, from <br> http://www.youtube.com/playlist?list=PLZv8x7uxq5XY-IQfQFb6mC6OXzz0h8ceF  
 |23| FPGAs for Beginners (Director). (2021, October 10). Setting up a Nexys board in Linux! [Video recording]. <br> https://www.youtube.com/watch?v=9gJdh8Rb1vI  
 |24| FPGAs For Dummies®, 2nd Intel® Special Edition. (n.d.). Intel. Retrieved November 27, 2024, from <br> https://www.intel.com/content/www/us/en/content-details/775363/fpgas-for-dummies-2nd-intel-special-edition.html  
-|25| Freecores/hd44780_driver. (2024). [VHDL]. FreeCores. <br> https://github.com/freecores/hd44780_driver (Original work published 2014)  
+|25| Freecores/hd44780_driver. (2024). [VHDL]. FreeCores. <br> https://github.com/freecores/hd44780_driver  
 |26| Fundamentals of VHDL with XIlinx Vivado Design Suite. (n.d.). YouTube. Retrieved November 11, 2024, from <br> http://www.youtube.com/playlist?list=PLrkc7rkl1Xyiem3OreD12DzmpQk4Zf5Df  
 |27| GEEKrar Guides (Director). (2022a, March 31). Install Linux Mint Cinnamon VirtualBox (2022) | Linux Mint 20.3 Una [Video recording]. <br> https://www.youtube.com/watch?v=j7XO1RXiOLs  
 |28| GEEKrar Guides (Director). (2022b, November 17). *NEW* Install VirtualBox 7 and Extension Pack [Video recording]. <br> https://www.youtube.com/watch?v=omQ6mLF2zYA  
@@ -854,7 +854,7 @@ gantt
         Nour Mostafa : active,2024-11-20 00:00, 2d
         Mohamed Abouissa : 2024-11-22 00:00, 2d
     section Report
-        Nour Mostafa : active,2024-11-25 00:00, 2d
+        Nour Mostafa : active,2024-11-25 00:00, 3d
         Mohamed Abouissa : 2024-11-25 00:00, 2d
 ```
 
