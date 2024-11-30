@@ -292,6 +292,8 @@ end;
   <img src="Photos/quartus-rtl.png" style="width: 33%; height: 300px;" title="RTL Schematic" /> <img src="Photos/quartus-technology-postfitting.png" style="width: 33%; height: 300px;" title="Post-fitting Technology Schematic"/> <img src="Photos/quartus-technology-postmapping.png" style="width: 33%; height: 300px;" title="Post-mapping Technology Schematic"/>   
 </p>
 
+We can observe from the results above that the waveforms from the RTL simulation and from the Waveform simulation are in alignment, especially since we have supplied the same test cases to both in order to cross check and verify for any differences. The results in the simulations can be observed directly from the P bus as well as analyzed from the HEX 7-segment bus (keeping in mind that both the Altera and Nexys boards Hexes follow the same 7-segment [arrangement order](Photos/7segment-arrangement.png)). Notice that we only see a wave in the simulation when we are observing a single bit, unlike when it's a bus of bits where you can only observe the binary values of that bus.
+
 	
 </details>
 
@@ -713,6 +715,8 @@ END;
   <img src="Photos/xilinx-rtldetails1.png" style="width: 49%; height: 300px;" title="Expanded Full Adder Instance RTL Schematic"/>  <img src="Photos/xilinx-rtldetails2.png" style="width: 49%; height: 300px;" title="Expanded 7 Segment Display Instance RTL Schematic" />
   <img src="Photos/xilinx-technologyschematic.png" style="width: 49%; height: 300px;" title=" Expanded Technology Schematic"/> <img src="Photos/xilinx-technlogyschematicdetails.png" style="width: 49%; height: 300px;" title="Zoomed Technology Schematic" />
 </p>
+
+We have made sure to use the same input cases across all our tests in order to easily observe the alignment in the results. We can notice that the simulation waves above match the results obtained in Quartus Prime. For example, when `A = 0000` and `B = 0000` the result `P = 00000000`. Keep in mind that the hex segments cannot be anaylzed here like they could in the Quartus simulation because they don't accurately reflect the multiplexing they undergo to show different values using different segments on different hexes.
 
 </details>
 
