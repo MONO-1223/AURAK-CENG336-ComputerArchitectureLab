@@ -409,7 +409,15 @@ begin
     a1b3: fa PORT MAP (ParProB2(4), A1B3_sig, carryb3(1), P(4), carryb3(2));
     a2b3: fa PORT MAP (ParProB2(5), A2B3_sig, carryb3(2), P(5), carryb3(3));
     a3b3: fa PORT MAP (ParProB2(6), A3B3_sig, carryb3(3), P(6), P(7));
-	
+
+    -- While not a complete clock divider (it doesn't directly produce a new clock signal), this implementation achieves the
+    -- same effect by toggling display_selector at a slower rate. It takes a 100 MHz input clock (clk_100MHz) and uses a counter
+    -- to create a slower toggling signal. The counter increments on each rising edge of the clock, and when it reaches the value 99999,
+    -- it resets to zero and toggles the display_selector signal. In this case, the output signal toggles every 100,000 cycles of the 100 MHz
+    -- clock, resulting in a frequency of 500 Hz. (f_output = (f_input)/(2xcounter)). The process runs on the rising edge of the clk_100MHz signal,
+    -- which means it checks the condition and updates the signals 100 million times per second. The counter variable keeps track of how many clock
+    -- cycles have occurred. It increments by 1 with every rising edge of the clock. When the counter reaches 99999, it means 100,000 clock cycles
+    -- have passed. Once the counter reaches 99999 (1 ms has elapsed), it resets to 0. At the same time, the display_selector signal is updated (incremented). 
 	PROCESS (clk_100MHz)
     BEGIN
         IF rising_edge(clk_100MHz) THEN
