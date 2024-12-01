@@ -304,21 +304,11 @@ int main(int argc, char* argv[])
 	
 <br>
 
-The reference simulator takes the following command-line arguments: `./csim-ref [-hv] -s <s> -E <E> -b <b> -t <tracefile>`
-- `-h`: Optional help flag that prints usage info 
-- `-v`: Optional verbose flag that displays trace info 
-- `-s <s>`: Number of set index bits (S =2s is the number of sets) 
-- `-E <E>`: Associativity (number of lines per set) 
-- `-b <b>`: Number of block bits (B =2b is the block size) 
-- `-t <tracefile>`: Name of the valgrind trace to replay 
-
-<br>
-
 <p align="center">
   <img src="Photos/virtualbox.png" style="width: 49%; height: 300px;" title="VirtualBox Software"/> <img src="Photos/system-specs.png" style="width: 49%; height: 300px;" title="Virtual Computer System Specifications" /> 
 </p>
 
-// anchor
+The steps outlined above detail the process for launching the virtual machine used to conduct this lab's experiments. Additionally, we have included an image showcasing the system specifications for reference.
 
 <br>
 
@@ -326,7 +316,7 @@ The reference simulator takes the following command-line arguments: `./csim-ref 
   <img src="Photos/command-to-extract-tar-contents-on-linux.png" style="width: 49%; height: 300px;" title="Extracting the .tar file through the command line"/> <img src="Photos/inside-the-created-directory.png" style="width: 49%; height: 300px;" title="Examining the created folder's contents after the extraction" /> 
 </p>
 
-// anchor
+On the left, we demonstrate the process of extracting the .tar file. On the right, we explore the directory and subfiles it generated. The command `tar xvf` is used to extract files from a .tar archive in Linux and other Unix-like systems. The tar utility stands for "tape archive" and is commonly used to create and manipulate archive files. The flags `x`, `v`, and `f` modify its behavior. The `x` flag stands for "extract," indicating that you want to extract the contents of the archive. The `v` flag stands for "verbose," meaning the command will display a list of files as they are extracted, allowing the user to see the progress. The `f` flag specifies that the next argument is the name of the file to extract, which must immediately follow the f flag.
 
 <br>
 
@@ -334,7 +324,7 @@ The reference simulator takes the following command-line arguments: `./csim-ref 
   <img src="Photos/installing-valgrind-and-running.png" style="width: 49%; height: 300px;" title="Valgrind command"/> <img src="Photos/end-of-valgrind.png" style="width: 49%; height: 300px;" title="Valgrind command continued" /> 
 </p>
 
-// anchor
+The screenshots show a side-by-side view of the Linux terminal and the file manager. We captured the process of installing and using the Valgrind command, along with the results it generates. `sudo apt` is a command used in Linux-based systems, such as Ubuntu and Debian, for package management. The `sudo` part stands for "SuperUser Do," which grants administrative privileges to execute commands that require elevated permissions. `apt` stands for "Advanced Package Tool" and is the command-line interface used to manage software packages on Debian-based systems. Using `sudo apt`, you can perform various tasks like installing, removing, and updating software packages. As for `Valgrind`, it is a programming tool used primarily for memory debugging, memory leak detection, and profiling. It is most commonly associated with C and C++ programs, though it can be used for other languages as well. Valgrind helps developers identify issues such as memory leaks (where allocated memory is not properly freed), improper memory access, and memory corruption, which can lead to program crashes or unpredictable behavior. By running a program through Valgrind, it monitors memory usage and detects errors such as reading from or writing to memory locations that have already been freed or are uninitialized. The tool also provides detailed reports about where and when memory errors occur, making it easier to track down bugs. Additionally, Valgrind includes performance profiling tools that can help identify inefficient code sections by measuring memory usage and CPU time. As a result, it is an invaluable tool for ensuring the correctness and efficiency of software, especially in large and complex applications. The command `valgrind --log-fd=1 --tool=lackey -v --trace-mem=yes ls -l` is using Valgrind to monitor the behavior of the `ls -l` command. In this specific case, Valgrind is configured to run with the `lackey` tool, which is used for tracing memory accesses and logging them. The option `--log-fd=1` specifies that Valgrind should write its output to file descriptor 1 (standard output), while the `-v` flag enables verbose mode, providing detailed output. The `--trace-mem=yes` option tells Valgrind to track and report all memory accesses during the execution of the `ls -l` command, which lists directory contents with detailed information (like file size, permissions, and modification date).
 
 <br>
 
@@ -342,7 +332,7 @@ The reference simulator takes the following command-line arguments: `./csim-ref 
   <img src="Photos/clean-build-envr-then-compile-and-build.png" style="width: 49%; height: 300px;" title="make command"/> <img src="Photos/testing-csim-short-and-verbose.png" style="width: 49%; height: 300px;" title="Testing csim" /> 
 </p>
 
-// anchor
+The `make` and `make clean` commands are used in a directory containing a `Makefile` to manage and build a project. The `make` command builds the project according to the rules specified in the `Makefile`. It compiles and links the source files into an executable or binary by following the instructions defined in the file. `make` checks the timestamps of files and only recompiles the parts that are outdated, which makes the build process more efficient. On the other hand, the `make clean` command is used to remove files generated during the build process, such as object files and executables. This ensures that the build directory is free from compiled files, allowing for a clean build from scratch. It is often used to reset the build environment or resolve issues related to previous builds, and the specific files removed depend on the `clean` target in the `Makefile`. The reference simulator accepts several command-line arguments `./csim-ref [-hv] -s <s> -E <E> -b <b> -t <tracefile>` to configure its behavior. The `-h` flag is optional and provides usage information when invoked. The `-v` flag, also optional, enables verbose output, displaying trace information. The `-s <s>` argument specifies the number of set index bits, where S = $2^s$ represents the number of sets in the cache. The `-E <E>` flag defines the associativity, which is the number of lines per set in the cache. The `-b <b>` argument sets the number of block bits, where B = $2^b$ denotes the block size in the cache. Finally, the `-t <tracefile>` flag specifies the name of the Valgrind trace file to replay during the simulation. These arguments together allow the user to customize the simulator's settings for different cache configurations and trace files. In the photo on the right, we see the same command running in both the short and verbose modes on the same file and using the same s, E, b parameters.
 
 <br>
 
