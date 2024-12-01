@@ -1189,16 +1189,16 @@ int main(int argc, char* argv[])
   <img src="Photos/evaluating-partB2.png" style="width: 32%; height: 205px;" title="Running the code with 64 x 64"/>
   <img src="Photos/evaluating-partB3.png" style="width: 32%; height: 205px;" title="Running the code with 61 x 67" />
 </p>
-
-// anchor
-
-<br>
-
 <p align="center">
   <img src="Photos/example-debugging-function0.png" style="width: 49%; height: 300px;" title=""/> <img src="Photos/example-debugging-function0continued.png" style="width: 49%; height: 300px;" title="" /> 
 </p>
 
-// anchor
+In this set of tests, we evaluated the performance and efficiency of various matrix transpose functions using different matrix dimensions. Matrix transposition is a fundamental operation in many scientific and engineering applications, and optimizing this process can significantly impact computational efficiency. By analyzing the cache performance metrics—such as hits, misses, and evictions—across different matrix sizes (64x64, 61x67, and 32x32), we aimed to understand how each function handles memory access and how effectively they utilize the cache. The N specifies the number of rows in the matrix while the m specifies the number of columns. The output shows the results of several functions (func 0, func 1, func 2, func 3) that are evaluated for performance and memory usage. Before we analyze the results, it's important to first revise critical definitions. __Hits__ represent the number of successful cache accesses. A higher number of hits typically indicates better performance. __Misses__ represent the number of times the cache access failed, necessitating a fetch from the main memory. Fewer misses usually indicate better efficiency. __Evictions__ occur when a cache line is replaced with new data. A high number of evictions can indicate a less efficient cache usage pattern. 
+
+In the case of (64x64), Function 0 has the highest number of hits and the lowest number of misses and evictions, indicating it is the most efficient. Functions 1 and 2 both have identical results, suggesting they use similar or identical memory access patterns. They have significantly higher misses and evictions compared to Function 0, indicating lower efficiency. Function 3 performs slightly better than Functions 1 and 2 but is still less efficient than Function 0. When testing for (67x61), Function 0 has the highest number of hits and the lowest number of misses and evictions, indicating it is the most efficient. Function 1 has a lower number of hits and higher misses/evictions compared to Function 0, suggesting lower efficiency. Function 2, similar to Function 1, with even lower efficiency. Function 3 performs better than Functions 1 and 2 but is still less efficient than Function 0. 
+
+Overall, Function 0 stands out as the most efficient matrix transpose algorithm across different matrix sizes. It effectively leverages cache memory to minimize misses and evictions, leading to better performance. Function 3 also shows promise with its alternative access pattern, providing a middle-ground solution. Functions 1 and 2, while consistent, are less efficient and could benefit from optimization to improve their cache performance.
+
 
 <br>
 
