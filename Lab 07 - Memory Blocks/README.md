@@ -1,43 +1,91 @@
 # <p align="center">Memory Blocks</p>
 
-This lab focuses on designing a `32x4-bit RAM` module on an FPGA using `DE-series` boards. Using VHDL, we interfaced the RAM with slide switches for data input, address selection, and clock control. The system stores and retrieves data, displaying address and data values on seven-segment displays. Both simulation and practical results confirmed the successful operation of the memory module, demonstrating FPGA-based memory implementation and hardware interfacing.
+This lab focuses on designing a 32x4-bit RAM module on an FPGA using the DE2-115 board. Using VHDL, we interfaced the RAM with slide switches for data input, address selection, and clock control. The system stores and retrieves data, displaying address and data values on seven-segment displays. Both simulation and practical results confirmed the successful operation of the memory module, demonstrating FPGA-based memory implementation and hardware interfacing.
 
 ---
 
-In modern computer systems, memory is a critical resource that supports efficient data storage and access for processing operations. Field-Programmable Gate Arrays (FPGAs) offer versatile platforms for implementing memory due to their reconfigurable nature and the inclusion of dedicated memory resources. These resources, such as `M9K` and `M10K` memory blocks available in Intel FPGAs, enable the development of custom memory architectures optimized for specific applications.
+In modern computer systems, memory is a critical resource that supports efficient data storage and access for processing operations. Field-Programmable Gate Arrays (FPGAs) offer versatile platforms for implementing memory due to their reconfigurable nature and the inclusion of dedicated memory resources. These resources, such as `M9K` and `M10K` memory blocks available in Intel FPGAs, enable the development of custom memory architectures optimized for specific applications. The `M9K` blocks provide 9216 bits of memory each, while `M10K` blocks offer 10240 bits. The `M9K` and `M10K` memory blocks offer notable features, including input and optional output port registers for synchronized signal operation and dual ports for separate read and write processes. This lab will leverage these features to implement a `32x4 RAM` module with registered input ports and a separate unregistered data output port, following a synchronous design approach to optimize memory performance on FPGA platforms. By configuring these blocks with an aspect ratio of 4-bit width and 32-word depth, this exercise demonstrates how on-chip memory can be allocated and organized to meet specific design needs.
 
-This lab explores the design and implementation of a 32x4-bit Random Access Memory (RAM) module using the memory blocks in Intel FPGAs, such as those found on `DE10-Lite`, `DE0-CV`, `DE1-SoC`, and `DE2-115` boards. These FPGA boards feature the `MAX 10`, `Cyclone IV`, and `Cyclone V` series FPGAs, which include either `M9K` or `M10K` memory blocks. `M9K` blocks provide `9216 bits` of memory each, while `M10K` blocks offer `10240 bits`. By configuring these blocks with an aspect ratio of 4-bit width and 32-word depth, this exercise demonstrates how on-chip memory can be allocated and organized to meet specific design needs.
+Memory blocks are contiguous chunks of memory that serve as the fundamental units for data storage and transfer in computer systems. In caching, a memory block, also known as a cache block or cache line, represents the smallest segment of memory transferred between main memory and the cache. These blocks are typically of fixed size, often a power of two, such as 8, 16, or 64 bytes, allowing for efficient indexing and addressing. Larger blocks can enhance spatial locality by bringing in more data at once, but they may also increase memory overhead if unused data is fetched. Beyond caching, memory blocks are central to RAM and virtual memory management, forming the basis of pages and frames, as well as to file systems where blocks represent storage units on a disk. While larger blocks reduce the frequency of memory accesses, they can lead to cache pollution by filling the cache with unnecessary data, whereas smaller blocks offer precision but may increase data transfer overhead. Balancing block size is crucial for optimizing performance, as fetching data in blocks reduces slower memory access while leveraging spatial locality.
 
-[Figure 1](Photos/32x4_(RAM).png) illustrates the structure of a 32x4-bit Random Access Memory (RAM) module, which includes essential input and output ports for accessing and managing stored data. The module features a 5-bit address port that allows access to any of the 32 memory locations, as $2^5 = 32$ Each location, or `word` in the RAM can store 4 bits of data. A Write control input is also provided to dictate whether the module operates in write or read mode. When the Write signal is active, the data at the specified address is updated with the value provided at the Data port. Conversely, when the Write signal is inactive, the module is in read mode, allowing data retrieval from the specified address. The Data port is a 4-bit bidirectional line used for both input and output, making it possible to write 4-bit values to the RAM during write operations and retrieve 4-bit values during read operations. This setup enables efficient management of 32 four-bit words using a compact, straightforward configuration.
+RAM, or Random Access Memory, is a type of volatile computer memory used to store data and instructions that a computer's processor needs to access quickly. Unlike storage devices such as hard drives or SSDs, which are designed for long-term data storage, RAM is used for short-term, high-speed operations, as it allows data to be read from and written to memory locations almost instantaneously. This speed is critical for running applications, loading operating systems, and performing calculations. RAM is considered volatile because its contents are erased when the computer is powered off, in contrast to non-volatile memory, which retains data even without power. RAM capacity, typically measured in gigabytes (GB), directly affects a system's ability to handle multiple applications or large workloads simultaneously. Modern computers use DDR (Double Data Rate) RAM, which allows faster data transfer rates. The efficiency of RAM significantly impacts overall system performance, as insufficient RAM can lead to reliance on slower storage devices to handle active data, causing noticeable lags. By temporarily storing frequently accessed data, RAM serves as a bridge between the processor and permanent storage, ensuring smooth and efficient computing operations. RAM is a collection of memory cells organized into multiple blocks or addresses. Each of these memory blocks can store a fixed amount of data, usually in bytes, and is identified by a unique memory address. RAM is structured to provide random access, meaning the processor can directly access any memory block or cell without having to read through others sequentially.
 
-The enhanced [Figure 2](Photos/32x4_(RAM)(2).png) of the 32x4-bit RAM module includes level-sensitive `D latches` on the Address, DataIn, and Write inputs. These latches are controlled by a clock signal, but unlike the RAM module, they are not edge-triggered. Instead, they pass data through to the RAM inputs whenever the clock signal is high, allowing the inputs to be held steady while the clock is high. In contrast, the RAM block itself is `triggered` on the `positive clock edge`, meaning that it only updates its stored values at the moment the clock transitions from low to high. This setup enables controlled and synchronized memory operations. When the clock is high, the latches allow data from the Address, DataIn, and Write ports to flow into the RAM module. On the positive edge of the clock, if the Write signal is active, the data from DataIn is written to the specified address in the RAM. If Write is inactive, the RAM operates in read mode, allowing data retrieval from the specified address and displaying it immediately on the unregistered DataOut port. This combination of `level-sensitive` latches and `edge-triggered` RAM ensures stable input handling with precise timing for memory operations.
-
-The `M9K` and `M10K` memory blocks offer notable features, including input and optional output port registers for synchronized signal operation and dual ports for separate read and write processes. This lab will leverage these features to implement a `32x4 RAM` module with registered input ports and a separate unregistered data output port, following a synchronous design approach to optimize memory performance on FPGA platforms.
+[Figure 1](Photos/32x4_(RAM).png) illustrates the structure of a 32x4-bit RAM module, which includes essential input and output ports for accessing and managing stored data. The module features a 5-bit address port that allows access to any of the 32 memory locations, as $2^5 = 32$. Each location, or word in the RAM can store 4 bits of data. A `Write` control input is also provided to dictate whether the module operates in write or read mode. When the `Write` signal is active, the data at the specified address is updated with the value provided at the `Data` port. Conversely, when the `Write` signal is inactive, the module is in read mode, allowing data retrieval from the specified address. The `Data` port is a 4-bit bidirectional line used for both input and output, making it possible to write 4-bit values to the RAM during write operations and retrieve 4-bit values during read operations. This setup enables efficient management of 32 four-bit words using a compact, straightforward configuration. The enhanced [Figure 2](Photos/32x4_(RAM)(2).png) of the 32x4-bit RAM module includes level-sensitive D latches on the `Address`, `DataIn`, and `Write` inputs. These latches are controlled by a clock signal, but unlike the RAM module, they are not edge-triggered. Instead, they pass data through to the RAM inputs whenever the clock signal is high, allowing the inputs to be held steady while the clock is high. In contrast, the RAM block itself is triggered on the positive clock edge, meaning that it only updates its stored values at the moment the clock transitions from low to high. This setup enables controlled and synchronized memory operations. When the clock is high, the latches allow data from the `Address`, `DataIn`, and `Write` ports to flow into the RAM module. On the positive edge of the clock, if the `Write` signal is active, the data from `DataIn` is written to the specified address in the RAM. If `Write` is inactive, the RAM operates in read mode, allowing data retrieval from the specified address and displaying it immediately on the unregistered `DataOut` port. This combination of level-sensitive latches and edge-triggered RAM ensures stable input handling with precise timing for memory operations.
 
 ## Procedure & Implementation
 
-In this lab, we will implement a memory circuit on an FPGA using a `DE-series` board. Our goal is to create a simple `32x4 RAM` module that interacts with the FPGA’s hardware features, such as `slide switches` and `seven segment displays`. We will develop a Quartus project and a VHDL file that instantiates the `ram32x4` module with connections to the DE-series board's input and output pins.
+The objective here is to implement a memory circuit on our board. We shall create a simple `32x4 RAM` module that interacts with the FPGA’s hardware features, such as slide switches and seven segment displays. Using the slide switches `SW` on the FPGA board, we will load data into specific memory locations. Switches `SW 0 to 3` will provide the 4-bit data input for the RAM, while switches `SW 4 to 8` will specify the 5-bit address to access specific memory locations. The write operation is controlled by `SW 9`, and `KEY 0` is used as the clock input for synchronous data loading. For visualization, the current address, data input, and data output values will be displayed on the board’s seven-segment displays. Specifically, `HEX 4 and 5` will show the address, `HEX 2` will display the data being loaded into the memory, and `HEX 0` will show the data read out from the memory. By testing this setup, we will confirm that data can be stored in and retrieved from various memory locations in the RAM module.
 
-Using the slide switches `SW` on the FPGA board, we will load data into specific memory locations. Switches `SW 0 to 3` will provide the 4-bit data input for the RAM, while switches `SW 4 to 8` will specify the 5-bit address to access specific memory locations. The Write operation is controlled by `SW 9`, and `KEY 0` is used as the `Clock` input for synchronous data loading.
-
-For visualization, the current address, data input, and data output values will be displayed on the board’s `seven-segment displays`. Specifically, `HEX 4 and 5` will show the address, `HEX 2` will display the data being loaded into the memory, and `HEX 0` will show the data read out from the memory. By testing this setup, we will confirm that data can be stored in and retrieved from various memory locations in the RAM module. This practical exercise helps to reinforce concepts of memory implementation, data storage, and hardware interfacing on FPGAs.
+When describing a RAM module with a depth of 32 and a width of 4, it refers to the module's organizational structure. The depth of 32 indicates the number of distinct memory locations or addresses the module contains, meaning there are 32 unique locations where data can be stored. Each of these locations is identified by a specific address, defining the module's capacity in terms of addressable units. The width of 4 signifies the number of bits each memory location can hold, meaning every memory address stores a 4-bit word. This structure allows the total storage capacity of the RAM module to be calculated as the product of depth and width, which in this case is $32 \times 4 = 128$ bits. 
 
 <details>
   <summary>VHDL Code</summary>
 <br>
 
 ```VHDL
+-- This code instantiates a 32 x 4 memory 
+-- inputs: KEY0 is the clock, SW3-SW0 provides data to write into memory.
+-- SW8-SW4 provides the memory address, SW9 is the memory Write input.
+-- outputs: 7-seg displays HEX5-4 show the memory address, HEX2
+-- displays the data input to the memory, and HEX0 show the contents read
+-- from the memory. LEDGR shows the status of the SW switches.
+
+-- RAM module
+-- inputs: 
+--    Clock
+--    Address
+--    Write: asserted to perform a write
+--    DataIn: data to be written
+--
+-- outputs:
+--    DataOut: data read
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
 ENTITY part2 IS 
-PORT ( KEY : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-       SW  : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
-       HEX5, HEX4, HEX2, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6);
-       LEDR : OUT STD_LOGIC_VECTOR(9 DOWNTO 0) );
+-- Define the entity (module) named "part2". An entity in VHDL represents the interface for a hardware module, including its input and output ports.
+
+PORT ( 
+  KEY : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+  -- Defines an input port "KEY" as a vector of type STD_LOGIC with a single bit (0 DOWNTO 0) range.
+  -- Typically, this may represent a single button or control signal.
+
+  SW : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
+  -- Defines an input port "SW" as a vector of type STD_LOGIC with 10 bits (9 DOWNTO 0).
+  -- This represents multiple switches, each of which can provide a binary input to the module.
+
+  HEX5, HEX4, HEX2, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6);
+  -- Defines four output ports ("HEX5", "HEX4", "HEX2", "HEX0") as vectors of type STD_LOGIC, each with 7 bits (0 TO 6).
+  -- These outputs are intended to drive 7-segment displays, with each bit corresponding to one segment (a-g).
+  -- The numbers in the names (5, 4, 2, 0) suggest these may be different display positions.
+
+  LEDR : OUT STD_LOGIC_VECTOR(9 DOWNTO 0) 
+  -- Defines an output port "LEDR" as a vector of type STD_LOGIC with 10 bits (9 DOWNTO 0).
+  -- This output corresponds to a set of 10 LEDs, each bit controlling one LED.
+
+);
 END part2;
 
+
 ARCHITECTURE Behavior OF part2 IS
+
+	-- Creating a component inside the architecture of a module, even when the component already has its 
+	-- own entity defined elsewhere, provides key organizational, structural, and functional benefits in 
+	-- VHDL. A component declaration encapsulates all the details about the interface (ports) of the module 
+	-- being instantiated. By explicitly declaring the component, the architecture becomes self-contained. 
+	-- A reader doesn't need to refer to external files or entities to understand how the component interacts 
+	-- with the rest of the module. Components allow modular and hierarchical design. Once a component is 
+	-- declared and defined, it can be reused in multiple architectures or projects without redefining its 
+	-- interface. This approach promotes design abstraction, where high-level modules can focus on interconnecting 
+	-- components rather than their internal logic. Furthermore, some synthesis and simulation tools require 
+	-- explicit component declarations to resolve instances within the architecture. Without a component 
+	-- declaration, the tool might not be able to infer the relationship between the architecture and the referenced entity.
+
+	-- While it's theoretically possible to use direct entity instantiation (function calling), this method
+	--	bypasses the benefits of modularity and encapsulation provided by components. Directly referencing 
+	-- entities without declaring them as components can make the architecture less portable, harder to read, 
+	-- and more prone to errors during synthesis or simulation.
    COMPONENT ram32x4 
       PORT ( address : IN  STD_LOGIC_VECTOR (4 DOWNTO 0);
              clock   : IN  STD_LOGIC ;
@@ -45,13 +93,18 @@ ARCHITECTURE Behavior OF part2 IS
              wren    : IN  STD_LOGIC  := '1';
              q       : OUT STD_LOGIC_VECTOR (3 DOWNTO 0));
    END COMPONENT;
+
+	
    COMPONENT hex7seg
       PORT ( hex     : IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
              display : OUT STD_LOGIC_VECTOR(0 TO 6));
    END COMPONENT;
+   
+	
    SIGNAL Clock, Write : STD_LOGIC;
    SIGNAL Address : STD_LOGIC_VECTOR(4 DOWNTO 0); 
    SIGNAL DataIn, DataOut : STD_LOGIC_VECTOR(3 DOWNTO 0); 
+	
 BEGIN
    Clock <= KEY(0);
    Write <= SW(9);
@@ -60,10 +113,10 @@ BEGIN
 
    -- instantiate memory module
    -- module ram32x4 (address, clock, data, wren, q)
-   U1: ram32x4 PORT MAP (Address, Clock, DataIn, Write, DataOut);
+   U1: ram32x4 PORT MAP (Address, Clock, DataIn, Write, DataOut); -- this name must match the title of the qip file
 
    -- display the data input, data output, and address on the 7-segs
-   digit0: hex7seg PORT MAP (DataOut(3 DOWNTO 0), HEX0);
+   digit0: hex7seg PORT MAP (DataOut(3 DOWNTO 0), HEX0); -- Calling the hex7seg module 
    digit2: hex7seg PORT MAP (DataIn(3 DOWNTO 0), HEX2);
    digit5: hex7seg PORT MAP ("000" & Address(4), HEX5);
    digit4: hex7seg PORT MAP (Address(3 DOWNTO 0), HEX4);
@@ -72,6 +125,8 @@ BEGIN
    LEDR(8 DOWNTO 4) <= Address;
    LEDR(9) <= Write;
 END Behavior;
+
+-----------------------------------------------------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -100,29 +155,47 @@ BEGIN
    PROCESS (hex)
    BEGIN
       CASE (hex) IS
-         WHEN "0000" => display <= "0000001";
-         WHEN "0001" => display <= "1001111";
-         WHEN "0010" => display <= "0010010";
-         WHEN "0011" => display <= "0000110";
-         WHEN "0100" => display <= "1001100";
-         WHEN "0101" => display <= "0100100";
-         WHEN "0110" => display <= "1100000";
-         WHEN "0111" => display <= "0001111";
-         WHEN "1000" => display <= "0000000";
-         WHEN "1001" => display <= "0001100";
-         WHEN "1010" => display <= "0001000";
-         WHEN "1011" => display <= "1100000";
-         WHEN "1100" => display <= "0110001";
-         WHEN "1101" => display <= "1000010";
-         WHEN "1110" => display <= "0110000";
-         WHEN OTHERS => display <= "0111000";
+         WHEN "0000" => display <= "0000001"; -- 0
+         WHEN "0001" => display <= "1001111"; -- 1
+         WHEN "0010" => display <= "0010010"; -- 2
+         WHEN "0011" => display <= "0000110"; -- 3
+         WHEN "0100" => display <= "1001100"; -- 4
+         WHEN "0101" => display <= "0100100"; -- 5
+         WHEN "0110" => display <= "1100000"; -- 6
+         WHEN "0111" => display <= "0001111"; -- 7
+         WHEN "1000" => display <= "0000000"; -- 8
+         WHEN "1001" => display <= "0001100"; -- 9
+         WHEN "1010" => display <= "0001000"; -- A (10)
+         WHEN "1011" => display <= "1100000"; -- B (11)
+         WHEN "1100" => display <= "0110001"; -- C (12)
+         WHEN "1101" => display <= "1000010"; -- D (13)
+         WHEN "1110" => display <= "0110000"; -- E (14)
+         WHEN OTHERS => display <= "0111000"; -- F (15)
       END CASE;
    END PROCESS;
 END Behavior;
-
 ```
 
 ```VHDL
+-- Automatically generatd code using the IP Catalog from Quartus Tools tab
+
+-- This VHDL code defines a 32x4 single-port RAM module using Intel's Altera-specific `altsyncram` megafunction,
+-- commonly employed for FPGA designs. The `ram32x4` entity specifies the interface for this module, including ports
+-- for a 5-bit `address`, a clock signal `clock`, 4-bit input data `data`, a write-enable signal `wren`, and a 4-bit
+-- output `q`. The `altsyncram` component is instantiated within the architecture named `SYN`. This megafunction is pre-designed
+-- for efficient memory implementation on Intel Cyclone IV E FPGAs, utilizing M9K memory blocks.
+
+-- The architecture uses a signal, `sub_wire0`, to connect the `altsyncram` output `q_a` to the entity's output port `q`.
+-- The `GENERIC MAP` clause configures various parameters of the `altsyncram` component. Key parameters include the number of
+-- memory words `numwords_a => 32`, data width `width_a => 4`, and address width `widthad_a => 5`, defining a memory depth
+-- of 32 and a width of 4 bits per word. Other parameters specify the memory operation mode `SINGLE_PORT`, the type of RAM block
+-- `M9K`, and behaviors such as whether the output data is registered `outdata_reg_a => "UNREGISTERED"` or uninitialized at startup
+-- `power_up_uninitialized => "FALSE"`. The `PORT MAP` clause connects the entity's ports to the internal `altsyncram` component,
+-- aligning the external `address`, `clock`, `data`, and `wren` signals with the corresponding inputs of the `altsyncram`.
+-- The `read_during_write_mode_port_a => "NEW_DATA_NO_NBE_READ"` setting specifies the behavior when writing to and reading from the
+-- same address, ensuring new data is immediately available. This setup efficiently maps high-level memory operations to the FPGA's
+-- hardware resources, leveraging the FPGA's built-in RAM blocks for optimized performance.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
@@ -245,9 +318,7 @@ By the `fifth rising edge`, the write is still high, and the address changes to 
 
 ## Conclusion
 
-This lab successfully demonstrated the design, implementation, and testing of a `32x4-bit` RAM module on an FPGA, with practical control and display elements such as switches and seven-segment displays. By interfacing the RAM with the `DE-series` board's hardware features, we explored how FPGA memory resources, specifically `M9K` or `M10K` blocks, support configurable memory structures.
-
-Through both simulation and hands-on testing, we confirmed that data could be written to and read from specified memory addresses, validating the module's functionality and timing. The simulation waveform provided a clear visualization of memory operations, highlighting how the write and read functions performed as expected. This exercise reinforced important concepts in FPGA-based memory design, including clock synchronization, signal routing, and hardware interfacing. Overall, the lab provided a practical understanding of memory management on reconfigurable hardware, which is essential for future applications in digital system design.
+// anchor
 
 ## Resources
 |3| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.   
