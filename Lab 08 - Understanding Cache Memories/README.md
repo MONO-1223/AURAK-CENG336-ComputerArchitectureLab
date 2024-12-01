@@ -1218,7 +1218,27 @@ Cache performance can be enhanced through several optimization techniques. Block
 
 ## Resources
 
-// anchor
+|1| 351 Cache Simulator. (n.d.). Retrieved November 20, 2024, from <br> https://courses.cs.washington.edu/courses/cse351/cachesim/  
+|2| Basic Cache Optimization Techniques. (2022, March 11). GeeksforGeeks. <br> https://www.geeksforgeeks.org/basic-cache-optimization-techniques/  
+|3| Cache Memory in Computer Organization. (2015, December 8). GeeksforGeeks. <br> https://www.geeksforgeeks.org/cache-memory-in-computer-organization/  
+|4| Cache Miss. (n.d.). Hazelcast. Retrieved November 20, 2024, from <br> https://hazelcast.com/glossary/cache-miss/  
+|5| Cache Miss vs Cache Hit: What’s the Difference? (n.d.). WP Rocket. Retrieved November 20, 2024, from <br> https://wp-rocket.me/wordpress-cache/cache-miss-vs-cache-hit/  
+|6| Cache Simulator. (n.d.). Retrieved November 20, 2024, from <br> https://vhosts.eecs.umich.edu/370simulators/cache/simulator.html  
+|7| Computer Systems: A Programmer’s Perspective (2nd Editi…. (n.d.). Retrieved November 20, 2024, from <br> https://www.goodreads.com/book/show/829182.Computer_Systems  
+|8| Direct Mapped Cache Simulator. (n.d.). Retrieved November 20, 2024, from <br> https://www3.ntu.edu.sg/home/smitha/ParaCache/Paracache/dmc.html  
+|9| Gropp, W. (n.d.). Lecture 7: Matrix Transpose.  
+|10| Jacob Schrum (Director). (2020, August 11). Introduction to Cache Memory Concepts [Video recording]. <br> https://www.youtube.com/watch?v=U6gf2PRBmQY  
+|11| Linux make Command with Examples. (2024, June 4). GeeksforGeeks. <br> https://www.geeksforgeeks.org/linux-make-command/  
+|12| PowerCert Animated Videos (Director). (2016, November 28). CPU Cache Explained—What is Cache Memory? [Video recording]. <br> https://www.youtube.com/watch?v=yi0FhRqDJfo  
+|13| RJ Speaks (Director). (2022, October 6). Caching & Matrix Transpose: Don’t Throw My Boxes [Video recording]. <br> https://www.youtube.com/watch?v=EMm-Un7BtIM  
+|14| Tsifakis, D., Rendell, A. P., & Strazdins, P. E. (2004). Cache Oblivious Matrix Transposition: Simulation and Experiment. In M. Bubak, G. D. Van Albada, P. M. A. Sloot, & J. Dongarra |1| (Eds.), Computational Science—ICCS 2004 (Vol. 3037, pp. 17–25). Springer Berlin Heidelberg. <br> https://doi.org/10.1007/978-3-540-24687-9_3  
+|15| user635832. (2014, July 30). A Cache Efficient Matrix Transpose Program? [Forum post]. Stack Overflow. <br> https://stackoverflow.com/q/5200338  
+|16| Valgrind Home. (n.d.). Retrieved December 1, 2024, from <br> https://valgrind.org/  
+|17| What is Cache Memory? Cache Memory in Computers, Explained. (n.d.). Search Storage. Retrieved November 20, 2024, from <br> https://www.techtarget.com/searchstorage/definition/cache-memory  
+|18| What is the cache miss rate for an optimal matrix transpose? (2016, August 24). [Forum post]. Stack Overflow. <br> https://stackoverflow.com/q/13733716  
+|19| Caches: What Are They For? (n.d.). Retrieved December 1, 2024, from <br> https://csillustrated.berkeley.edu/PDFs/handouts/cache-1-basics-handout.pdf  
+|20| Cache Misses. (n.d.). Retrieved December 1, 2024, from <br> https://csillustrated.berkeley.edu/PDFs/handouts/cache-2-misses-handout.pdf  
+|21| Cache Associativity. (n.d.). <br> https://csillustrated.berkeley.edu/PDFs/handouts/cache-3-associativity-handout.pdf  
 
 <br>
 
