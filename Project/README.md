@@ -19,6 +19,9 @@ The Altera DE2-115 board, which uses an Intel (formerly Altera) Cyclone IV FPGA,
 <br>
 
 ``` VHDL
+-- In this code, we focus only on the multiplier implementation.
+-- If you want to inspect how the LCD operates, kindly refer to the included .rar file to download the full source code.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_unsigned.all;
