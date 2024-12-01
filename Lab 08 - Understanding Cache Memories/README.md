@@ -1,6 +1,6 @@
 # <p align="center">Understanding Cache Memories</p>
 
-This lab aims to 
+The objective of this lab is to explore and analyze cache memory behavior and optimization techniques using simulation and practical experimentation. By employing Linux-based tools, including Valgrind, we investigate the impact of cache parameters—such as associativity, block size, and set count—on cache performance metrics like hits, misses, and evictions. In the second part, we focus on optimizing a small matrix transpose function to minimize cache misses, emphasizing memory access patterns, cache line utilization, and spatial locality. These experiments enhance our understanding of how cache architecture influences computational efficiency and performance.
 
 ---
 
