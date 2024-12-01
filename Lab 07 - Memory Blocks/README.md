@@ -16,8 +16,6 @@ RAM, or Random Access Memory, is a type of volatile computer memory used to stor
 
 The objective here is to implement a memory circuit on our board. We shall create a simple `32x4 RAM` module that interacts with the FPGA’s hardware features, such as slide switches and seven segment displays. Using the slide switches `SW` on the FPGA board, we will load data into specific memory locations. Switches `SW 0 to 3` will provide the 4-bit data input for the RAM, while switches `SW 4 to 8` will specify the 5-bit address to access specific memory locations. The write operation is controlled by `SW 9`, and `KEY 0` is used as the clock input for synchronous data loading. For visualization, the current address, data input, and data output values will be displayed on the board’s seven-segment displays. Specifically, `HEX 4 and 5` will show the address, `HEX 2` will display the data being loaded into the memory, and `HEX 0` will show the data read out from the memory. By testing this setup, we will confirm that data can be stored in and retrieved from various memory locations in the RAM module.
 
-When describing a RAM module with a depth of 32 and a width of 4, it refers to the module's organizational structure. The depth of 32 indicates the number of distinct memory locations or addresses the module contains, meaning there are 32 unique locations where data can be stored. Each of these locations is identified by a specific address, defining the module's capacity in terms of addressable units. The width of 4 signifies the number of bits each memory location can hold, meaning every memory address stores a 4-bit word. This structure allows the total storage capacity of the RAM module to be calculated as the product of depth and width, which in this case is $32 \times 4 = 128$ bits. 
-
 <details>
   <summary>VHDL Code</summary>
 <br>
@@ -250,8 +248,13 @@ BEGIN
 
 
 END SYN;
-
 ```
+
+<p align="center">
+  <img src="Photos/128bits.png" title="Compilation Report" />
+</p>
+
+When describing a RAM module with a depth of 32 and a width of 4, it refers to the module's organizational structure. The depth of 32 indicates the number of distinct memory locations or addresses the module contains, meaning there are 32 unique locations where data can be stored. Each of these locations is identified by a specific address, defining the module's capacity in terms of addressable units. The width of 4 signifies the number of bits each memory location can hold, meaning every memory address stores a 4-bit word. This structure allows the total storage capacity of the RAM module to be calculated as the product of depth and width, which in this case is $32 \times 4 = 128$ bits as shown in the highlight above from the successful compilation report. 
 
 </details>
 
