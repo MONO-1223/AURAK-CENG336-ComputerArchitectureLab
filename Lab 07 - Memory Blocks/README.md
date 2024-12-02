@@ -324,8 +324,13 @@ In the simulation waveform, we observe the clock, write, address, data in, and d
 The name M9K refers to a specific type of memory block used in Intel (formerly Altera) FPGA devices, particularly in Cyclone and Stratix families. The "M" stands for memory, and the "9K" indicates that each of these memory blocks provides 9 kilobits (Kb) of storage capacity. These blocks are embedded within the FPGA fabric and are designed to offer high-performance, low-latency memory for various applications such as data buffers, FIFOs, and small RAM modules.
 
 ## Resources
-|3| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.   
-// anchor
+|1| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.   
+|2| Baas, B. (n.d.). ALTERA M9K EMBEDDED MEMORY BLOCKS. (n.d.). <br> https://www.ece.ucdavis.edu/~bbaas/180/notes/Handout.M9K.mems.pdf  
+|3| Little Man Computer. (n.d.). Retrieved December 2, 2024, from <br> https://wellingborough.github.io/LMC/  
+|4| Little Man Computer—LMC/CPU Simulator. (n.d.). Retrieved December 2, 2024, from <br> https://www.101computing.net/LMC/  
+|5| Memory Management in Operating System. (2021, August 18). GeeksforGeeks. <br> https://www.geeksforgeeks.org/memory-management-in-operating-system/  
+|6| Random Access Memory (RAM). (2021, June 14). GeeksforGeeks. <br> https://www.geeksforgeeks.org/random-access-memory-ram/  
+|7| What is the relation between cache line and memory blocks? (n.d.). Quora. Retrieved December 2, 2024, from <br> https://www.quora.com/What-is-the-relation-between-cache-line-and-memory-blocks  
 
 <br>
 
