@@ -265,38 +265,38 @@ When describing a RAM module with a depth of 32 and a width of 4, it refers to t
 <be>
 
  <p align="center">	 
-  <img src="Photos/workaround-reset-case.jpg" title="0000 1000 = 08"/>
+  <img src="Photos/workaround-reset-case.jpg" title="Starting Point"/>
 </p>
 
 // anchor
 
 <p align="center">
-  <img src="Photos/writing-5-into-00address-in-memory.jpg" style="width: 49%; height: 300px;" title=""/> <img src="Photos/reading-from-00address-in-memory.jpg.jpg" style="width: 49%; height: 300px;" title="" /> 
+  <img src="Photos/writing-5-into-00address-in-memory.jpg" style="width: 49%; height: 300px;" title="Writing 5 into the 00 address"/> <img src="Photos/reading-from-00address-in-memory.jpg.jpg" style="width: 49%; height: 300px;" title="Reading from the 00 address" /> 
  </p>
 
 // anchor
 
  <p align="center">
-  <img src="Photos/writing-8-into-01address-in-memory.jpg" style="width: 49%; height: 300px;" title=""/>  <img src="Photos/reading-from-01address-in-memory.jpg.jpg" style="width: 49%; height: 300px;" title="0000 0011 = 03" />
+  <img src="Photos/writing-8-into-01address-in-memory.jpg" style="width: 49%; height: 300px;" title="Writing 8 into the 01 address"/>  <img src="Photos/reading-from-01address-in-memory.jpg.jpg" style="width: 49%; height: 300px;" title="Reading from the 01 address" />
  </p>
 
 // anchor
 
  <p align="center">
-  <img src="Photos/checking-a-memory-location-we-didnt-write-anything-to.jpg" style="width: 49%; height: 300px;" title="0000 0100 = 04"/> <img src="Photos/wroteandread-value-in11adress.jpg" style="width: 49%; height: 300px;" title="0000 0101 = 05" />
-<img src="Photos/overwriting-by-writing-a-new-value-into-same-address.jpg" style="width: 49%; height: 300px;" title="0000 0110 = 06"/>  <img src="Photos/confirming-the-overwrite-by-reading-from-address.jpg" style="width: 49%; height: 300px;" title="0000 0111 = 07" />
+  <img src="Photos/checking-a-memory-location-we-didnt-write-anything-to.jpg" style="width: 49%; height: 300px;" title="Reading from an address we didn't write anything to yet"/> <img src="Photos/wroteandread-value-in11adress.jpg" style="width: 49%; height: 300px;" title="Writing and reading into and from the 11 address" />
+<img src="Photos/overwriting-by-writing-a-new-value-into-same-address.jpg" style="width: 49%; height: 300px;" title="Overwriting the data stored in the 11 address"/>  <img src="Photos/confirming-the-overwrite-by-reading-from-address.jpg" style="width: 49%; height: 300px;" title="Confirming the overwrite by reading from the 11 address" />
  </p>
 
 // anchor
   
  <p align="center">
-<img src="Photos/reading-proofthat5issavedinthisaddressregardlessofthedatainnow.jpg" style="width: 49%; height: 300px;" title="0000 1000 = 08"/> <img src="Photos/reading-proofthat8issavedinthisaddressregardlessofthedatainnow.jpg" style="width: 49%; height: 300px;" title="0000 1001 = 09" />
+<img src="Photos/reading-proofthat5issavedinthisaddressregardlessofthedatainnow.jpg" style="width: 49%; height: 300px;" title="Reading from the 00 address again"/> <img src="Photos/reading-proofthat8issavedinthisaddressregardlessofthedatainnow.jpg" style="width: 49%; height: 300px;" title="Reading from the 01 address again" />
 </p>
 
 // anchor
 
  <p align="center">	 
-  <img src="Photos/workaround-reset-case.jpg" title="0000 1000 = 08"/>
+  <img src="Photos/workaround-reset-case.jpg" title="Workaround reset the data stored in an address by storing 0 at the address"/>
 </p>
 
 // anchor
@@ -309,7 +309,7 @@ When describing a RAM module with a depth of 32 and a width of 4, it refers to t
 <br>
 
 <p align="center">
-  <img src="Photos/waveform.png" title="anchor" />
+  <img src="Photos/waveform.png" title="Waveform Simulation" />
 </p>
 
 In the simulation waveform, we observe the clock, write, address, data in, and data out signals in action. At the first clock rising edge, the `write` signal is low, indicating a read operation at address `00000`. Since nothing has been written yet, the output reads `0000`. On the second rising edge, the `write` signal goes high, enabling a write operation at address `00000` with the input data `1010`, which is reflected immediately on data out. By the fifth rising edge, the `write` is still high, and the address changes to `11111`, where data in `0101` is written and displayed on data out simultaneously. In the sixth and seventh rising edges, the `write` signal is low, so the module performs read operations. It retrieves `1010` from address `00000` and `0101` from address `11111`, confirming that the saved data is correctly stored and accessed.
@@ -320,6 +320,8 @@ In the simulation waveform, we observe the clock, write, address, data in, and d
 ## Conclusion
 
 // anchor
+
+The name M9K refers to a specific type of memory block used in Intel (formerly Altera) FPGA devices, particularly in Cyclone and Stratix families. The "M" stands for memory, and the "9K" indicates that each of these memory blocks provides 9 kilobits (Kb) of storage capacity. These blocks are embedded within the FPGA fabric and are designed to offer high-performance, low-latency memory for various applications such as data buffers, FIFOs, and small RAM modules.
 
 ## Resources
 |3| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.   
