@@ -1,5 +1,15 @@
 # Computer Architecture Lab
 
+
+
+https://github.com/user-attachments/assets/ebc04ddf-0c6a-431c-b845-dfefd1f4ff67
+
+
+
+https://github.com/user-attachments/assets/94c971f0-b716-45ee-9e99-579f09968bd4
+
+
+
 https://github.com/user-attachments/assets/ef2b7863-8adf-4ae9-b218-2f611a3c44be
 
 https://github.com/user-attachments/assets/cf1bb517-8816-4ad3-a6d3-56deb3ef6147
