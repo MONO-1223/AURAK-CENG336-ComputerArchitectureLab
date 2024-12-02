@@ -268,39 +268,39 @@ When describing a RAM module with a depth of 32 and a width of 4, it refers to t
   <img src="Photos/workaround-reset-case.jpg" title="Starting Point"/>
 </p>
 
-// anchor
+The initial state of the board, as shown above, indicates that the value stored at address `00` is 0. This observation allows us to conclude that when no value has been explicitly saved in an address, the default value is 0.
 
 <p align="center">
   <img src="Photos/writing-5-into-00address-in-memory.jpg" style="width: 49%; height: 300px;" title="Writing 5 into the 00 address"/> <img src="Photos/reading-from-00address-in-memory.jpg.jpg" style="width: 49%; height: 300px;" title="Reading from the 00 address" /> 
  </p>
 
-// anchor
+The two photos above demonstrate the process of writing and reading the value 5 to and from address `00`. In the image on the left, switch 9 is activated to enable write mode, and switches 0 to 3 are configured to represent the value 5, as displayed on HEX2 (data input). On the next rising clock edge, as shown in the image on the right, the value 5 can now be read from HEX0, which displays the data stored at the address specified by HEX4 and HEX5.
 
  <p align="center">
   <img src="Photos/writing-8-into-01address-in-memory.jpg" style="width: 49%; height: 300px;" title="Writing 8 into the 01 address"/>  <img src="Photos/reading-from-01address-in-memory.jpg.jpg" style="width: 49%; height: 300px;" title="Reading from the 01 address" />
  </p>
 
-// anchor
+The two photos above illustrate the process of writing and reading the value 8 to and from address `01`. In the left image, the write switch is activated, the address switches are set to `01` (reflected on HEX4 and HEX5), and the data input switches are set to 8, as shown on HEX2. At this stage, HEX0 still displays the result from the previous operation because the value at address `01` has not yet been updated. The update occurs on the next rising edge of the clock. In the right image, taken after the clock rises, we can see that the value 8 has been successfully written to the desired address and is now displayed on HEX0.
 
  <p align="center">
   <img src="Photos/checking-a-memory-location-we-didnt-write-anything-to.jpg" style="width: 49%; height: 300px;" title="Reading from an address we didn't write anything to yet"/> <img src="Photos/wroteandread-value-in11adress.jpg" style="width: 49%; height: 300px;" title="Writing and reading into and from the 11 address" />
 <img src="Photos/overwriting-by-writing-a-new-value-into-same-address.jpg" style="width: 49%; height: 300px;" title="Overwriting the data stored in the 11 address"/>  <img src="Photos/confirming-the-overwrite-by-reading-from-address.jpg" style="width: 49%; height: 300px;" title="Confirming the overwrite by reading from the 11 address" />
  </p>
 
-// anchor
-  
+In the first image, we set the address switches to `11`, which initially contains the default value of 0. We then wrote the value 1 into this address by appropriately configuring the write and data input switches. After waiting for the next clock cycle, we confirmed that the value had been successfully written to the address. In the third image, we tested overwriting a value in memory by replacing the previously saved value of 1 with 9. As shown in the fourth image, after the next rising clock cycle, the value 9 was successfully stored in address `11`, overwriting the previous value.
+
  <p align="center">
 <img src="Photos/reading-proofthat5issavedinthisaddressregardlessofthedatainnow.jpg" style="width: 49%; height: 300px;" title="Reading from the 00 address again"/> <img src="Photos/reading-proofthat8issavedinthisaddressregardlessofthedatainnow.jpg" style="width: 49%; height: 300px;" title="Reading from the 01 address again" />
 </p>
 
-// anchor
+To ensure the robustness of the RAM module we created, we revisited addresses `00` and `01` in read mode to verify whether they still held the previously written values or if the values had been erased. As expected, the addresses retained the values 5 and 8, respectively. It’s important to note that the state of the data input switches, and the corresponding value displayed on HEX2 (which showed 0), is irrelevant in read mode. Regardless of what value is present on the data input, it has no effect since the module is not using it in read mode—it could be disregarded entirely.
 
  <p align="center">	 
   <img src="Photos/workaround-reset-case.jpg" title="Workaround reset the data stored in an address by storing 0 at the address"/>
 </p>
 
-// anchor
-	
+We devised a simple method to reset the data in an address by storing the value 0 into it. In the initial step, we observed that when an address is empty, its default value is 0. Therefore, saving the value 0 into an address effectively clears its contents, making it equivalent to an empty address. We applied this process to all the addresses used during the experiment, such as `00`, `01`, and `11`. And, as shown in the reading state above, the value saved in address `00` now indeed is 0 (i.e. nothing).
+
 </details>
 
 <details>
@@ -321,7 +321,7 @@ In the simulation waveform, we observe the clock, write, address, data in, and d
 
 // anchor
 
-The name M9K refers to a specific type of memory block used in Intel (formerly Altera) FPGA devices, particularly in Cyclone and Stratix families. The "M" stands for memory, and the "9K" indicates that each of these memory blocks provides 9 kilobits (Kb) of storage capacity. These blocks are embedded within the FPGA fabric and are designed to offer high-performance, low-latency memory for various applications such as data buffers, FIFOs, and small RAM modules.
+The name `M9K` refers to a specific type of memory block used in Intel (formerly Altera) FPGA devices, particularly in Cyclone and Stratix families. The "M" stands for memory, and the "9K" indicates that each of these memory blocks provides 9 kilobits (Kb) of storage capacity. These blocks are embedded within the FPGA fabric and are designed to offer high-performance, low-latency memory for various applications such as data buffers, FIFOs, and small RAM modules.
 
 ## Resources
 |1| Ashenden, P. J. (2008). The designer’s guide to VHDL (3rd ed). Morgan Kaufmann Publishers.   
