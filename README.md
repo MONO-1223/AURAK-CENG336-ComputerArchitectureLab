@@ -88,3 +88,14 @@ When connecting the USB cable to the board, make sure to insert it into the left
 If you ever need to identify the model of the board and don’t have the manual nearby, simply look at the CPU area on the board itself. The model name is usually printed there, allowing you to confirm the board model easily.
 
 In digital design, a key distinction exists between combinational and sequential circuits. Combinational circuits produce outputs purely based on their current inputs, without relying on past states or a clock signal. This means that any change in the inputs instantaneously affects the outputs, making combinational circuits suitable for logic operations where immediate results are needed. In contrast, sequential circuits depend on a clock to drive them. A clock signal enables sequential circuits to store and update states, allowing them to maintain a history of input changes over time. This timing aspect makes sequential circuits essential for designs involving memory or state transitions, such as counters and registers, where the circuit behavior depends on both current and previous inputs.
+
+## Resources
+|1| alldatasheet.com. (n.d.). HD44780 Datasheet(PDF). Retrieved October 13, 2024, from <br> http://www.alldatasheet.com/datasheet-pdf/pdf/63673/HITACHI/HD44780.html  
+|2| EDA Playground. (n.d.). Retrieved October 13, 2024, from <br> https://www.edaplayground.com/x/A4  
+|3| Electronics Engineering (Director). (2020, July 5). How to use EDA playground for VHDL programming? [Video recording]. <br> https://www.youtube.com/watch?v=v4pzZY9F_0s  
+|4| Intel® Quartus® Prime Lite Edition Design Software Version 20.1.1 for Windows. (n.d.). Intel. Retrieved October 13, 2024, from <br> https://www.intel.com/content/www/us/en/software-kit/660907/intel-quartus-prime-lite-edition-design-software-version-20-1-1-for-windows.html  
+|5| Techquickie (Director). (2022, February 26). These Chips Are Better Than CPUs (ASICs and FPGAs) [Video recording]. <br> https://www.youtube.com/watch?v=7Elgs5HzIbE  
+|6| VHDL/Verilog Interactive Simulator. (n.d.). Retrieved October 13, 2024, from <br> https://tapec.uv.es/pardo/hdlsim/  
+|7| When I try to make and run University Program VWF, it gives this error :"ModelSim executable not found" . (2019, May 3). <br> https://community.intel.com/t5/Intel-Quartus-Prime-Software/When-I-try-to-make-and-run-University-Program-VWF-it-gives-this/m-p/678829#M62116  
+|8| (N.d.). Retrieved October 13, 2024, from <br> https://vhdlweb.com/assignments  
+
