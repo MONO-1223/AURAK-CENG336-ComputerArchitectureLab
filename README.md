@@ -7,6 +7,17 @@ https://github.com/user-attachments/assets/ef2b7863-8adf-4ae9-b218-2f611a3c44be
 
 https://github.com/user-attachments/assets/5c811a64-28a7-49d8-8dfd-63aa5b0cfdeb
 
+
+
+https://github.com/user-attachments/assets/b55521dc-85b6-445e-96b6-80c3c86f2000
+
+
+
+https://github.com/user-attachments/assets/ee0f2f36-938a-4c0e-a1de-1e5e18cb62b0
+
+
+
+
 The DE2 series has long been a leader in educational development boards, setting itself apart with a wide range of interfaces designed to support various application requirements. Building on its established leadership and success, Terasic introduces the latest addition, the DE2-115, featuring the Cyclone IV E device. This board is designed to meet the growing demand for versatile, low-cost solutions in areas such as mobile video, voice, and data access, while also addressing the need for high-quality images. The DE2-115 strikes an ideal balance between affordability, low power consumption, and an extensive range of logic, memory, and DSP capabilities. The Cyclone EP4CE115 device integrated into the DE2-115 boasts 114,480 logic elements (LEs), making it the largest device in the Cyclone IV E series. It also includes up to 3.9 Mbits of RAM and 266 multipliers, offering a powerful combination of cost-effectiveness, advanced functionality, and lower power consumption compared to previous Cyclone generations. The DE2-115 builds on the features of its predecessors, particularly the DE2-70, while incorporating additional interfaces to support key protocols like Gigabit Ethernet (GbE). It also includes a High-Speed Mezzanine Card (HSMC) connector, allowing for expanded functionality and connectivity through HSMC daughter cards and cables. For large-scale ASIC prototyping, multiple FPGA-based boards can be connected using HSMC cables through this connector, enabling more complex development setups.
 
 VHDL is generally considered a high-level hardware description language (HDL). VHDL allows designers to describe complex digital systems at a higher abstraction level, using constructs like entities, architectures, processes, and generics. Unlike low-level languages, which focus on controlling each specific logic gate or transistor, VHDL lets you specify behaviors and structures without directly addressing individual hardware components. VHDL is used to model and simulate digital circuits. It enables the description of hardware logic in terms of behavioral, dataflow, and structural models, rather than manually controlling each component. This higher level of abstraction lets you focus on system functionality rather than on the precise, low-level layout.
