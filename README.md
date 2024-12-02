@@ -27,6 +27,18 @@ https://github.com/user-attachments/assets/ee0f2f36-938a-4c0e-a1de-1e5e18cb62b0
 
 
 
+https://github.com/user-attachments/assets/e91ecb4f-97da-493c-8313-6484fae50de3
+
+
+
+https://github.com/user-attachments/assets/a4e28c5f-0ad6-4cd2-88eb-ccd8be22cd5c
+
+
+
+https://github.com/user-attachments/assets/bbbd8af3-7d15-42b6-8d2a-eaba1bc2d97c
+
+
+
 
 The DE2 series has long been a leader in educational development boards, setting itself apart with a wide range of interfaces designed to support various application requirements. Building on its established leadership and success, Terasic introduces the latest addition, the DE2-115, featuring the Cyclone IV E device. This board is designed to meet the growing demand for versatile, low-cost solutions in areas such as mobile video, voice, and data access, while also addressing the need for high-quality images. The DE2-115 strikes an ideal balance between affordability, low power consumption, and an extensive range of logic, memory, and DSP capabilities. The Cyclone EP4CE115 device integrated into the DE2-115 boasts 114,480 logic elements (LEs), making it the largest device in the Cyclone IV E series. It also includes up to 3.9 Mbits of RAM and 266 multipliers, offering a powerful combination of cost-effectiveness, advanced functionality, and lower power consumption compared to previous Cyclone generations. The DE2-115 builds on the features of its predecessors, particularly the DE2-70, while incorporating additional interfaces to support key protocols like Gigabit Ethernet (GbE). It also includes a High-Speed Mezzanine Card (HSMC) connector, allowing for expanded functionality and connectivity through HSMC daughter cards and cables. For large-scale ASIC prototyping, multiple FPGA-based boards can be connected using HSMC cables through this connector, enabling more complex development setups.
 
