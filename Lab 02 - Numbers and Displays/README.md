@@ -244,6 +244,8 @@ end;
 
 In the results, we can clearly observe that for each binary input, we get the correct corresponding output on the 7-segment display. We also see the switch inputs mirrored on the above LEDRs as an indicator of the switch's activation. For example, when we enter the binary value '1000', the output is '0000000', which means the 7-segment display is correctly showing the number '8'. Similarly, other inputs such as '0001' will display '1', and so on. Note that the outputs on the HEX0, and HEX1 have 1 bit less than the input and that's because the 7-segment display has a max of 7 bits one for each index. This demonstrates that the system reliably converts the binary inputs into their respective numerical values on the 7-segment display, ensuring accurate visual feedback for each input combination.
 
+In ModelSim, when observing variables that are composites of multiple waveforms, the simulator often displays a bit string of numbers instead of a traditional waveform. This occurs because the variable being observed is essentially an aggregation of several individual 1-bit waveforms, each representing a component of the composite variable. In the simulation interface, these composite variables appear as a dropdown list containing multiple sub-variables, each with its own distinct waveform. It's crucial to understand that seeing "0000000" in HEX1 at the beginning doesn't imply that the result is only relevant for the first input. Rather, this value remains constant throughout the simulation, and thus, it is not repeatedly copied for each input cycle. If the value were to change, you would observe updates for each new input. However, since it remains unchanged, it is displayed once at the start and extends continuously until the end of the waveform.
+
 </details>
 </details>
 
@@ -583,7 +585,7 @@ END Structure;
  <img src="Photos/43.jpg" style="width: 49%; height: 300px;" title="A=1000 B=0011 Cin=0 (8 + 3 + 0 = 11)"/>  <img src="Photos/44.jpg" style="width: 49%; height: 300px;" title="A=1010 B=1111 Cin=0 (10 + 15 + 0 = 25)" />
 </p>
 
-As shown in the results above, the setup is behaving as expected. For example, when `A = 0000 = 0`, `B = 0101 = 5`, and `Cin = 0` their sum was 5 as displayed on the rightmost bits of the LEDRs with 0101.
+As shown in the results above, the setup is behaving as expected. For example, when `A = 0000 = 0`, `B = 0101 = 5`, and `Cin = 0` their sum was 5 as displayed on the rightmost bits of the LEDRs with 0101. Note that we haven't documented any cases with `Cin = 1`.
 
 </details>
 
